@@ -1,272 +1,68 @@
-/* -----------------------
-   Reset i podstawowe style
------------------------ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.nav-links {
+	display: flex;
+	gap: 40px;
+	justify-content: center;
+	align-items: center;
+	flex: 1;
+	margin: 0 32px;
+}
+.navbar-centered {
+	width: 65%;
+	min-width: 220px;
+	max-width: 800px;
+	margin: 0 auto;
+	background: #b8bfa8;
+	border-radius: 14px;
+	box-shadow: 0 2px 12px rgba(60,120,80,0.08);
+	padding: 12px 24px;
+	height: 48px;
+	font-size: 1.15rem;
+	position: sticky;
+	top: 24px;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	transition: box-shadow 0.2s;
+}
+.logo {
+	font-weight: bold;
+	font-size: 1.3rem;
+	color: #3a3a3a;
+	text-decoration: none;
+	margin-right: 24px;
+}
+.btn-login {
+	margin-left: 24px;
+	text-decoration: none;
+	color: #3a3a3a;
+	font-weight: 500;
+	font-size: 1.1rem;
+	padding: 8px 18px;
+	border-radius: 8px;
+	background: #e3e7db;
+	border: none;
+	transition: background 0.2s;
+}
+.btn-login:hover {
+	background: #d1d6c2;
+}
+.main-rounded-container {
+	width: 94vw;
+	height: 95vh;
+	max-width: 1350px;
+	min-width: 340px;
+	background: #f3f8f2;
+	border-radius: 24px;
+	box-shadow: 0 8px 32px rgba(60,120,80,0.10);
+	margin: 5vh auto;
+	padding: 32px 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
 }
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background: #f5f5f5;
-    padding-top: 70px; /* wysokość fixed navbar */
+	background: #627d58;
+	min-height: 100vh;
 }
 
-/* -----------------------
-   Navbar (fixed)
------------------------ */
-.navbar {
-    background: #fff;
-    border-bottom: 1px solid #ddd;
-    padding: 0.5rem 1rem;
-    position: fixed; /* zawsze na wierzchu */
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    height: 70px; /* ustalana wysokość headera */
-}
-
-.navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    font-weight: bold;
-    font-size: 1.5rem;
-    text-decoration: none;
-    color: #333;
-}
-
-.nav-links {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #333;
-    padding: 0.5rem 0.8rem;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    background-color: #f0f0f0;
-}
-
-.btn-login {
-    text-decoration: none;
-    color: #fff;
-    background-color: #007BFF;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.btn-login:hover {
-    background-color: #0056b3;
-}
-
-/* Mobilny widok navbar */
-@media (max-width:768px){
-    .navbar-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-    .nav-links {
-        flex-direction: column;
-        width: 100%;
-        gap: 1rem;
-    }
-    .nav-links a {
-        width: 100%;
-    }
-    .btn-login {
-        width: 100%;
-        text-align: center;
-    }
-}
-
-/* -----------------------
-   Hero + statystyki w jednym prostokącie
------------------------ */
-.hero-stats {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-    background: #f5f5f5;
-    min-height: calc(100vh - 70px); /* prawie pełny ekran minus navbar */
-}
-
-.hero-stats-container {
-    max-width: 1000px;
-    width: 100%;
-    background: #007BFF;
-    color: #fff;
-    border-radius: 15px;
-    padding: 40px 40px;
-    text-align: center;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around; /* równomierne rozmieszczenie treści w pionie */
-    align-items: center;
-}
-
-/* Tekst hero */
-.hero-text h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-.hero-text p {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-/* Przycisk */
-.btn-primary {
-    text-decoration: none;
-    color: #fff;
-    background: #0056b3;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    transition: 0.3s;
-}
-.btn-primary:hover {
-    background: #003f7f;
-}
-
-/* Statystyki w hero */
-.stats-container {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
-.stat-item {
-    margin: 10px;
-}
-.stat-item h2 {
-    font-size: 3rem;
-}
-.stat-item p {
-    font-size: 1.2rem;
-    color: #e0e0e0;
-}
-
-/* -----------------------
-   Zaokrąglone prostokąty sekcji
------------------------ */
-.about-solution,
-.how-it-works,
-.for-companies {
-    min-height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    margin: 40px auto;
-    max-width: 1000px;
-}
-
-/* Wewnątrz prostokąta */
-.about-container,
-.how-container,
-.company-container {
-    max-width: 800px;
-    width: 100%;
-    text-align: center;
-}
-
-/* Sekcje opisowe */
-.about-container h2,
-.how-container h2,
-.company-container h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-.about-container p,
-.how-container p,
-.company-container p {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-/* Lista jak działa */
-.how-container ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-}
-.how-container li {
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
-}
-
-/* Slider firm */
-.company-slider {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-    overflow-x: auto;
-    justify-content: center;
-}
-.company-slider img {
-    height: 80px;
-    object-fit: contain;
-    border-radius: 5px;
-    flex-shrink: 0;
-}
-
-/* -----------------------
-   Stopka
------------------------ */
-.footer {
-    background: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-/* -----------------------
-   Responsywność
------------------------ */
-@media(max-width:768px){
-    .hero-text h1 {
-        font-size: 2rem;
-    }
-    .hero-text p {
-        font-size: 1rem;
-    }
-    .btn-primary {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
-    }
-    .stats-container {
-        flex-direction: column;
-        gap: 20px;
-    }
-    .company-slider img {
-        height: 60px;
-    }
-    .about-container h2,
-    .how-container h2,
-    .company-container h2 {
-        font-size: 1.5rem;
-    }
-    .about-container p,
-    .how-container p,
-    .company-container p {
-        font-size: 1rem;
-    }
-}
