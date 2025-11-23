@@ -1,0 +1,67 @@
+/* Footer styles extracted from style.css */
+.footer-block {
+    box-sizing: border-box;
+    max-width: var(--section-max); /* match unified section width */
+    width: 100%; /* fill the .sections-wrapper so footer matches cards width */
+    margin: 12px auto 6px auto; /* smaller bottom gap (few pixels) */
+    background: #0b0b0b; /* join button color */
+    border-radius: 16px;
+    /* match business-wrapper padding so inner content aligns */
+    padding: 18px 22px;
+    box-shadow: 0 8px 22px rgba(11,11,11,0.16);
+}
+.site-footer {
+    background: transparent; /* footer sits inside .footer-block */
+    color: #e6eef6; /* light text */
+    padding: 0; /* inner padding handled by .footer-block */
+    display: block;
+}
+.site-footer-inner { max-width: var(--section-max); margin: 0 auto; width: 100%; padding: 0 12px; box-sizing: border-box; }
+.footer-columns {
+    /* footer gap variable controls space between columns and to sides */
+    --fg: 32px;
+    display: flex;
+    gap: var(--fg);
+    justify-content: flex-start;
+    align-items: center; /* vertically center columns */
+    margin-bottom: 14px;
+    /* pad container by the same gap so outer spacing equals inner gap */
+    padding: 0 var(--fg);
+}
+/* Make the three columns split the available width evenly.
+   Use calc to subtract the total gap from 100% and divide by 3 so
+   each column has the same outer width. */
+.footer-col {
+    text-align: center; /* center text lines inside each column */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* center content inside each column */
+    /* subtract: left padding + right padding + gaps between columns (2 gaps)
+       total = 4 * var(--fg) for 3 columns (2 inner gaps + 2 side paddings) */
+    flex: 0 1 calc((100% - (var(--fg) * 4)) / 3);
+    min-width: 140px;
+    padding: 0 10px;
+}
+.footer-col h4 { margin: 0 0 12px; color: #fff; font-size: 1.05rem; }
+.footer-col ul { list-style:none; padding:0; margin:0; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a { color: #bfd0df; text-decoration: none; opacity: 0.95; }
+.footer-col a:hover { text-decoration: underline; opacity: 1; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.04); padding-top: 14px; text-align: center; }
+.footer-bottom .copyright { color: #9aa7b6; font-size: 0.95rem; }
+
+@media (max-width: 900px) {
+    /* Allow wrapping on narrow screens, but keep columns compact */
+    .footer-columns {
+        --fg: 14px; /* reduce gap on small screens */
+        flex-wrap: wrap;
+        gap: var(--fg);
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0 var(--fg);
+    }
+    .footer-col { flex: 1 1 180px; min-width: 140px; max-width: 100%; padding: 0 6px; }
+
+    /* Make the footer block nearly full-width on small screens */
+    .footer-block { width: calc(100% - 24px); margin: 8px auto; }
+}
