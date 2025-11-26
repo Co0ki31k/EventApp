@@ -1,24 +1,57 @@
 /* Navbar-specific styles moved from style.css */
 
 .navbar-centered {
-    width: 50%;
-    max-width: 640px;
+    width: 40%;
+    max-width: none;
     min-width: 300px;
     margin: 0 auto;
-    background: #e6e8e5; /* slightly darker off-white so navbar is a bit deeper */
+    background: #e6e8e5;
     --nav-radius: 30px;
-    border-radius: var(--nav-radius); /* use CSS variable so children can match */
+    border-radius: var(--nav-radius);
     box-shadow: 0 5px 14px rgba(20,30,20,0.06);
-    padding: 0px 2px; /* reduced vertical padding to lower navbar height */
+    padding: 4px 2px;
     font-size: 0.95rem;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* simple sans-serif */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     position: sticky;
-    top: 14px; /* stick near top of viewport */
+    top: 14px;
     z-index: 20;
     display: flex;
     align-items: center;
     justify-content: space-between;
     transition: transform 0.28s cubic-bezier(.2,.9,.2,1), opacity 0.28s ease;
+    min-height: 50px;
+}
+
+@media (min-width: 1921px) {
+    .navbar-centered {
+        width: 40%;
+        padding: 6px 2px;
+        min-height: 58px;
+    }
+}
+
+@media (min-width: 1601px) and (max-width: 1920px) {
+    .navbar-centered {
+        width: 40%;
+        padding: 5px 2px;
+        min-height: 55px;
+    }
+}
+
+@media (min-width: 1367px) and (max-width: 1600px) {
+    .navbar-centered {
+        width: 40%;
+        padding: 5px 2px;
+        min-height: 52px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .navbar-centered {
+        width: 42%;
+        padding: 4px 2px;
+        min-height: 50px;
+    }
 }
 
 /* CSS-only: if the browser supports View Timeline, animate the navbar moving up
@@ -35,37 +68,101 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: none; /* remove white box */
-    padding: 0; /* no padding so only logo image is visible */
+    background: none;
+    padding: 0;
     border-radius: 0;
-    margin-left: 20px; /* more space from left edge */
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 14px;
     box-shadow: none;
 }
 
 .logo img {
-    height: 64px; /* larger logo per request */
+    height: 40px;
     width: auto;
     display: block;
+}
+
+@media (min-width: 1921px) {
+    .logo {
+        margin-left: 14px;
+        margin-right: 20px;
+    }
+    .logo img {
+        height: 50px;
+    }
+}
+
+@media (min-width: 1601px) and (max-width: 1920px) {
+    .logo {
+        margin-left: 13px;
+        margin-right: 18px;
+    }
+    .logo img {
+        height: 47px;
+    }
+}
+
+@media (min-width: 1367px) and (max-width: 1600px) {
+    .logo {
+        margin-left: 11px;
+        margin-right: 16px;
+    }
+    .logo img {
+        height: 43px;
+    }
 }
 
 .nav-links {
     display: flex;
     flex: 1 1 auto;
-    justify-content: center; /* centered links */
-    gap: 36px;
+    justify-content: center;
+    gap: 14px;
     align-items: center;
+    margin: 0 10px;
 }
 
 .nav-links a {
-    color: #0b0b0b; /* black text per request */
+    color: #0b0b0b;
     text-decoration: none;
-    font-weight: 600; /* slightly bolder */
-    font-size: 0.92rem; /* slightly smaller */
-    padding: 6px 8px; /* reduced padding */
+    font-weight: 600;
+    font-size: 0.83rem;
+    padding: 5px 8px;
     border-radius: 6px;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.1px;
     transition: background 0.12s ease, transform 0.08s ease;
+}
+
+@media (min-width: 1921px) {
+    .nav-links {
+        gap: 22px;
+        margin: 0 16px;
+    }
+    .nav-links a {
+        font-size: 1.02rem;
+        padding: 7px 12px;
+    }
+}
+
+@media (min-width: 1601px) and (max-width: 1920px) {
+    .nav-links {
+        gap: 19px;
+        margin: 0 14px;
+    }
+    .nav-links a {
+        font-size: 0.96rem;
+        padding: 6px 11px;
+    }
+}
+
+@media (min-width: 1367px) and (max-width: 1600px) {
+    .nav-links {
+        gap: 16px;
+        margin: 0 12px;
+    }
+    .nav-links a {
+        font-size: 0.89rem;
+        padding: 5px 9px;
+    }
 }
 
 .nav-links a:hover {
@@ -74,21 +171,53 @@
 }
 
 .btn-login {
-    margin-left: 16px;
-    margin-right: 22px; /* space from right edge */
+    margin-left: 10px;
+    margin-right: 10px;
     text-decoration: none;
-    color: #d9f06a; /* brighter yellow-green for JOIN text */
+    color: #d9f06a;
     font-weight: 700;
-    font-size: 1.2rem; /* increased JOIN font-size per request */
-    padding: 10px 18px; /* slightly reduced padding */
-    border-radius: var(--nav-radius); /* match navbar radius */
-    background: #0b0b0b; /* dark rounded JOIN button */
+    font-size: 0.86rem;
+    padding: 6px 14px;
+    border-radius: 18px;
+    background: #0b0b0b;
     border: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 6px rgba(3,33,54,0.16) inset;
-    transition: transform 0.08s ease, filter 0.12s ease; /* match hero/map button lift timing */
+    transition: transform 0.08s ease, filter 0.12s ease;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+@media (min-width: 1921px) {
+    .btn-login {
+        margin-left: 16px;
+        margin-right: 14px;
+        font-size: 1.08rem;
+        padding: 9px 20px;
+        border-radius: 24px;
+    }
+}
+
+@media (min-width: 1601px) and (max-width: 1920px) {
+    .btn-login {
+        margin-left: 14px;
+        margin-right: 12px;
+        font-size: 1.01rem;
+        padding: 8px 18px;
+        border-radius: 22px;
+    }
+}
+
+@media (min-width: 1367px) and (max-width: 1600px) {
+    .btn-login {
+        margin-left: 12px;
+        margin-right: 11px;
+        font-size: 0.93rem;
+        padding: 7px 16px;
+        border-radius: 20px;
+    }
 }
 
 .btn-login:hover {

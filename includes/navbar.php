@@ -10,7 +10,7 @@ if(isLoggedIn()) {
 
 <nav class="navbar navbar-centered">
     <a href="index.php" class="logo">
-        <img src="/EventApp/assets/img/logo.png" alt="<?= APP_NAME ?>">
+        <img src="../assets/img/logo.png" alt="<?= APP_NAME ?>">
     </a>
     <div class="nav-links">
         <?php

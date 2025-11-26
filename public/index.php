@@ -41,17 +41,17 @@ require_once "../includes/header.php";
     <div id="features" class="features-section">
         <div class="features-row">
             <article class="feature-card">
-                <div class="feature-media" style="background-image: url('/EventApp/assets/img/feature1.png')"></div>
+                <div class="feature-media" style="background-image: url('../assets/img/feature1.png')"></div>
                 <h3>Przeglądaj mapę</h3>
                 <p>Sprawdź wydarzenia w Twojej okolicy lub wyszukuj w innych miastach</p>
             </article>
             <article class="feature-card">
-                <div class="feature-media" style="background-image: url('/EventApp/assets/img/feature2.png')"></div>
+                <div class="feature-media" style="background-image: url('../assets/img/feature2.png')"></div>
                 <h3>Wybierz wydarzenie</h3>
                 <p>Znajdź coś, co Cię interesuje i sprawdź wszystkie szczegóły</p>
             </article>
             <article class="feature-card">
-                <div class="feature-media" style="background-image: url('/EventApp/assets/img/feature3.png')"></div>
+                <div class="feature-media" style="background-image: url('../assets/img/feature3.png')"></div>
                 <h3>Dołącz i baw się</h3>
                 <p>Zapisz się na wydarzenie i ciesz się wspaniałymi chwilami</p>
             </article>
@@ -122,26 +122,26 @@ require_once "../includes/header.php";
                 <div id="infinite" class="highway-slider partners-wrapper">
                     <div class="container highway-barrier">
                         <ul class="highway-lane">
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner1.png" alt="Partner 1"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner2.png" alt="Partner 2"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner3.png" alt="Partner 3"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner4.png" alt="Partner 4"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner5.png" alt="Partner 5"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner6.png" alt="Partner 6"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner7.png" alt="Partner 7"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner8.png" alt="Partner 8"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner9.png" alt="Partner 9"></li>
+                            <li class="highway-car"><img src="../assets/img/partner1.png" alt="Partner 1"></li>
+                            <li class="highway-car"><img src="../assets/img/partner2.png" alt="Partner 2"></li>
+                            <li class="highway-car"><img src="../assets/img/partner3.png" alt="Partner 3"></li>
+                            <li class="highway-car"><img src="../assets/img/partner4.png" alt="Partner 4"></li>
+                            <li class="highway-car"><img src="../assets/img/partner5.png" alt="Partner 5"></li>
+                            <li class="highway-car"><img src="../assets/img/partner6.png" alt="Partner 6"></li>
+                            <li class="highway-car"><img src="../assets/img/partner7.png" alt="Partner 7"></li>
+                            <li class="highway-car"><img src="../assets/img/partner8.png" alt="Partner 8"></li>
+                            <li class="highway-car"><img src="../assets/img/partner9.png" alt="Partner 9"></li>
 
                             <!-- duplicated sequence for continuous scroll -->
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner1.png" alt="Partner 1"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner2.png" alt="Partner 2"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner3.png" alt="Partner 3"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner4.png" alt="Partner 4"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner5.png" alt="Partner 5"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner6.png" alt="Partner 6"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner7.png" alt="Partner 7"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner8.png" alt="Partner 8"></li>
-                            <li class="highway-car"><img src="/EventApp/assets/img/partner9.png" alt="Partner 9"></li>
+                            <li class="highway-car"><img src="../assets/img/partner1.png" alt="Partner 1"></li>
+                            <li class="highway-car"><img src="../assets/img/partner2.png" alt="Partner 2"></li>
+                            <li class="highway-car"><img src="../assets/img/partner3.png" alt="Partner 3"></li>
+                            <li class="highway-car"><img src="../assets/img/partner4.png" alt="Partner 4"></li>
+                            <li class="highway-car"><img src="../assets/img/partner5.png" alt="Partner 5"></li>
+                            <li class="highway-car"><img src="../assets/img/partner6.png" alt="Partner 6"></li>
+                            <li class="highway-car"><img src="../assets/img/partner7.png" alt="Partner 7"></li>
+                            <li class="highway-car"><img src="../assets/img/partner8.png" alt="Partner 8"></li>
+                            <li class="highway-car"><img src="../assets/img/partner9.png" alt="Partner 9"></li>
                         </ul>
                     </div>
                 </div>
@@ -149,8 +149,8 @@ require_once "../includes/header.php";
 
             <div class="business-cta"><a class="biz-cta" href="#">Skontaktuj się</a></div>
 
-            <script src="/EventApp/assets/js/highwayResize.js"></script>
-            <script src="/EventApp/assets/js/navCenterScroll.js"></script>
+            <script src="../assets/js/highwayResize.js"></script>
+            <script src="../assets/js/navCenterScroll.js"></script>
 
         </div> <!-- .business-inner -->
     </div> <!-- .business-wrapper -->
