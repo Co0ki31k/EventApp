@@ -5,5 +5,13 @@ html, body {
 	margin: 0;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	font-family: $font-family-base;
+	font-size: $font-size-base;
+	line-height: $line-height-base;
+	}
+
+/* sensible default box-sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 

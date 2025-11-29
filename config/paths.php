@@ -16,6 +16,8 @@ define("BASE_URL", "http://localhost/Projekt/public");
 
 // Public assets
 define("ASSETS_PATH", PUBLIC_PATH . "/assets");
+// Public assets URL (use in HTML for src/href)
+define("ASSETS_URL", rtrim(BASE_URL, '/') . '/assets');
 define("ASSETS_CSS_PATH", ASSETS_PATH . "/css");
 define("ASSETS_JS_PATH", ASSETS_PATH . "/js");
 define("ASSETS_IMG_PATH", ASSETS_PATH . "/img");

@@ -1,2 +1,10 @@
 $body-bg-color: #ffffff; // biały
 $body-text-color: #222222; // ciemny neutralny tekst
+
+// Guest accents
+$guest-accent-color: #F97316;
+
+// Typography
+$font-family-base: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", system-ui, sans-serif;
+$font-size-base: 14px; // bazowy rozmiar czcionki (mniejszy niż domyślny 16px)
+$line-height-base: 1.5;
