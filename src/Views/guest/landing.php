@@ -22,10 +22,10 @@
 	<div class="stats-inner">
 		<h2 class="stats-title">Tysiące powodów, by wyjść z domu.</h2>
 		<div class="stats-list">
-				<div class="stats-card featured">
-					<div class="stat-number">25k+</div>
-					<div class="stat-label">Aktywnych Użytkowników</div>
-				</div>
+			<div class="stats-card featured">
+				<div class="stat-number">25k+</div>
+				<div class="stat-label">Aktywnych Użytkowników</div>
+			</div>
 			<div class="stats-card">
 				<div class="stat-number">10k+</div>
 				<div class="stat-label">Wydarzeń Miesięcznie</div>

@@ -1,7 +1,7 @@
 html, body {
   height: 100%;
-  background: #ffffff;
-  color: #222222;
+  background: #F1F5F9;
+  color: #0F172A;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -234,7 +234,7 @@ html, body {
   gap: 1.5rem;
   align-items: center;
   width: 80%; /* limit section to max 80% of viewport width */
-  max-width: 2800px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -259,8 +259,8 @@ html, body {
 }
 
 .stats-card {
-  width: 880px; /* static width: show larger cards by default (no hover expansion) */
-  min-width: 880px;
+  width: 20%; /* static width: show larger cards by default (no hover expansion) */
+  min-width: 10%;
   background: #fff;
   border-radius: 18px;
   padding: 1.6rem 1.4rem;
@@ -276,8 +276,6 @@ html, body {
 }
 
 .stats-card.featured {
-  width: 1760px; /* keep featured visually dominant (double static width) */
-  min-width: 880px;
   background: linear-gradient(180deg, #0b5a36 0%, #06422a 100%);
   color: #e6fff3;
   border-radius: 28px;
