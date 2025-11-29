@@ -16,3 +16,32 @@
 		</div>
 	</div>
 </section>
+
+<!-- Stats section (large) under hero - centered title with vertical card list -->
+<section class="stats-section">
+	<div class="stats-inner">
+		<h2 class="stats-title">Tysiące powodów, by wyjść z domu.</h2>
+		<div class="stats-list">
+				<div class="stats-card featured">
+					<div class="stat-number">25k+</div>
+					<div class="stat-label">Aktywnych Użytkowników</div>
+				</div>
+			<div class="stats-card">
+				<div class="stat-number">10k+</div>
+				<div class="stat-label">Wydarzeń Miesięcznie</div>
+			</div>
+			<div class="stats-card">
+				<div class="stat-number">500+</div>
+				<div class="stat-label">Zaplanowanych eventów w Twojej okolicy</div>
+			</div>
+			<div class="stats-card">
+				<div class="stat-number">10k</div>
+				<div class="stat-label">Dzielnic i Osiedli w Aplikacji</div>
+			</div>
+			<div class="stats-card">
+				<div class="stat-number">300+</div>
+				<div class="stat-label">Lokalnych Twórców i Organizatorów</div>
+			</div>
+		</div>
+	</div>
+</section>

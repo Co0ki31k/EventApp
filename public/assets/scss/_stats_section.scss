@@ -1,0 +1,99 @@
+/* Stats section styles (moved out of _hero_guest.scss) */
+
+.stats-section {
+  position: relative;
+  padding: 6.5rem 4rem;
+  overflow: visible;
+}
+
+.stats-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  width: 80%; /* limit section to max 80% of viewport width */
+  max-width: 2800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.stats-title {
+  text-align: center;
+  font-size: 2.6rem;
+  margin: 0 0 0.5rem 0;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.stats-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: nowrap;
+  overflow-x: visible;
+}
+
+.stats-card {
+  width: 880px; /* static width: show larger cards by default (no hover expansion) */
+  min-width: 880px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.6rem 1.4rem;
+  box-shadow: 0 14px 36px rgba(16,24,40,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  justify-content: center;
+  transition: none;
+  overflow: hidden;
+  cursor: default;
+  flex: 0 0 auto;
+}
+
+
+.stats-card.featured {
+  width: 1760px; /* keep featured visually dominant (double static width) */
+  min-width: 880px;
+  background: linear-gradient(180deg,#0b5a36 0%, #06422a 100%);
+  color: #e6fff3;
+  border-radius: 28px;
+  box-shadow: 0 40px 100px rgba(4,20,13,0.35);
+  padding: 2.4rem 2.2rem;
+}
+
+.stats-card.featured .stat-number {
+  color: #8fdcb0;
+  font-weight: 900;
+}
+
+.stats-card:not(.featured) {
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(255,255,255,0.02) 100%), repeating-linear-gradient(0deg, rgba(0,0,0,0.02) 0 1px, transparent 1px 72px), repeating-linear-gradient(90deg, rgba(0,0,0,0.02) 0 1px, transparent 1px 72px);
+  background-color: #f3f7f5;
+}
+
+.stat-number {
+  font-size: 4.4rem;
+  font-weight: 800;
+  color: #0f172a;
+  transition: none;
+}
+
+.stat-label {
+  color: darken(#666, 6%);
+  font-size: 2rem;
+  transition: none;
+}
+
+@media (max-width: 900px) {
+  .stats-inner { gap: 1rem; padding: 0 0.5rem; width: 95%; }
+  .stats-title { font-size: 1.8rem; }
+  .stats-list { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; }
+  .stats-card { width: 90%; min-width: 320px; flex: 0 0 90%; padding: 1rem; }
+  .stats-card { width: 90%; transform: none; box-shadow: 0 8px 24px rgba(16,24,40,0.08); }
+  .stat-number { font-size: 2.4rem; }
+}
