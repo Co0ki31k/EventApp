@@ -1,6 +1,7 @@
-@import 'variables';
-@import 'base';
-@import 'hero_guest';
-@import 'stats_section';
-@import 'roles_section';
+@use 'variables' as *;
+@use 'base';
+@use 'hero_guest';
+@use 'stats_section';
+@use 'roles_section';
+@use 'footer';
 

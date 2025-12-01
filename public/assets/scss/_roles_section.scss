@@ -1,22 +1,25 @@
-/* Roles / Two-cards section styles (cleaned) */
+@use 'variables' as *;
+@use "sass:color";
+
 .roles-section {
-  padding: 3rem 1rem;
+  padding: 4rem 1.25rem;
   background: $white;
 }
 
 .roles-container {
-  max-width: 70%;
+  max-width: 90%;
   margin: 0 auto;
   background: transparent;
+  padding: 0 1rem;
 }
 
 .roles-title {
   text-align: center;
   font-size: 3rem;
   line-height: 1.02;
-  margin: 0 0 0.3rem 0;
+  margin: 0 0 0.5rem 0;
   color: $text-body-color;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .roles-subtitle {
@@ -28,119 +31,188 @@
 }
 
 .grad {
-  /* warm orange -> muted warm stop to match reference */
-  background: linear-gradient(90deg, $guest-accent-color 15%, $accent-blue);
+  background: linear-gradient(90deg, $guest-accent-color 0%, $accent-blue 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
+  font-weight: 900;
+}
+
+.role-title-orange{
+  color: $guest-accent-color;
+}
+
+.role-title-blue{
+  color: $accent-blue;
 }
 
 .roles-inner {
-  display: flex;
-  gap: 2.5rem;
-  align-items: stretch;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  justify-items: center;
+  position: relative;
 }
 
-.role-card {
-  flex: 1 1 48%;
-  background: $white;
-  border-radius: 18px;
-  padding: 2.5rem 2.25rem 2.75rem;
-  box-shadow: 0 30px 70px rgba(16,24,40,0.08);
+/* Nudge each column slightly toward the center for visual balance */
+.roles-inner > .role-half:first-child {
+  transform: translateX(6.5%);
+}
+.roles-inner > .role-half:last-child {
+  transform: translateX(-6.5%);
+}
+.roles-inner > .role-half {
+  transition: transform 220ms ease;
+}
+
+/* Column wrapper that stacks image above the card */
+.role-half {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 95%;
   position: relative;
-  overflow: visible;
+  z-index: 1;
 }
 
-/* folded corner decoration - colored per variant */
-.role-card::after {
+/* Image block above the card; centers the image and limits its width */
+.role-image {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 8rem;
+  justify-content: center;
+}
+
+.role-image img {
+  max-width: 60%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+
+.role-half::before {
   content: '';
   position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 78px;
-  height: 78px;
-  border-bottom-left-radius: 18px;
-  transform: translate(0,0) rotate(0deg);
-}
-.role-card.orange::after {
-  background: linear-gradient(135deg, $guest-accent-color 0%, lighten($guest-accent-color,6%) 60%);
-  box-shadow: 0 8px 18px rgba(249,115,22,0.12);
-}
-.role-card.blue::after {
-  background: linear-gradient(135deg, $accent-blue 0%, lighten($accent-blue,6%) 60%);
-  box-shadow: 0 8px 18px rgba(29,78,216,0.10);
+  z-index: 0;
+  width: 75%;
+  height: 70%;
+  border-radius: 50%;
+  top: -7rem;
+  left: -7rem;
+  pointer-events: none;
+  filter: blur(30px);
+  opacity: 1;
 }
 
-.role-top {
+.role-half:first-child::before {
+  background: radial-gradient(circle at 30% 35%, rgba($guest-accent-color,0.45), rgba($guest-accent-color,0.15) 30%, transparent 65%);
+}
+
+.role-half:last-child::before {
+  left: auto;
+  right: -7rem;
+  background: radial-gradient(circle at 70% 35%, rgba($accent-blue,0.45), rgba($accent-blue,0.15) 30%, transparent 65%);
+}
+
+
+.role-card {
+  width: 100%;
+  background: transparent;
+  padding: 1.5rem 1.6rem 2rem;
   display: flex;
+  flex-direction: column;
   gap: 1rem;
+  position: relative;
+  overflow: visible;
   align-items: center;
 }
 
-.role-icon {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
+.role-content {
+  width: 100%;
+  flex: 1 1 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: $guest-accent-color;
-  font-size: 1.35rem;
-  flex: 0 0 68px;
-  background: rgba($guest-accent-color, 0.09);
-  box-shadow: none;
 }
 
-.role-card.orange .role-icon { color: $guest-accent-color; background: rgba($guest-accent-color, 0.10); }
-.role-card.blue .role-icon { color: $accent-blue; background: rgba($accent-blue, 0.08); }
-
 .role-title {
-  font-size: 1.45rem;
+  font-size: 2.75rem;
+  padding-top: 1rem;
   color: $text-body-color;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .role-desc {
-  color: $text-body-color;
-  font-size: 1rem;
+  color: $text-muted-color;
+  font-size: 1.5rem;
   line-height: 1.6;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
+  max-width: 40rem;
+  text-align: center;
 }
 
-.role-cta { margin-top: auto; }
+.role-cta { margin-top: 2rem; }
+
 
 .role-btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 1.05rem 1.5rem;
-  border-radius: 40px;
+  display: inline-block;
+  padding: 1.2rem 6rem;
+  border-radius: 30px;
   color: $white;
   text-decoration: none;
   font-weight: 800;
-  font-size: 1.02rem;
+  font-size: 1.18rem; /* większy, adekwatny napis */
+  box-shadow: 0 12px 40px rgba(16,24,40,0.08);
+  text-align: center;
 }
 
 .role-card.orange .role-btn {
-  background: linear-gradient(90deg, $guest-accent-color 0%, darken($guest-accent-color,6%) 100%);
-  box-shadow: 0 18px 60px rgba(249,115,22,0.22);
-}
-.role-card.blue .role-btn {
-  background: linear-gradient(90deg, $accent-blue 0%, darken($accent-blue,6%) 100%);
-  box-shadow: 0 16px 50px rgba(29,78,216,0.16);
+  background-image: linear-gradient(90deg, $accent-blue 0%, color.adjust($accent-blue, $lightness: 20%) 100%), linear-gradient(90deg, $guest-accent-color 0%, color.adjust($guest-accent-color, $lightness: 20%) 100%);
+  background-repeat: no-repeat, no-repeat;
+  background-position: left center, left center;
+  background-size: 0% 100%, 100% 100%;
+  box-shadow: 0 14px 60px rgba(249,115,22,0.18);
+  transition: background-size 420ms cubic-bezier(0.2,0.8,0.2,1);
 }
 
-.role-btn .btn-arrow { opacity: 0.95; font-weight: 800; }
+.role-card.orange .role-btn:hover {
+  background-size: 100% 100%, 100% 100%;
+}
+
+.role-card.blue .role-btn {
+  background-image: linear-gradient(90deg, $guest-accent-color 0%, color.adjust($guest-accent-color, $lightness: 20%) 100%), linear-gradient(90deg, $accent-blue 0%, color.adjust($accent-blue, $lightness: 20%) 100%);
+  background-repeat: no-repeat, no-repeat;
+  background-position: right center, left center;
+  background-size: 0% 100%, 100% 100%;
+  box-shadow: 0 12px 50px rgba(29,78,216,0.14);
+  transition: background-size 420ms cubic-bezier(0.2,0.8,0.2,1);
+}
+
+.role-card.blue .role-btn:hover {
+  background-size: 100% 100%, 100% 100%;
+}
 
 @media (max-width: 900px) {
   .roles-container { padding: 2rem 1rem; border-radius: 18px; }
-  .roles-inner { flex-direction: column; gap: 1.25rem; }
-  .role-card { flex: 0 0 100%; }
+  .roles-inner { grid-template-columns: 1fr; gap: 1.25rem; }
+  .roles-inner::before { display: none; }
+  .role-card { width: 100%; max-width: none; }
   .roles-title { font-size: 1.9rem; }
   .roles-subtitle { font-size: 1rem; }
-  .role-card::after { display: none; }
+  .role-btn {
+    width: 80%; /* na małych ekranach przyciski większe i czytelne */
+    min-width: auto;
+    font-size: 1.02rem;
+    padding: 0.85rem 1.2rem;
+  }
+  
+  .role-half::before { display: none; }
 }

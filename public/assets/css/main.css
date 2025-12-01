@@ -1,7 +1,9 @@
+@charset "UTF-8";
+/* Tekst - Skala Slate */
 html, body {
   height: 100%;
   background: #F1F5F9;
-  color: #0F172A;
+  color: #0B0B0B;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -10,6 +12,11 @@ html, body {
   line-height: 1.5;
 }
 
+@media (max-width: 1500px) {
+  html, body {
+    font-size: 9.8px;
+  }
+}
 /* sensible default box-sizing */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -17,6 +24,7 @@ html, body {
 
 .guest-hero {
   height: 100vh;
+  background: #FFFFFF;
   display: flex;
   align-items: center;
   /* accent underline: two rounded strokes under a single word */
@@ -32,27 +40,33 @@ html, body {
   width: 100%;
   display: flex;
   align-items: center; /* center children vertically */
-  height: auto;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  gap: 1rem;
 }
 .guest-hero .hero-left {
-  width: 55%;
-  padding: 4rem 4rem 4rem 22rem;
+  flex: 0 0 55%;
+  padding: clamp(1.2rem, 4vw, 4rem) 0 clamp(1.2rem, 4vw, 4rem) clamp(1.5rem, 12vw, 26rem);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center; /* vertical centering */
   align-items: flex-start; /* keep text left-aligned */
+  min-width: 300px;
 }
 .guest-hero .hero-right {
-  width: 45%;
+  flex: 0 0 45%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 9rem 2rem 0rem;
+  padding: clamp(1rem, 2.5vw, 2rem) clamp(0.8rem, 4vw, 10rem) clamp(1rem, 2.5vw, 2rem) 0;
   box-sizing: border-box;
+  min-width: 260px;
 }
 .guest-hero h1 {
-  font-size: 7.4rem;
+  /* responsive scale: smaller screens shrink, large screens cap at original size */
+  font-size: clamp(2.2rem, 6vw, 7.4rem);
   margin: 0 0 1rem;
   line-height: 1.05;
   font-weight: 600;
@@ -112,17 +126,17 @@ html, body {
   }
 }
 .guest-hero h2 {
-  font-size: 2rem;
+  font-size: clamp(1rem, 2.2vw, 2rem);
   margin: 0 0 1.5rem;
-  color: #444;
+  color: #0B0B0B;
   font-weight: 400;
 }
 .guest-hero .btn {
   display: inline-block;
-  padding: 1.2rem 2.4rem; /* larger padding */
+  padding: 1.7rem 2.8rem; /* larger padding */
   border-radius: 30px;
   text-decoration: none;
-  font-size: 1.5rem; /* larger button font */
+  font-size: 1.62rem; /* larger button font */
   font-weight: 700;
   line-height: 1;
 }
@@ -136,10 +150,10 @@ html, body {
 }
 .guest-hero .btn-primary {
   background: #F97316;
-  color: #fff;
+  color: #FFFFFF;
 }
 .guest-hero .btn-primary:hover {
-  background: #166fc1;
+  background: #C2410C;
 }
 .guest-hero .btn-map {
   position: relative;
@@ -182,11 +196,14 @@ html, body {
   transform: translateX(8px) scale(1.18);
 }
 .guest-hero .hero-right img {
-  max-width: 100%;
-  height: auto;
+  /* show full image without cropping */
   display: block;
+  width: auto; /* avoid forcing full width which can crop when height limited */
+  max-width: 100%;
+  max-height: 80vh; /* allow large images but stay within viewport */
+  height: auto;
   border-radius: 8px;
-  max-height: 70vh;
+  object-fit: contain; /* ensure whole image is visible */
 }
 .guest-hero .hero-left {
   height: 100%;
@@ -219,7 +236,6 @@ html, body {
   }
 }
 
-/* Stats section styles (moved out of _hero_guest.scss) */
 .stats-section {
   position: relative;
   padding: 6.5rem 4rem;
@@ -231,9 +247,9 @@ html, body {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.5rem;
   align-items: center;
-  width: 80%; /* limit section to max 80% of viewport width */
+  width: 85%;
   max-width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
@@ -242,7 +258,15 @@ html, body {
 .stats-title {
   text-align: center;
   font-size: 2.6rem;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.2rem 0;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.stats-subtitle {
+  text-align: center;
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
   color: #0f172a;
   font-weight: 700;
 }
@@ -250,60 +274,59 @@ html, body {
 .stats-list {
   display: flex;
   flex-direction: row;
-  gap: 1.5rem;
+  gap: 2rem;
   align-items: stretch;
   justify-content: center;
   width: 100%;
-  flex-wrap: nowrap;
+  flex-wrap: wrap; /* allow wrapping: first row 3 cards, second row 2 cards */
   overflow-x: visible;
 }
 
 .stats-card {
-  width: 20%; /* static width: show larger cards by default (no hover expansion) */
-  min-width: 10%;
+  flex: 0 0 30%;
+  min-width: 220px;
   background: #fff;
-  border-radius: 18px;
-  padding: 1.6rem 1.4rem;
-  box-shadow: 0 14px 36px rgba(16, 24, 40, 0.07);
+  border-radius: 20px;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  align-self: center;
+  /* keep width proportional to height: width = height * 1.7 */
+  aspect-ratio: 1.75/1;
+  padding: 1.8rem 1.2rem;
+  box-shadow: 0 18px 42px rgba(16, 24, 40, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  align-items: center; /* center contents horizontally */
+  text-align: center;
+  gap: 0.8rem;
   justify-content: center;
   transition: none;
   overflow: hidden;
   cursor: default;
-  flex: 0 0 auto;
 }
 
-.stats-card.featured {
-  background: linear-gradient(180deg, #0b5a36 0%, #06422a 100%);
-  color: #e6fff3;
-  border-radius: 28px;
-  box-shadow: 0 40px 100px rgba(4, 20, 13, 0.35);
-  padding: 2.4rem 2.2rem;
-}
-
-.stats-card.featured .stat-number {
-  color: #8fdcb0;
-  font-weight: 900;
-}
-
-.stats-card:not(.featured) {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(255, 255, 255, 0.02) 100%), repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.02) 0 1px, transparent 1px 72px), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.02) 0 1px, transparent 1px 72px);
-  background-color: #f3f7f5;
+/* Make items 4 and above the same size as top-row cards */
+.stats-card:nth-child(n+4) {
+  flex: 0 0 30%;
+  min-width: 220px;
+  aspect-ratio: 1.75/1;
 }
 
 .stat-number {
   font-size: 4.4rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1D4ED8; /* use project accent for numbers */
   transition: none;
 }
 
 .stat-label {
-  color: rgb(86.7, 86.7, 86.7);
-  font-size: 2rem;
+  color: #94A3B8; /* use muted text color */
+  font-size: 1.75rem;
   transition: none;
+  width: 100%;
+  text-align: center;
+  margin: 0;
 }
 
 @media (max-width: 900px) {
@@ -332,7 +355,298 @@ html, body {
     transform: none;
     box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
   }
+  /* on small screens, keep width = 1.7 * height as requested */
+  .stats-card, .stats-card:nth-child(n+4) {
+    aspect-ratio: 1.72/1;
+  }
   .stat-number {
     font-size: 2.4rem;
+  }
+}
+.roles-section {
+  padding: 4rem 1.25rem;
+  background: #FFFFFF;
+}
+
+.roles-container {
+  max-width: 90%;
+  margin: 0 auto;
+  background: transparent;
+  padding: 0 1rem;
+}
+
+.roles-title {
+  text-align: center;
+  font-size: 3rem;
+  line-height: 1.02;
+  margin: 0 0 0.5rem 0;
+  color: #0B0B0B;
+  font-weight: 900;
+}
+
+.roles-subtitle {
+  text-align: center;
+  font-size: 3rem;
+  margin: 0 0 2rem 0;
+  color: #94A3B8;
+  font-weight: 700;
+}
+
+.grad {
+  background: linear-gradient(90deg, #F97316 0%, #1D4ED8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  font-weight: 900;
+}
+
+.role-title-orange {
+  color: #F97316;
+}
+
+.role-title-blue {
+  color: #1D4ED8;
+}
+
+.roles-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  justify-items: center;
+  position: relative;
+}
+
+/* Nudge each column slightly toward the center for visual balance */
+.roles-inner > .role-half:first-child {
+  transform: translateX(6.5%);
+}
+
+.roles-inner > .role-half:last-child {
+  transform: translateX(-6.5%);
+}
+
+.roles-inner > .role-half {
+  transition: transform 220ms ease;
+}
+
+/* Column wrapper that stacks image above the card */
+.role-half {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 95%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Image block above the card; centers the image and limits its width */
+.role-image {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 8rem;
+  justify-content: center;
+}
+
+.role-image img {
+  max-width: 60%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.role-half::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 75%;
+  height: 70%;
+  border-radius: 50%;
+  top: -7rem;
+  left: -7rem;
+  pointer-events: none;
+  filter: blur(30px);
+  opacity: 1;
+}
+
+.role-half:first-child::before {
+  background: radial-gradient(circle at 30% 35%, rgba(249, 115, 22, 0.45), rgba(249, 115, 22, 0.15) 30%, transparent 65%);
+}
+
+.role-half:last-child::before {
+  left: auto;
+  right: -7rem;
+  background: radial-gradient(circle at 70% 35%, rgba(29, 78, 216, 0.45), rgba(29, 78, 216, 0.15) 30%, transparent 65%);
+}
+
+.role-card {
+  width: 100%;
+  background: transparent;
+  padding: 1.5rem 1.6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: visible;
+  align-items: center;
+}
+
+.role-content {
+  width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.role-title {
+  font-size: 2.75rem;
+  padding-top: 1rem;
+  color: #0B0B0B;
+  font-weight: 900;
+}
+
+.role-desc {
+  color: #94A3B8;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  max-width: 40rem;
+  text-align: center;
+}
+
+.role-cta {
+  margin-top: 2rem;
+}
+
+.role-btn {
+  display: inline-block;
+  padding: 1.2rem 6rem;
+  border-radius: 30px;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.18rem; /* większy, adekwatny napis */
+  box-shadow: 0 12px 40px rgba(16, 24, 40, 0.08);
+  text-align: center;
+}
+
+.role-card.orange .role-btn {
+  background-image: linear-gradient(90deg, #1D4ED8 0%, rgb(111.293877551, 143.893877551, 235.706122449) 100%), linear-gradient(90deg, #F97316 0%, rgb(251.5606694561, 174.7489539749, 121.4393305439) 100%);
+  background-repeat: no-repeat, no-repeat;
+  background-position: left center, left center;
+  background-size: 0% 100%, 100% 100%;
+  box-shadow: 0 14px 60px rgba(249, 115, 22, 0.18);
+  transition: background-size 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.role-card.orange .role-btn:hover {
+  background-size: 100% 100%, 100% 100%;
+}
+
+.role-card.blue .role-btn {
+  background-image: linear-gradient(90deg, #F97316 0%, rgb(251.5606694561, 174.7489539749, 121.4393305439) 100%), linear-gradient(90deg, #1D4ED8 0%, rgb(111.293877551, 143.893877551, 235.706122449) 100%);
+  background-repeat: no-repeat, no-repeat;
+  background-position: right center, left center;
+  background-size: 0% 100%, 100% 100%;
+  box-shadow: 0 12px 50px rgba(29, 78, 216, 0.14);
+  transition: background-size 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.role-card.blue .role-btn:hover {
+  background-size: 100% 100%, 100% 100%;
+}
+
+@media (max-width: 900px) {
+  .roles-container {
+    padding: 2rem 1rem;
+    border-radius: 18px;
+  }
+  .roles-inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .roles-inner::before {
+    display: none;
+  }
+  .role-card {
+    width: 100%;
+    max-width: none;
+  }
+  .roles-title {
+    font-size: 1.9rem;
+  }
+  .roles-subtitle {
+    font-size: 1rem;
+  }
+  .role-btn {
+    width: 80%; /* na małych ekranach przyciski większe i czytelne */
+    min-width: auto;
+    font-size: 1.02rem;
+    padding: 0.85rem 1.2rem;
+  }
+  .role-half::before {
+    display: none;
+  }
+}
+.footer {
+  background: linear-gradient(180deg, rgba(29, 78, 216, 0.04), rgba(249, 115, 22, 0.02));
+  padding: 1rem 1rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer-brand {
+  font-weight: 900;
+  color: #0B0B0B;
+  font-size: 1.25rem;
+}
+
+.footer-brand .footer-logo {
+  height: 36px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.75rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.footer-links a {
+  color: #0B0B0B;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.footer-copyright {
+  color: #0B0B0B;
+  font-size: 1.25rem;
+}
+
+@media (max-width: 700px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }/*# sourceMappingURL=main.css.map */
