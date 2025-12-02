@@ -15,3 +15,11 @@ if (!function_exists('url')) {
         return $p === '' ? '/' : $p;
     }
 }
+
+if (!function_exists('view')) {
+    function view(string $path): string {
+        if (defined('VIEWS_PATH')) return rtrim(VIEWS_PATH, '/') . '/' . ltrim($path, '/');
+        if (defined('BASE_PATH')) return rtrim(BASE_PATH, '/') . '/src/Views/' . ltrim($path, '/');
+        return 'src/Views/' . ltrim($path, '/');
+    }
+}

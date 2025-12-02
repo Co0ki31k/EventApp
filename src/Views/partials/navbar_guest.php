@@ -23,8 +23,8 @@
     </div>
 
     <div class="guest-nav-right">
-      <a href="/login" class="nav-link nav-login">Logowanie</a>
-      <a href="/register" class="nav-link nav-register">Rejestracja</a>
+      <a href="<?= url('login.php') ?>" class="nav-link nav-login">Logowanie</a>
+      <a href="<?= url('register.php') ?>" class="nav-link nav-register">Rejestracja</a>
     </div>
   </div>
 </nav>

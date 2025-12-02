@@ -22,3 +22,4 @@
   echo '<link rel="manifest" href="' . htmlspecialchars(asset('img/favicon_io/site.webmanifest')) . '">';
   ?>
 </head>
+<body>

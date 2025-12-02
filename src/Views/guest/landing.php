@@ -2,8 +2,7 @@
 // Guest landing view - hero section
 // Sekcja hero zajmuje 100vh. Lewa kolumna 45% (tekst + CTA), prawa 55% (obrazek).
 ?>
-
-<?php include __DIR__ . '/../partials/navbar_guest.php'; ?>
+<?php include view('partials/navbar_guest.php'); ?>
 
 <section class="guest-hero">
 	<div class="hero-inner">
@@ -63,7 +62,7 @@
 						<div class="role-title"><span class="role-title-orange">Twórz.</span> Zorganizuj coś własnego</div>
 						<div class="role-desc">Masz pomysł na spacer z psami, planszówki czy poranną jogę? Dodaj wydarzenie w 30 sekund i znajdź chętnych w sąsiedztwie.</div>
 						<div class="role-cta">
-							<a class="role-btn" href="#">Rozpocznij</a>
+							<a class="role-btn" href="/register">Rozpocznij</a>
 						</div>
 					</div>
 				</div>
@@ -78,7 +77,7 @@
 						<div class="role-title"><span class="role-title-blue">Odkrywaj.</span> Dołącz do ekipy</div>
 						<div class="role-desc">Nudzisz się? Sprawdź mapę, zobacz, kto właśnie gra w kosza lub idzie na kawę, i dołącz jednym kliknięciem.</div>
 						<div class="role-cta">
-							<a class="role-btn" href="#">Rozpocznij</a>
+							<a class="role-btn" href="/register">Rozpocznij</a>
 						</div>
 					</div>
 				</div>
@@ -99,4 +98,5 @@
 		<div class="footer-copyright">© <?= date('Y') ?> EventApp</div>
 	</div>
 </footer>
+</body>
 
