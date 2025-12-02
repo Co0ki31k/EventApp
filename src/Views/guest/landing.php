@@ -3,6 +3,8 @@
 // Sekcja hero zajmuje 100vh. Lewa kolumna 45% (tekst + CTA), prawa 55% (obrazek).
 ?>
 
+<?php include __DIR__ . '/../partials/navbar_guest.php'; ?>
+
 <section class="guest-hero">
 	<div class="hero-inner">
 		<div class="hero-left">
