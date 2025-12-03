@@ -12,5 +12,6 @@
 </main>
 
 <script src="<?= asset('js/auth/slider.js') ?>" defer></script>
+<script src="<?= asset('js/auth/toggle-password.js') ?>" defer></script>
 </body>
 </html>

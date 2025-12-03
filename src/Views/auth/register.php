@@ -12,6 +12,11 @@
 </main>
 
 <script src="<?= asset('js/auth/slider.js') ?>" defer></script>
+<script src="<?= asset('js/auth/username-validation.js') ?>" defer></script>
+<script src="<?= asset('js/auth/email-validation.js') ?>" defer></script>
+<script src="<?= asset('js/auth/password-validation.js') ?>" defer></script>
+<script src="<?= asset('js/auth/toggle-password.js') ?>" defer></script>
+<script src="<?= asset('js/auth/empty-form-validation.js') ?>" defer></script>
 </body>
 </html>
 

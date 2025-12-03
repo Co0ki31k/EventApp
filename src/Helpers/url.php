@@ -23,3 +23,21 @@ if (!function_exists('view')) {
         return 'src/Views/' . ltrim($path, '/');
     }
 }
+
+if (!function_exists('config')) {
+    function config(string $file): string {
+        if (defined('CONFIG_PATH')) return rtrim(CONFIG_PATH, '/') . '/' . ltrim($file, '/');
+        if (defined('BASE_PATH')) return rtrim(BASE_PATH, '/') . '/config/' . ltrim($file, '/');
+        return __DIR__ . '/../../config/' . ltrim($file, '/');
+    }
+}
+
+if (!function_exists('load_class')) {
+    function load_class(string $className): void {
+        $path = defined('BASE_PATH') 
+            ? rtrim(BASE_PATH, '/') . '/src/classes/' . ltrim($className, '/') . '.php'
+            : __DIR__ . '/../src/classes/' . ltrim($className, '/') . '.php';
+        
+        require_once $path;
+    }
+}

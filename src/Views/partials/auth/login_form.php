@@ -28,23 +28,18 @@
 
     <div class="form-row">
       <label for="password">Hasło</label>
-      <input id="password" name="password" type="password" required minlength="8">
-    </div>
-
-    <div class="form-row">
-      <label class="checkbox-inline">
-        <input type="checkbox" name="remember" value="1" <?= !empty($old['remember']) ? 'checked' : '' ?>>
-        Zapamiętaj mnie
-      </label>
+      <div class="password-input-wrapper">
+        <input id="password" name="password" type="password" required minlength="8">
+        <button type="button" class="toggle-password" aria-label="Pokaż hasło">
+          <img src="<?= asset('img/register-login/show.png') ?>" alt="Pokaż hasło" class="eye-icon">
+        </button>
+      </div>
+      <a href="forgot-password.php" class="forgot-password-link">Zapomniałeś hasła?</a>
     </div>
 
     <div class="form-row form-actions">
       <button type="submit" class="btn btn-primary">Zaloguj się</button>
-      <a href="/forgot-password" class="btn btn-link">Zapomniałeś hasła?</a>
+      <a href="register.php" class="btn btn-link">Nie masz konta? Zarejestruj się</a>
     </div>
   </form>
-
-  <div class="auth-footer">
-    <p>Nie masz jeszcze konta? <a href="/register">Zarejestruj się</a></p>
-  </div>
 </section>
