@@ -7,7 +7,7 @@
       <label for="username">Nazwa użytkownika</label>
       <input id="username" name="username" type="text" value="<?= isset($old['username']) ? Security::escape($old['username']) : '' ?>" maxlength="50" required>
       <?php if (isset($errors['username'])): ?>
-        <span class="error-text" style="color: #e53e3e; font-size: 0.875rem;"><?= Security::escape($errors['username']) ?></span>
+        <span class="error-text" style="color: #e53e3e; font-size: 1.2rem;"><?= Security::escape($errors['username']) ?></span>
       <?php endif; ?>
     </div>
 
@@ -15,7 +15,7 @@
       <label for="email">E‑mail</label>
       <input id="email" name="email" type="email" value="<?= isset($old['email']) ? Security::escape($old['email']) : '' ?>" required>
       <?php if (isset($errors['email'])): ?>
-        <span class="error-text" style="color: #e53e3e; font-size: 0.875rem;"><?= Security::escape($errors['email']) ?></span>
+        <span class="error-text" style="color: #e53e3e; font-size: 1.2rem;"><?= Security::escape($errors['email']) ?></span>
       <?php endif; ?>
     </div>
 
@@ -28,7 +28,7 @@
         </button>
       </div>
       <?php if (isset($errors['password'])): ?>
-        <span class="error-text" style="color: #e53e3e; font-size: 0.875rem; display: block; margin-top: 0.5rem;"><?= Security::escape($errors['password']) ?></span>
+        <span class="error-text" style="color: #e53e3e; font-size: 1.2rem; display: block; margin-top: 0.5rem;"><?= Security::escape($errors['password']) ?></span>
       <?php endif; ?>
       <div class="password-checklist">
         <div class="checklist-item password-strength" data-rule="strength">

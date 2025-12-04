@@ -203,7 +203,8 @@ html, body {
   max-height: 80vh; /* allow large images but stay within viewport */
   height: auto;
   border-radius: 8px;
-  object-fit: contain; /* ensure whole image is visible */
+  -o-object-fit: contain;
+     object-fit: contain; /* ensure whole image is visible */
 }
 .guest-hero .hero-left {
   height: 100%;
@@ -456,7 +457,8 @@ html, body {
   max-width: 60%;
   width: auto;
   height: auto;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   display: block;
 }
 
@@ -975,7 +977,7 @@ html, body {
 }
 .form-errors li {
   color: #DC2626;
-  font-size: 0.9em;
+  font-size: 1.1em;
   font-weight: 500;
   margin: 0.4em 0;
 }
@@ -1024,6 +1026,9 @@ html, body {
 }
 .form-row input:hover:not(:focus) {
   background: rgba(148, 163, 184, 0.1);
+}
+.form-row input::-moz-placeholder {
+  color: rgba(148, 163, 184, 0.6);
 }
 .form-row input::placeholder {
   color: rgba(148, 163, 184, 0.6);
@@ -1282,14 +1287,14 @@ html, body {
 }
 .category-card strong,
 .subcategory-item strong {
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   color: #2d3748;
   display: block;
   margin-bottom: 0.35rem;
 }
 .category-card span,
 .subcategory-item span {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: #718096;
   line-height: 1.3;
 }
