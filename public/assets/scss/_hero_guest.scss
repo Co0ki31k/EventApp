@@ -1,0 +1,196 @@
+@use 'variables' as *;
+// Hero styles for guest landing
+.guest-hero {
+  height: 100vh;
+  background: $white;
+  display: flex;
+  align-items: center;
+
+  .hero-inner {
+    width: 100%;
+    display: flex;
+    align-items: center; /* center children vertically */
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .hero-left {
+    flex: 0 0 55%;
+    padding: clamp(1.2rem, 4vw, 4rem) 0 clamp(1.2rem, 4vw, 4rem) clamp(1.5rem, 12vw, 26rem);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical centering */
+    align-items: flex-start; /* keep text left-aligned */
+    min-width: 300px;
+  }
+
+  .hero-right {
+    flex: 0 0 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 2.5vw, 2rem) clamp(0.8rem, 4vw, 10rem) clamp(1rem, 2.5vw, 2rem) 0;
+    box-sizing: border-box;
+    min-width: 260px;
+  }
+
+  h1 {
+    /* responsive scale: smaller screens shrink, large screens cap at original size */
+    font-size: clamp(2.2rem, 6vw, 7.4rem);
+    margin: 0 0 1rem;
+    line-height: 1.05;
+    font-weight: 600;
+  }
+
+ 
+  /* accent underline: two rounded strokes under a single word */
+  h1 .accent-underline {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    padding-bottom: 0.05em; /* space for strokes */
+    z-index: 2; /* text above strokes */
+  }
+
+  h1 .accent-underline::before,
+  h1 .accent-underline::after {
+    content: '';
+    position: absolute;
+    left: 0.1em;
+    right: 0.20em;
+    background: $guest-accent-color;
+    display: block;
+    border-radius: 999px;
+  }
+
+  /* upper stroke (closer to the text) */
+  h1 .accent-underline::before {
+    left: -0.10em;
+    right: -0.01em;
+    bottom: -0.1em;
+    height: 0.08em;
+    z-index: -1;
+    transform: rotate(-3deg) skewX(10deg); 
+    border-radius: 60% 100% 0% 30%;
+  }
+
+  /* lower stroke (slightly below) */
+  h1 .accent-underline::after {
+    bottom: -0.06em;
+    height: 0.07em;
+    z-index: -2;
+    transform: rotate(2deg) skewX(-10deg); 
+    border-radius: 50% 100% 0% 30%;
+  }
+
+  @media (max-width: 900px) {
+    h1 .accent-underline { padding-bottom: 0.20em; }
+    h1 .accent-underline::before { bottom: 0.02em; height: 0.08em; left: -0.06em; right: -0.06em; border-radius: 999px; transform: none; }
+    h1 .accent-underline::after { bottom: -0.04em; height: 0.10em; left: -0.06em; right: -0.06em; border-radius: 999px; transform: none; }
+  }
+
+  h2 {
+    font-size: clamp(1rem, 2.2vw, 2rem);
+    margin: 0 0 1.5rem;
+    color: $text-body-color;
+    font-weight: 400;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 1.7rem 2.8rem; /* larger padding */
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 1.62rem; /* larger button font */
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  /* Make the arrow inside the button visually thicker and slightly larger */
+  .btn .btn-arrow {
+    display: inline-block;
+    font-weight: 900;
+    font-size: 1.35em; /* slightly larger than button text */
+    line-height: 1;
+    vertical-align: middle;
+    transform: translateY(-0.06em);
+  }
+
+  .btn-primary {
+    background: $guest-accent-color;
+    color: $white;
+  }
+
+  .btn-primary:hover { background: $guest-button-hoover; }
+
+  /* Option A: pulse + arrow slide for .btn-map */
+  .btn-map {
+    position: relative;
+    overflow: hidden;
+    transition: transform .18s ease;
+    will-change: transform;
+  }
+
+  .btn-map:hover {
+    transform: translateY(-4px) scale(1.02);
+    animation: btn-pulse 1.2s infinite;
+  }
+
+  @keyframes btn-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+    50% { box-shadow: 0 8px 20px -8px rgba(0,0,0,0.18); }
+    100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+  }
+
+  .btn-map .btn-arrow {
+    display: inline-block;
+    transform: translateX(-3px);
+    transition: transform .28s cubic-bezier(.2,.9,.2,1), transform .18s ease;
+  }
+  .btn-map:hover .btn-arrow { transform: translateX(8px); }
+
+  /* New: scale the label and arrow more when hovered (so text and arrow grow) */
+  .btn-map .btn-label {
+    display: inline-block;
+    transform-origin: center center;
+    transition: transform .18s ease;
+  }
+
+  .btn-map:hover .btn-label {
+    transform: scale(1.08);
+  }
+
+  .btn-map:hover .btn-arrow {
+    transform: translateX(8px) scale(1.18);
+  }
+
+  /* constrain image height so left column can match it */
+  .hero-right img {
+    /* show full image without cropping */
+    display: block;
+    width: auto; /* avoid forcing full width which can crop when height limited */
+    max-width: 100%;
+    max-height: 80vh; /* allow large images but stay within viewport */
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain; /* ensure whole image is visible */
+  }
+
+  /* make left column expand/shrink to match image height roughly */
+  .hero-left { height: 100%; }
+
+  @media (max-width: 900px) {
+    height: auto;
+    padding: 3rem 0;
+
+    .hero-inner { flex-direction: column; }
+    .hero-left, .hero-right { width: 100%; padding: 1rem 1.5rem; max-height: none; }
+    h1 { font-size: 2.6rem; }
+    h2 { font-size: 1.1rem; }
+    .btn { font-size: 1rem; padding: 0.8rem 1.2rem; }
+    .btn .btn-arrow { font-size: 1.15em; }
+  }
+}

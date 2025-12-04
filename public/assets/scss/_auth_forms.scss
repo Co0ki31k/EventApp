@@ -1,0 +1,382 @@
+@use 'variables' as *;
+@use 'sass:color';
+
+// Panel autoryzacji
+.auth-panel {
+  width: auto;
+  height: auto;
+  text-align: center;
+  font-size: 125%;
+  padding: 2em 3.5em 1em 3.5em;
+  border: 2px solid black;
+  border-radius: 16px;
+  
+  h1 {
+    font-size: 3.7em;
+    color: $text-primary;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .muted {
+    color: $text-secondary;
+    margin-bottom: 1.8em;
+    font-size: 1.4em;
+    text-align: center;
+  }
+}
+
+
+// Komunikaty o błędach
+.form-errors {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  padding: 1em 1.25em;
+  margin-bottom: 1.5em;
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    color: #DC2626;
+    font-size: 0.9em;
+    font-weight: 500;
+    margin: 0.4em 0;
+    
+    &:first-child {
+      margin-top: 0;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Formularz rejestracji/logowania
+.form-register,
+.form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6em;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  text-align: left;
+  
+  label {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: $text-secondary;
+    text-align: left;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.85em 1em;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    background: rgba(148, 163, 184, 0.1);
+    color: $text-primary;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    
+    &:focus {
+      outline: none;
+      background: rgba(148, 163, 184, 0.12);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+    }
+    
+    &:hover:not(:focus) {
+      background: rgba(148, 163, 184, 0.1);
+    }
+    
+    &::placeholder {
+      color: rgba(148, 163, 184, 0.6);
+    }
+    
+    // Walidacja email
+    &.valid {
+      background: rgba(22, 163, 74, 0.05);
+      border: 2px solid rgba(22, 163, 74, 0.3);
+    }
+    
+    &.invalid {
+      background: rgba(220, 38, 38, 0.05);
+      border: 2px solid rgba(220, 38, 38, 0.3);
+    }
+  }
+}
+
+// Wrapper dla pola hasła z przyciskiem
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+  
+  input {
+    padding-right: 3em;
+  }
+}
+
+.toggle-password {
+  position: absolute;
+  right: 0.75em;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+  
+  &:hover {
+    opacity: 0.7;
+  }
+  
+  &:focus {
+    outline: none;
+    opacity: 0.8;
+  }
+  
+  .eye-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+}
+
+// Link przypomnienia hasła
+.forgot-password-link {
+  display: block;
+  margin-top: 0.7em;
+  font-size: 1em;
+  color: $accent-blue;
+  text-decoration: none;
+  text-align: left;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: color.adjust($accent-blue, $lightness: -10%);
+    text-decoration: underline;
+  }
+}
+
+// Checklista wymagań hasła
+.password-checklist {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
+.password-strength {
+  &.checklist-item {
+    .check-text {
+      color: $text-secondary;
+    }
+    
+    .strength-value {
+      font-weight: 600;
+    }
+    
+    &.weak {
+      .check-icon {
+        color: $text-secondary;
+      }
+      
+      .strength-value {
+        color: #DC2626;
+      }
+    }
+    
+    &.medium {
+      .check-icon {
+        color: $text-secondary;
+      }
+      
+      .strength-value {
+        color: #F59E0B;
+      }
+    }
+    
+    &.strong {
+      .check-icon {
+        color: #16A34A;
+      }
+      
+      .check-text {
+        color: #16A34A;
+      }
+      
+      .strength-value {
+        color: #16A34A;
+      }
+    }
+  }
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  font-size: 0.9em;
+  transition: color 0.2s ease;
+  
+  .check-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em;
+    font-weight: 700;
+    color: $text-secondary;
+    transition: all 0.2s ease;
+  }
+  
+  .check-text {
+    font-weight: 400;
+    color: $text-secondary;
+    transition: color 0.2s ease;
+  }
+  
+  &.valid {
+    .check-icon {
+      color: #16A34A;
+    }
+    
+    .check-text {
+      color: #16A34A;
+    }
+  }
+}
+
+// Komunikat błędu dla pustych pól
+.field-error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1em;
+  color: #DC2626;
+  margin-top: 0.4em;
+  animation: slideDown 0.2s ease;
+  
+  .validation-icon {
+    font-size: 0.85em;
+    font-weight: 700;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-actions {
+  margin-top: 0.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: stretch;
+}
+
+// Przyciski
+.btn {
+  display: inline-block;
+  padding: 0.9em 1.5em;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, $accent-blue 0%, color.adjust($accent-blue, $lightness: 5%) 100%);
+  color: $white;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.25);
+  
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, color.adjust($accent-blue, $lightness: -5%) 0%, $accent-blue 100%);
+    box-shadow: 0 6px 20px rgba(29, 78, 216, 0.35);
+    transform: translateY(-2px);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(29, 78, 216, 0.25);
+  }
+}
+
+.btn-link {
+  background: transparent;
+  color: $text-secondary;
+  padding: 0.7em 1em;
+  font-size: 0.95em;
+  font-weight: 500;
+  box-shadow: none;
+  
+  &:hover {
+    color: $accent-blue;
+    background: rgba(29, 78, 216, 0.04);
+    transform: none;
+  }
+}
+
+// Responsywność mobile
+@media (max-width: 900px) {
+  .auth-panel {
+    h1 {
+      font-size: 1.75em;
+    }
+    
+    .muted {
+      font-size: 0.9em;
+    }
+  }
+  
+  .form-register,
+  .form-login {
+    gap: 1em;
+  }
+  
+  .form-row {
+    input {
+      padding: 0.75em 0.9em;
+      font-size: 0.95em;
+    }
+  }
+  
+  .btn {
+    padding: 0.8em 1.3em;
+    font-size: 0.95rem;
+  }
+}

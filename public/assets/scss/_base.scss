@@ -1,0 +1,26 @@
+@use 'variables' as *;
+
+html, body {
+  height: 100%;
+  background: $body-bg-color;
+  color: $text-body-color;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+// On smaller screens (laptops), reduce base font to 60% per request (choice C)
+@media (max-width: 1500px) {
+  html, body {
+    font-size: $font-size-small;
+  }
+}
+
+/* sensible default box-sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+

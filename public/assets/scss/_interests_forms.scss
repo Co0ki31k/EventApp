@@ -1,0 +1,101 @@
+// Interests selection forms styles
+// Używane w interests_categories.php i interests_subcategories.php
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 0.8fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.subcategories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.category-card,
+.subcategory-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0.75rem;
+  border: 2px solid #2f2f30;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #ffffff;
+  text-align: center;
+  min-height: 90px;
+
+  strong {
+    font-size: 1.1rem;
+    color: #2d3748;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  span {
+    font-size: 0.9rem;
+    color: #718096;
+    line-height: 1.3;
+  }
+
+  &:hover {
+    border-color: #a0aec0;
+    background: #f7fafc;
+    transform: translateY(-2px);
+  }
+
+  &.selected {
+    background: #e2e8f0;
+    border-color: #a0aec0;
+
+    strong {
+      color: #2d3748;
+    }
+
+    span {
+      color: #4a5568;
+    }
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+}
+
+.form-interests {
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #e2e8f0;
+  }
+
+  .btn-secondary {
+    padding: 1rem 2rem;
+    background: #e2e8f0;
+    color: #2d3748;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: background 0.2s;
+    font-size: 1.2rem;
+
+    &:hover {
+      background: #cbd5e0;
+    }
+  }
+
+  .btn-primary {
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    font-size: 1.2rem;
+  }
+}
