@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pl">
+<html lang="pl"<?php if (!empty($html_class)) { echo ' class="' . htmlspecialchars($html_class) . '"'; } ?>>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">

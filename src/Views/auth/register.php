@@ -1,6 +1,7 @@
 <?php
 // Registration view
 ?>
+<?php $html_class = 'auth-root'; ?>
 <?php include view('partials/head.php'); ?>
 <main class="auth-page">
   <?php 

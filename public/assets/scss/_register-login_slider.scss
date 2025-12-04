@@ -22,7 +22,7 @@
 
 // Lewa strona - zaokrąglony prostokąt z delikatnym marginesem
 .auth-left {
-  flex: 1 1 50%;
+  flex: 1 1 45%;
   background: $white;
   border-radius: 24px;
   padding: 3rem 5rem;
@@ -107,7 +107,7 @@
 
 // Prawa strona - zaokrąglony prostokąt z większym marginesem
 .auth-right { 
-  flex: 1 1 50%;
+  flex: 1 1 55%;
   background: $white;
   display: flex; 
   align-items: center; 
