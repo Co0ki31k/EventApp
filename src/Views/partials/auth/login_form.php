@@ -19,7 +19,7 @@
       <label for="email">E‑mail</label>
       <input id="email" name="email" type="email" value="<?= isset($old['email']) ? htmlspecialchars($old['email']) : '' ?>" required autofocus>
       <?php if (isset($errors['email'])): ?>
-        <span class="error-text" style="color: #e53e3e; font-size: 0.875rem; display: block; margin-top: 0.5rem;"><?= htmlspecialchars($errors['email']) ?></span>
+        <span class="error-text" style="color: #e53e3e; font-size: 1.2rem; display: block; margin-top: 0.5rem;"><?= htmlspecialchars($errors['email']) ?></span>
       <?php endif; ?>
     </div>
 
@@ -32,10 +32,10 @@
         </button>
       </div>
       <?php if (isset($errors['password'])): ?>
-        <span class="error-text" style="color: #e53e3e; font-size: 0.875rem; display: block; margin-top: 0.5rem;"><?= htmlspecialchars($errors['password']) ?></span>
+        <span class="error-text" style="color: #e53e3e; font-size: 1.2rem; display: block; margin-top: 0.5rem;"><?= htmlspecialchars($errors['password']) ?></span>
       <?php endif; ?>
       <?php if (isset($errors['general'])): ?>
-        <span class="error-text" style="color: #e53e3e; font-size: 0.875rem; display: block; margin-top: 0.5rem; font-weight: 600;"><?= htmlspecialchars($errors['general']) ?></span>
+        <span class="error-text" style="color: #e53e3e; font-size: 1.2rem; display: block; margin-top: 0.5rem; font-weight: 600;"><?= htmlspecialchars($errors['general']) ?></span>
       <?php endif; ?>
     </div>
 
