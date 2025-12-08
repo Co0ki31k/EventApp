@@ -16,7 +16,7 @@
 
   <form action="login.php" method="post" class="form-login">
     <div class="form-row">
-      <label for="email">E‑mail</label>
+      <label for="email">E-mail</label>
       <input id="email" name="email" type="email" value="<?= isset($old['email']) ? htmlspecialchars($old['email']) : '' ?>" required autofocus>
       <?php if (isset($errors['email'])): ?>
         <span class="error-text" style="color: #e53e3e; font-size: 1.2rem; display: block; margin-top: 0.5rem;"><?= htmlspecialchars($errors['email']) ?></span>
@@ -41,7 +41,10 @@
 
     <div class="form-row form-actions">
       <button type="submit" class="btn btn-primary">Zaloguj się</button>
-      <a href="register.php" class="btn btn-link">Nie masz konta? Zarejestruj się</a>
+      <div class="inline-actions">
+        <a href="register.php" class="btn btn-link">Nie masz konta? Zarejestruj się</a>
+        <a href="forgot-password.php" class="btn btn-link">Zapomniałeś hasła?</a>
+      </div>
     </div>
   </form>
 </section>
