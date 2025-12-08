@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Zapisz ID użytkownika w sesji tymczasowej
         $_SESSION['temp_user_id'] = $result['user_id'];
         
-        // Przekieruj do wyboru zainteresowań
-        header('Location: interests.php');
+        // Przekieruj do strony weryfikacji email (użytkownik wpisze kod z maila)
+        header('Location: verify-email.php');
         exit;
     } else {
         $errors = $result['errors'];

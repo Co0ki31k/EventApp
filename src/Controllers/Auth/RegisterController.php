@@ -3,6 +3,8 @@
 /**
  * Controller rejestracji użytkownika
  */
+require_once SRC_PATH . '/classes/EmailVerification.php';
+
 class RegisterController
 {
     private array $errors = [];
@@ -76,11 +78,25 @@ class RegisterController
                 'user_id' => null
             ];
         }
-        
-        // Sukces
+
+        // Generuj token weryfikacyjny i kod, zapisz do EmailVerifications i wyślij maila
+        $token = EmailVerification::generateToken((int)$userId);
+        if ($token === false) {
+            return [
+                'success' => false,
+                'message' => 'Nie udało się przygotować weryfikacji email. Spróbuj ponownie.',
+                'errors' => ['general' => 'Błąd podczas generowania tokena'],
+                'user_id' => $userId
+            ];
+        }
+
+        // Wyślij email z kodem/linkiem
+        EmailVerification::sendVerificationEmail($this->data['email'], $token);
+
+        // Sukces (wymagana weryfikacja email)
         return [
             'success' => true,
-            'message' => 'Konto zostało utworzone pomyślnie',
+            'message' => 'Konto zostało utworzone. Sprawdź email aby dokończyć weryfikację.',
             'errors' => [],
             'user_id' => $userId
         ];

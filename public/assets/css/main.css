@@ -203,8 +203,7 @@ html, body {
   max-height: 80vh; /* allow large images but stay within viewport */
   height: auto;
   border-radius: 8px;
-  -o-object-fit: contain;
-     object-fit: contain; /* ensure whole image is visible */
+  object-fit: contain; /* ensure whole image is visible */
 }
 .guest-hero .hero-left {
   height: 100%;
@@ -457,8 +456,7 @@ html, body {
   max-width: 60%;
   width: auto;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   display: block;
 }
 
@@ -1027,9 +1025,6 @@ html, body {
 .form-row input:hover:not(:focus) {
   background: rgba(148, 163, 184, 0.1);
 }
-.form-row input::-moz-placeholder {
-  color: rgba(148, 163, 184, 0.6);
-}
 .form-row input::placeholder {
   color: rgba(148, 163, 184, 0.6);
 }
@@ -1189,6 +1184,21 @@ html, body {
   align-items: stretch;
 }
 
+/* Inline actions used e.g. under login button (register / forgot) */
+.inline-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Make sure link-style buttons don't stretch full width inside inline-actions */
+.inline-actions .btn {
+  display: inline-block;
+  width: auto;
+}
+
 .btn {
   display: inline-block;
   padding: 0.9em 1.5em;
@@ -1254,6 +1264,138 @@ html, body {
   .btn {
     padding: 0.8em 1.3em;
     font-size: 0.95rem;
+  }
+}
+/* Styles for email verification panel */
+.verify-panel {
+  padding: 18px;
+  width: auto;
+}
+
+.verify-card {
+  width: auto;
+  min-width: 50%;
+  margin: 0 auto;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.verify-header {
+  text-align: center;
+  padding: 24px 20px 12px;
+  background: #fff;
+}
+
+.verify-icon {
+  font-size: 2em;
+  color: #44b749;
+  margin-bottom: 8px;
+}
+
+.verify-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+  letter-spacing: 2px;
+  color: #6b7280;
+}
+
+.verify-body {
+  padding: 1.2em;
+  background: #fff;
+}
+
+.verify-intro {
+  color: #374151;
+  margin: 0 0 6px;
+  font-size: 1.2em;
+}
+
+.verify-expiry {
+  color: #6b7280;
+  font-size: 1em;
+  margin: 0 0 1.2em;
+}
+
+.code-inputs {
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+  margin: 1em 0 1.2em;
+}
+
+.code-inputs .digit {
+  width: 2.5em;
+  height: 2.6em;
+  text-align: center;
+  font-size: 1.3em;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.btn-verify {
+  display: block;
+  width: 100%;
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 1em 1.3em;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.75em;
+}
+
+.verify-links {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.3em;
+  align-items: center;
+}
+
+.link-like {
+  background: none;
+  border: none;
+  color: #22c55e;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-size: 1em;
+}
+
+.notice.success {
+  margin: 8px 0;
+  padding: 8px;
+  background: #ecfdf5;
+  color: #065f46;
+  border-radius: 6px;
+}
+
+.notice.error {
+  margin: 8px 0;
+  padding: 8px;
+  background: #fff1f2;
+  color: #9f1239;
+  border-radius: 6px;
+}
+
+.dev-box {
+  margin-top: 10px;
+  background: #f8fafc;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .verify-card {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .code-inputs .digit {
+    width: 40px;
+    height: 44px;
   }
 }
 .categories-grid {
