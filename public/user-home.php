@@ -12,7 +12,6 @@ if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
     exit;
 }
 
-// Przekieruj do mapy
-header('Location: map.php');
-exit;
+require_once VIEWS_USER_PATH . '/home.php';
+
 ?>

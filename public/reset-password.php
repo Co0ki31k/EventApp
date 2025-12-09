@@ -15,7 +15,7 @@ $errors = [];
 $message = '';
 $token = $_GET['token'] ?? '';
 
-if (empty($token)&&$_SERVER['REQUEST_METHOD'] !== 'POST') {
+if (empty($token)) {
     $errors[] = 'Brak tokenu resetu.';
 } else {
     $reset = PasswordReset::verifyToken($token);

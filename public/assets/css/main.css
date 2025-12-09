@@ -1492,6 +1492,24 @@ html, body {
   font-size: 1.2rem;
 }
 
+/* User home layout styles (placeholder)
+   Import this partial into main.scss when ready.
+*/
+.user-home-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+  height: calc(100vh - 0px);
+}
+
+.user-map-area {
+  position: relative;
+}
+
+.map-wrapper {
+  height: 100%;
+}
+
 body.user-home {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1550,56 +1568,117 @@ body.user-home {
   transform: translateY(-2px);
 }
 
-.map-page {
-  margin: 0;
-  padding: 0;
+/* Sidebar styles renamed from _sidebar_user.scss to _user_sidebar.scss */
+.user-sidebar {
+  width: 64px;
+  background: #fff;
+  border-right: 1px solid #eee;
+  position: relative;
+  z-index: 30;
+  transition: width 0.2s ease;
+}
+
+.user-sidebar.expanded {
+  width: 384px; /* 64 + 320 panel */
+}
+
+.sidebar-inner {
+  display: flex;
   height: 100vh;
+}
+
+.sidebar-icons {
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  width: 64px;
+}
+
+.sidebar-icon {
+  display: block;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sidebar-panels {
+  width: 320px;
   overflow: hidden;
 }
 
-.map-navbar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+/* Panels (sliding) styles for user sidebar */
+.sidebar-panels {
+  position: relative;
 }
-.map-navbar .navbar-container {
+
+.panel {
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease;
+}
+
+.panel-hidden {
+  transform: translateX(-10%);
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.panel[aria-hidden=false] {
+  transform: translateX(0);
+  opacity: 1;
+  height: auto;
+}
+
+.panel .panel-body {
+  padding: 12px;
+  overflow: auto;
+  max-height: calc(100vh - 40px);
+}
+
+/* Topbar styles placeholder */
+.user-topbar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 12px;
+  z-index: 20;
   display: flex;
-  justify-content: space-between;
+  gap: 12px;
   align-items: center;
-  max-width: 100%;
 }
-.map-navbar .navbar-brand h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
+
+.mode-switch .mode-btn {
+  margin: 0 6px;
 }
-.map-navbar .navbar-user {
+
+/* Profile modal styles placeholder */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.open {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
 }
-.map-navbar .navbar-user .user-name {
-  font-weight: 600;
-  font-size: 1rem;
-}
-.map-navbar .navbar-user .btn-logout {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  padding: 0.5rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-.map-navbar .navbar-user .btn-logout:hover {
-  background: white;
-  color: #667eea;
-  border-color: white;
+
+.modal .modal-content {
+  background: #fff;
+  padding: 16px;
+  border-radius: 6px;
+  width: 320px;
 }
 
 #map {
@@ -1607,26 +1686,4 @@ body.user-home {
   width: 100%;
   height: calc(100vh - 80px);
   z-index: 1;
-}
-
-@media (max-width: 768px) {
-  .map-navbar {
-    padding: 1rem;
-  }
-  .map-navbar .navbar-brand h1 {
-    font-size: 1.25rem;
-  }
-  .map-navbar .navbar-user {
-    gap: 1rem;
-  }
-  .map-navbar .navbar-user .user-name {
-    display: none;
-  }
-  .map-navbar .navbar-user .btn-logout {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
-  #map {
-    height: calc(100vh - 60px);
-  }
 }/*# sourceMappingURL=main.css.map */

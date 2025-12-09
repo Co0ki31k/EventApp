@@ -1,3 +1,16 @@
+/* User home layout styles (placeholder)
+   Import this partial into main.scss when ready.
+*/
+.user-home-layout{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+  height: calc(100vh - 0px);
+}
+.user-map-area{
+  position: relative;
+}
+.map-wrapper{ height:100%; }
 // User home page styles
 // Tymczasowe style dla strony użytkownika (placeholder)
 

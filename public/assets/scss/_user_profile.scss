@@ -1,0 +1,4 @@
+/* Profile modal styles placeholder */
+.modal{ display:none; position:fixed; inset:0; align-items:center; justify-content:center; }
+.modal.open{ display:flex; }
+.modal .modal-content{ background:#fff; padding:16px; border-radius:6px; width:320px; }

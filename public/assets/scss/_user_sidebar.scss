@@ -1,0 +1,16 @@
+/* Sidebar styles renamed from _sidebar_user.scss to _user_sidebar.scss */
+.user-sidebar{
+  width:64px;
+  background:#fff;
+  border-right:1px solid #eee;
+  position:relative;
+  z-index:30;
+  transition:width .2s ease;
+}
+.user-sidebar.expanded{
+  width:384px; /* 64 + 320 panel */
+}
+.sidebar-inner{ display:flex; height:100vh; }
+.sidebar-icons{ list-style:none; padding:8px 0; margin:0; display:flex; flex-direction:column; gap:8px; align-items:center; width:64px; }
+.sidebar-icon{ display:block; width:44px; height:44px; padding:8px; background:none; border:none; border-radius:6px; cursor:pointer; }
+.sidebar-panels{ width:320px; overflow:hidden; }
