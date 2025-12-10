@@ -5,18 +5,19 @@
 
 <?php include view('partials/head.php'); ?>
 <div class="user-home-layout">
-    <?php view('user/partials/topbar'); ?>
-	<?php view('user/partials/sidebar'); ?>
+	<?php include view('user/partials/topbar.php'); ?>
+	<?php include view('user/partials/sidebar.php'); ?>
 
 	<main class="user-map-area">
-		<?php view('user/partials/map_container'); ?>
+		<?php include view('user/partials/map_container.php'); ?>
 	</main>
 
-</div>
+</div> 
 
 <?php // Frontend scripts for the user area
 ?>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-nPLbZ6YQmYVhG8h2r0nV3jV5y3s5k2qW1a1q3Y9iV6Q=" crossorigin=""></script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="crossorigin=""></script>
 <script src="<?= asset('js/user/map-controller.js') ?>"></script>
-<script src="<?= asset('js/user/sidebar.js') ?>"></script>
 <script src="<?= asset('js/user/topbar.js') ?>"></script>
+<script src="<?= asset('js/user/sidebar.js') ?>"></script>

@@ -17,8 +17,7 @@
   echo '<link rel="stylesheet" href="' . htmlspecialchars(asset('css/main.css')) . '">';
 
   // Leaflet CSS for user map
-  echo '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2Yw2Qb6v6gG1k4m4m0h2QfK0p0p2Xk9f2P4QF6w=" crossorigin="">';
-
+  echo '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>';
   echo '<link rel="apple-touch-icon" sizes="180x180" href="' . htmlspecialchars(asset('img/favicon_io/apple-touch-icon.png')) . '">';
   echo '<link rel="icon" type="image/png" sizes="32x32" href="' . htmlspecialchars(asset('img/favicon_io/favicon-32x32.png')) . '">';
   echo '<link rel="icon" type="image/png" sizes="16x16" href="' . htmlspecialchars(asset('img/favicon_io/favicon-16x16.png')) . '">';

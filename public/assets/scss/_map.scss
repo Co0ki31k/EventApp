@@ -1,7 +1,18 @@
+
 #map {
-  flex: 1;
   width: 100%;
-  height: calc(100vh - 80px); // Wysokość minus navbar
+  height: 100%;
   z-index: 1;
+}
+
+/* Desaturate and soften light tiles to a neutral gray appearance */
+.leaflet-tile-pane img{
+  /* Make tiles neutral/gray while preserving contrast for labels */
+  filter: grayscale(120%) brightness(85%) hue-rotate(230deg) saturate(95%);
+}
+
+.leaflet-marker-pane,
+.leaflet-popup-pane {
+  filter: none;
 }
 
