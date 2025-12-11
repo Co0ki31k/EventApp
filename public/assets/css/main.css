@@ -1530,6 +1530,7 @@ html, body {
 }
 
 .sidebar-inner {
+  position: relative;
   pointer-events: auto; /* re-enable clicks on inner elements */
   width: 100%;
   height: 95%;
@@ -1608,8 +1609,8 @@ html, body {
 
 /* Primary (largest) action button) */
 .sidebar-icon.primary {
-  width: 5rem; /* slightly larger primary action */
-  height: 5rem;
+  width: 4.75rem; /* slightly larger primary action */
+  height: 4.75rem;
   border-radius: 3rem;
   background: linear-gradient(180deg, #7b63ff, #5a3bff);
   color: #ffffff;
@@ -1660,34 +1661,52 @@ html, body {
 }
 
 /* Panels (sliding) styles for user sidebar */
+/* Position panels to the right of the sidebar */
 .sidebar-panels {
-  position: relative;
+  position: absolute;
+  left: calc(100% + 0.8rem);
+  top: 0; /* align with top of .sidebar-inner */
+  height: 100%; /* match .sidebar-inner height */
+  width: 28rem; /* panel width */
+  z-index: 21;
 }
 
 .panel {
   width: 100%;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.25s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* match sidebar visual style */
+  background: rgba(12, 18, 28, 0.72);
+  color: #d7e6ef;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition: transform 0.25s ease, opacity 0.2s ease, max-height 0.25s ease;
+  border-radius: 1.5rem; /* same as .sidebar-inner */
+  overflow: hidden;
 }
 
+/* Hidden: collapse by max-height so container sizing works */
 .panel-hidden {
-  transform: translateX(-10%);
+  transform: translateX(-8px);
   opacity: 0;
-  height: 0;
-  overflow: hidden;
+  pointer-events: none;
+  max-height: 0;
 }
 
 .panel[aria-hidden=false] {
   transform: translateX(0);
   opacity: 1;
-  height: auto;
+  pointer-events: auto;
+  max-height: 100%;
 }
 
 .panel .panel-body {
-  padding: 12px;
+  padding: 16px;
   overflow: auto;
-  max-height: calc(100vh - 40px);
+  /* allow body to fill remaining space inside panel */
+  max-height: calc(100% - 56px);
+  background: transparent; /* keep panel-body transparent so pill tint shows through */
+  color: #d7e6ef;
 }
 
 /* Topbar styles placeholder */

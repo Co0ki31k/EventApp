@@ -12,6 +12,7 @@
 }
 
 .sidebar-inner{
+  position: relative;
   pointer-events: auto; /* re-enable clicks on inner elements */
   width: 100%;
   height: 95%;
@@ -86,8 +87,8 @@
 
 /* Primary (largest) action button) */
 .sidebar-icon.primary{
-  width: 5rem; /* slightly larger primary action */
-  height: 5rem;
+  width: 4.75rem; /* slightly larger primary action */
+  height: 4.75rem;
   border-radius: 3rem;
   background: linear-gradient(180deg,#7b63ff,#5a3bff);
   color: #ffffff;

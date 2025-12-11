@@ -29,13 +29,13 @@
         <div class="sidebar-panels" aria-live="polite">
             <?php
             // Panels moved into the sidebar so the left side becomes one big expandable panel
-            view('user/partials/panels/add_event_panel');
-            view('user/partials/panels/calendar_panel');
-            view('user/partials/panels/messages_panel');
-            view('user/partials/panels/notifications_panel');
-            view('user/partials/panels/friends_panel');
-            view('user/partials/panels/filters_panel');
-            view('user/partials/panels/settings_panel');
+            include view('user/partials/panels/add_event_panel.php');
+            include view('user/partials/panels/calendar_panel.php');
+            include view('user/partials/panels/messages_panel.php');
+            include view('user/partials/panels/notifications_panel.php');
+            include view('user/partials/panels/friends_panel.php');
+            include view('user/partials/panels/filters_panel.php');
+            include view('user/partials/panels/settings_panel.php');
             ?>
         </div>
     </div>
