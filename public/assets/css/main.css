@@ -203,7 +203,8 @@ html, body {
   max-height: 80vh; /* allow large images but stay within viewport */
   height: auto;
   border-radius: 8px;
-  object-fit: contain; /* ensure whole image is visible */
+  -o-object-fit: contain;
+     object-fit: contain; /* ensure whole image is visible */
 }
 .guest-hero .hero-left {
   height: 100%;
@@ -456,7 +457,8 @@ html, body {
   max-width: 60%;
   width: auto;
   height: auto;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   display: block;
 }
 
@@ -1025,6 +1027,9 @@ html, body {
 .form-row input:hover:not(:focus) {
   background: rgba(148, 163, 184, 0.1);
 }
+.form-row input::-moz-placeholder {
+  color: rgba(148, 163, 184, 0.6);
+}
 .form-row input::placeholder {
   color: rgba(148, 163, 184, 0.6);
 }
@@ -1344,7 +1349,7 @@ html, body {
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  font-size: 0.75em;
+  font-size: 0.9em;
 }
 
 .verify-links {
@@ -1398,6 +1403,8 @@ html, body {
     height: 44px;
   }
 }
+/* Add Event panel styles (scoped) */
+/* Add Event moved to _user_add_event_panel.scss */
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(2, 0.8fr);
@@ -1540,7 +1547,8 @@ html, body {
   align-items: center;
   justify-content: flex-start;
   background: rgba(12, 18, 28, 0.72); /* dark translucent pill */
-  backdrop-filter: blur(0.12rem);
+  -webkit-backdrop-filter: blur(0.12rem);
+          backdrop-filter: blur(0.12rem);
   border-radius: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   box-sizing: border-box;
@@ -1618,6 +1626,16 @@ html, body {
   font-size: 2.2rem; /* larger icon for primary */
 }
 
+/* Keep primary action colors stable on hover (do not override background/color) */
+.sidebar-icon.primary:hover {
+  /* Only scale the primary button on hover — don't add the white square overlay
+     or change its gradient. Keep the original primary box-shadow. */
+  transform: scale(1.04);
+  background: linear-gradient(180deg, #7b63ff, #5a3bff) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(90, 59, 255, 0.28) !important;
+}
+
 /* Groups and layout */
 .sidebar-action {
   padding-bottom: 4rem;
@@ -1643,46 +1661,74 @@ html, body {
   justify-content: center;
 }
 
-.sidebar-panels {
-  margin-top: 0.45rem;
-  width: calc(100% - 0.8rem);
-  overflow: hidden;
+@media (max-width: 1500px) {
+  .sidebar-logo {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+  }
+  .sidebar-icon {
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: 2.3rem; /* increase icon font-size to better fill the square */
+    line-height: 1;
+  }
+  .sidebar-icon.primary {
+    width: 4.5rem; /* slightly larger primary action */
+    height: 4.5rem;
+    border-radius: 3rem;
+    font-size: 2.5rem; /* larger icon for primary */
+  }
+  .sidebar-action {
+    padding-bottom: 2.5rem;
+  }
+  .sidebar-group {
+    gap: 1.5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .sidebar-settings {
+    margin-top: auto;
+    padding-bottom: 1.3rem;
+  }
+  .sidebar-icon:hover {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1rem;
+    transform: translateY(-4px) scale(1.04);
+    background: rgba(255, 255, 255, 0.137);
+    color: #ffffff;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  }
 }
-
-/* Panels transparent so the pill tint shows through */
-.sidebar-panels .panel {
-  background: transparent;
-  box-shadow: none;
-  color: #cbdbe8;
-}
-
-.sidebar-panels .panel .panel-body {
-  background: transparent;
-}
-
-/* Panels (sliding) styles for user sidebar */
-/* Position panels to the right of the sidebar */
 .sidebar-panels {
   position: absolute;
   left: calc(100% + 0.8rem);
   top: 0; /* align with top of .sidebar-inner */
-  height: 100%; /* match .sidebar-inner height */
-  width: 28rem; /* panel width */
+  height: auto; /* match .sidebar-inner height */
+  width: auto; /* panel width */
   z-index: 21;
 }
 
 .panel {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  /* match sidebar visual style */
   background: rgba(12, 18, 28, 0.72);
-  color: #d7e6ef;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   transition: transform 0.25s ease, opacity 0.2s ease, max-height 0.25s ease;
   border-radius: 1.5rem; /* same as .sidebar-inner */
   overflow: hidden;
+  padding: 2.5rem;
+  /* Panel body font and label sizing as requested */
+}
+.panel > header, .panel header {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #d7e6ef;
+  padding-bottom: 1.5rem;
+}
+.panel .panel-body {
+  font-size: 1.3rem;
+  color: #d7e6ef;
 }
 
 /* Hidden: collapse by max-height so container sizing works */
@@ -1700,12 +1746,10 @@ html, body {
   max-height: 100%;
 }
 
-.panel .panel-body {
-  padding: 16px;
-  overflow: auto;
-  /* allow body to fill remaining space inside panel */
-  max-height: calc(100% - 56px);
-  background: transparent; /* keep panel-body transparent so pill tint shows through */
+/* Labels that appear inside any panel-body should be 1.5rem */
+.panel .panel-body label {
+  font-size: 1.4rem;
+  font-weight: 550;
   color: #d7e6ef;
 }
 
@@ -1730,7 +1774,8 @@ html, body {
 .mode-group {
   display: inline-flex;
   background: rgba(20, 30, 40, 0.45);
-  backdrop-filter: blur(0.1rem);
+  -webkit-backdrop-filter: blur(0.1rem);
+          backdrop-filter: blur(0.1rem);
   border-radius: 2rem;
   padding: 0.4rem;
   box-shadow: 0 0.3rem 0.7rem rgba(0, 0, 0, 0.12);
@@ -1743,7 +1788,7 @@ html, body {
   color: #d7e6ef;
   padding: 0.55rem 1rem;
   margin: 0rem;
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-weight: 600;
   border-radius: 2rem;
   cursor: pointer;
@@ -1765,7 +1810,8 @@ html, body {
   display: inline-flex;
   align-items: center;
   background: rgba(20, 30, 40, 0.45);
-  backdrop-filter: blur(0.1rem);
+  -webkit-backdrop-filter: blur(0.1rem);
+          backdrop-filter: blur(0.1rem);
   border-radius: 2rem;
   padding: 0.4rem;
   box-shadow: 0 0.3rem 0.7rem rgba(0, 0, 0, 0.12);
@@ -1779,7 +1825,7 @@ html, body {
   border: none;
   color: #d7e6ef;
   padding: 0.55rem 1rem;
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-weight: 600;
   border-radius: 2rem;
   cursor: pointer;
@@ -1832,6 +1878,103 @@ html, body {
   padding: 16px;
   border-radius: 6px;
   width: 320px;
+}
+
+.panel-add-event {
+  min-width: 30rem;
+  margin: 0 auto;
+  border-radius: inherit;
+  /* map button */
+  /* category select styles */
+}
+.panel-add-event .form-add-event {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+}
+.panel-add-event .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.panel-add-event .form-row textarea {
+  resize: vertical;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: #d7e6ef;
+  font-family: inherit;
+}
+.panel-add-event .row-inline {
+  display: flex;
+  gap: 1rem;
+}
+.panel-add-event .input-with-icon {
+  position: relative;
+  width: 100%;
+}
+.panel-add-event .input-with-icon input,
+.panel-add-event .input-with-icon select,
+.panel-add-event .input-with-icon textarea {
+  width: 100%;
+  border-radius: 0.75rem; /* 12px */
+  background: rgba(255, 255, 255, 0.02);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.04); /* 1px */
+  color: #d7e6ef;
+  font-family: inherit;
+  height: 4rem;
+  font-size: 1.2rem;
+}
+.panel-add-event .input-with-icon .input-icon {
+  position: absolute;
+  left: 0.625rem; /* 10px */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem; /* 20px */
+  height: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(215, 230, 239, 0.9);
+  pointer-events: none;
+  opacity: 0.95;
+}
+.panel-add-event .btn-map {
+  width: 100%;
+  height: 4rem;
+  border-radius: 1rem;
+  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-shadow: 0 8px 26px rgba(99, 102, 241, 0.18);
+  border: none;
+  padding: 0;
+}
+.panel-add-event .input-with-icon select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, rgba(215, 230, 239, 0.8) 50%), linear-gradient(135deg, rgba(215, 230, 239, 0.8) 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 36px;
+}
+.panel-add-event .form-actions {
+  margin-top: 6px;
+}
+.panel-add-event .form-actions .btn-create {
+  width: 100%;
+  height: 5rem;
+  border-radius: 1rem;
+  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: 0 8px 26px rgba(99, 102, 241, 0.18);
+  border: none;
+  padding: 0;
 }
 
 #map {

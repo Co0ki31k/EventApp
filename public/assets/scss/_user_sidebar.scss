@@ -96,6 +96,16 @@
   font-size: 2.2rem; /* larger icon for primary */
 }
 
+/* Keep primary action colors stable on hover (do not override background/color) */
+.sidebar-icon.primary:hover {
+  /* Only scale the primary button on hover — don't add the white square overlay
+     or change its gradient. Keep the original primary box-shadow. */
+  transform: scale(1.04);
+  background: linear-gradient(180deg,#7b63ff,#5a3bff) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(90,59,255,0.28) !important;
+}
+
 
 /* Groups and layout */
 .sidebar-action{
@@ -124,18 +134,52 @@
 }
 
 
+@media (max-width: 1500px) {
 
-.sidebar-panels{
-  margin-top: 0.45rem;
-  width: calc(100% - 0.8rem);
-  overflow: hidden;
-}
+  .sidebar-logo{
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+  }
+  .sidebar-icon{
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: 2.3rem; /* increase icon font-size to better fill the square */
+    line-height: 1;
+  }
+  
+  .sidebar-icon.primary{
+    width: 4.5rem; /* slightly larger primary action */
+    height: 4.5rem;
+    border-radius: 3rem;
+    font-size: 2.5rem; /* larger icon for primary */
+  }
 
-/* Panels transparent so the pill tint shows through */
-.sidebar-panels .panel{
-  background: transparent;
-  box-shadow: none;
-  color: #cbdbe8;
+  .sidebar-action{
+    padding-bottom: 2.5rem;
+  }
+
+  .sidebar-group{
+    gap: 1.5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+
+  .sidebar-settings{ 
+    margin-top: auto; 
+    padding-bottom: 1.3rem;
+  }
+
+
+  .sidebar-icon:hover{
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1rem;
+    transform: translateY(-4px) scale(1.04);
+    background: rgba(255, 255, 255, 0.137);
+    color: #ffffff;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  }
+
 }
-.sidebar-panels .panel .panel-body{ background: transparent; }
 

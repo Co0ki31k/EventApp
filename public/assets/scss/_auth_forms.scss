@@ -422,7 +422,7 @@
 .verify-expiry { color: #6b7280; font-size: 1em; margin: 0 0 1.2em; }
 .code-inputs { display: flex; gap: 0.5em; justify-content: center; margin: 1em 0 1.2em; }
 .code-inputs .digit { width: 2.5em; height: 2.6em; text-align: center; font-size: 1.3em; border: 1px solid #e5e7eb; border-radius: 6px; }
-.btn-verify { display: block; width: 100%; background: #28a745; color: #fff; border: none; padding: 1em 1.3em; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.75em;}
+.btn-verify { display: block; width: 100%; background: #28a745; color: #fff; border: none; padding: 1em 1.3em; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.9em;}
 .verify-links { display: flex; justify-content: space-around; margin-top: 1.3em; align-items: center; }
 .link-like { background: none; border: none; color: #22c55e; cursor: pointer; text-decoration: underline; padding: 0; font-size: 1em; }
 .notice.success { margin: 8px 0; padding: 8px; background: #ecfdf5; color: #065f46; border-radius: 6px; }
@@ -433,3 +433,6 @@
   .verify-card { width: 100%; padding: 0 10px; }
   .code-inputs .digit { width: 40px; height: 44px; }
 }
+
+/* Add Event panel styles (scoped) */
+/* Add Event moved to _user_add_event_panel.scss */
