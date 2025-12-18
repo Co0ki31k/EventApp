@@ -1,6 +1,5 @@
 /* map-controller.js
    Responsible for initializing the map and exposing functions to load pins
-   This is a placeholder — actual map lib initialization will be added later.
 */
 (function(){
     window.UserMapController = {
@@ -40,6 +39,62 @@
             this._initialized = true;
 
         },
+        // Pick mode state
+        _pickMode: false,
+        _tempMarker: null,
+        _selectedMarker: null,
+        _onMoveHandler: null,
+        _onClickHandler: null,
+        // Start interactive pick mode: marker follows cursor, click to select
+        startPickLocation: function(){
+            if(!this.map) return;
+            if(this._pickMode) return;
+            this._pickMode = true;
+            var self = this;
+            if(this.map && this.map.getContainer) this.map.getContainer().style.cursor = 'crosshair';
+
+            this._onMoveHandler = function(e){
+                var latlng = e.latlng;
+                if(!self._tempMarker){
+                    self._tempMarker = L.circleMarker(latlng, {radius:8, color:'#2ecc71', fillColor:'#2ecc71', fillOpacity:1, interactive:false}).addTo(self.markersLayer);
+                } else {
+                    self._tempMarker.setLatLng(latlng);
+                }
+            };
+
+            this._onClickHandler = function(e){
+                var latlng = e.latlng;
+                if(self._tempMarker){ self.markersLayer.removeLayer(self._tempMarker); self._tempMarker = null; }
+                if(self._selectedMarker){ self.markersLayer.removeLayer(self._selectedMarker); self._selectedMarker = null; }
+                self._selectedMarker = L.circleMarker(latlng, {radius:8, color:'#2ecc71', fillColor:'#2ecc71', fillOpacity:1, interactive:false}).addTo(self.markersLayer);
+
+                try{ window.dispatchEvent(new CustomEvent('panel:addEvent:locationSelected', { detail: { lat: latlng.lat, lng: latlng.lng } })); } catch(err){ console.log(err); }
+
+                self.stopPickLocation();
+            };
+
+            this.map.on('mousemove', this._onMoveHandler);
+            this.map.on('click', this._onClickHandler);
+        },
+        // Stop pick mode programmatically
+        stopPickLocation: function(){
+            if(!this._pickMode) return;
+            this._pickMode = false;
+            if(this.map && this.map.getContainer) this.map.getContainer().style.cursor = '';
+            if(this._onMoveHandler) this.map.off('mousemove', this._onMoveHandler);
+            if(this._onClickHandler) this.map.off('click', this._onClickHandler);
+            this._onMoveHandler = null;
+            this._onClickHandler = null;
+            if(this._tempMarker){ this.markersLayer.removeLayer(this._tempMarker); this._tempMarker = null; }
+        },
+            // Place or move the selected marker programmatically
+            placeMarkerAt: function(lat, lng){
+                if(!this.map) return;
+                var latlng = L.latLng(lat, lng);
+                if(this._selectedMarker){ this.markersLayer.removeLayer(this._selectedMarker); this._selectedMarker = null; }
+                this._selectedMarker = L.circleMarker(latlng, {radius:8, color:'#2ecc71', fillColor:'#2ecc71', fillOpacity:1, interactive:false}).addTo(this.markersLayer);
+                this.map.setView(latlng, this.map.getZoom());
+            },
         setMode: function(mode){
             // placeholder: change behavior based on mode
             console.log('Set map mode:', mode);
@@ -85,4 +140,34 @@
     } else {
         tryInit();
     }
+
+    // Attach panel event listeners only after initialization to ensure map exists
+    function attachPanelListeners(){
+        if(window.UserMapController._eventsAttached) return;
+        window.addEventListener('panel:addEvent:pickLocation', function(){
+            try{ window.UserMapController.startPickLocation(); } catch(err){ console.error(err); }
+        });
+        window.addEventListener('panel:addEvent:placeMarker', function(e){
+            var d = e && e.detail ? e.detail : null;
+            if(d && d.lat !== undefined && d.lng !== undefined){
+                try{ window.UserMapController.placeMarkerAt(d.lat, d.lng); } catch(err){ console.error(err); }
+            }
+        });
+        // allow external cancel
+        window.addEventListener('panel:addEvent:cancelPick', function(){
+            try{ window.UserMapController.stopPickLocation(); } catch(err){ console.error(err); }
+        });
+        window.UserMapController._eventsAttached = true;
+    }
+
+    // Try to attach listeners once map is ready
+    var attachRetries = 10;
+    (function waitForMap(){
+        if(window.UserMapController && window.UserMapController._initialized){
+            attachPanelListeners();
+            return;
+        }
+        if(attachRetries-- <= 0){ attachPanelListeners(); return; }
+        setTimeout(waitForMap, 200);
+    })();
 })();

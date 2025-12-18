@@ -95,7 +95,6 @@ CREATE TABLE Events (
     event_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(150) NOT NULL,
     description TEXT,
-    location VARCHAR(255),
     latitude DECIMAL(10,7),
     longitude DECIMAL(10,7),
     start_datetime DATETIME,

@@ -67,13 +67,32 @@
     width: 100%;
     height: 4rem;
     border-radius: 1rem;
+    background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    box-shadow: 0 8px 26px rgba(99,102,241,0.18);
+    border: none;
+    padding: 0;
+    transition: all 0.25s ease;
+
+    /* keep the same purple color on hover, only lift the button like .btn-primary does */
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(99,102,241,0.22);
       background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
-      color: #fff;
-      font-size: 1.4rem;
-      font-weight: 700;
-      box-shadow: 0 8px 26px rgba(99,102,241,0.18);
-      border: none;
-      padding: 0;
+    }
+
+    /* when user already selected a location, use green state (handled by JS via .location-selected) */
+    &.location-selected {
+      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+      box-shadow: 0 8px 26px rgba(16, 185, 129, 0.3);
+    }
+
+    &.location-selected:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(16,185,129,0.34);
+    }
   }
 
   /* category select styles */
@@ -81,11 +100,14 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-image: linear-gradient(45deg, transparent 50%, rgba(215,230,239,0.8) 50%), linear-gradient(135deg, rgba(215,230,239,0.8) 50%, transparent 50%);
     background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px);
-    background-size: 6px 6px, 6px 6px;
+    background-size: 0.5rem;
     background-repeat: no-repeat;
-    padding-right: 36px;
+    
+    option {
+      background-color: rgba(12,18,28,0.72);
+      color: #d7e6ef;
+    }
   }
 
   .form-actions {

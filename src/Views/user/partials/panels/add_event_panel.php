@@ -1,7 +1,24 @@
 <section id="panel-add-event" class="panel panel-hidden" aria-hidden="true">
     <header><h3>Dodaj wydarzenie</h3></header>
     <div class="panel-body panel-add-event">
+        <?php
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                require_once SRC_PATH . '/Controllers/EventsController.php';
+                load_class('Security');
+                $result = (new EventsController())->create();
+                $errors = $result['errors'] ?? [];
+                $successMessage = $result['message'] ?? null;
+            }
+        ?>
         <form class="form-add-event" action="#" method="post" novalidate>
+            <?php if (!empty($errors) && is_array($errors)): ?>
+                <script>
+                    (function(){
+                        var msgs = <?php echo json_encode(array_values($errors), JSON_UNESCAPED_UNICODE); ?> || [];
+                        if (msgs.length) alert(msgs.join("\n"));
+                    })();
+                </script>
+            <?php endif; ?>
             <div class="form-row">
                 <label for="event-title">Tytuł wydarzenia</label>
                 <div class="input-with-icon">
@@ -23,7 +40,7 @@
                         <span class="input-icon icon-calendar" aria-hidden="true"></span>
                     </div>
                     <div class="input-with-icon">
-                        <input id="event-time" name="time" type="time" aria-label="Wybierz godzinę" />
+                        <input id="event-time" name="time" type="time" aria-label="Wybierz godzinę" step="900" />
                         <span class="input-icon icon-clock" aria-hidden="true"></span>
                     </div>
                 </div>
@@ -32,22 +49,26 @@
             <div class="form-row">
                 <label>Lokalizacja</label>
                     <div class="input-with-icon">
-                        <button type="button" class="btn btn-map" id="btn-point-on-map">Wskaż na mapie</button>
+                        <button type="button" class="btn btn-primary btn-map" id="btn-point-on-map">Wskaż na mapie</button>
                         <span class="input-icon icon-map" aria-hidden="true"></span>
-            
+                        <input type="hidden" id="event-lat" name="latitude" value="" />
+                        <input type="hidden" id="event-lng" name="longitude" value="" />
                     </div>
             </div>
 
             <div class="form-row">
                 <label for="event-category">Kategoria</label>
                 <div class="input-with-icon">
+                    <?php
+                        $categories = Database::query("SELECT category_id AS id, name FROM Categories ORDER BY name", []);
+                    ?>
                     <select id="event-category" name="category">
                         <option value="">Wybierz kategorię</option>
-                        <option value="sport">Sport</option>
-                        <option value="cafe">Kawiarnia</option>
-                        <option value="walk">Spacer</option>
-                        <option value="cinema">Kino</option>
-                        <option value="run">Bieg</option>
+                        <?php if ($categories && is_array($categories)): ?>
+                            <?php foreach ($categories as $cat): ?>
+                                <option value="<?php echo Security::escape((string)$cat['id']); ?>"><?php echo Security::escape((string)$cat['name']); ?></option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>     
                     </select>
                     <span class="input-icon icon-category" aria-hidden="true"></span>
                 </div>
