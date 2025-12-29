@@ -37,7 +37,12 @@
             this.markersLayer = L.layerGroup().addTo(this.map);
 
             this._initialized = true;
+            console.log('UserMapController init complete');
 
+            // Dispatch event for other modules (e.g. map-markers.js)
+            try {
+                window.dispatchEvent(new CustomEvent('map:ready', { detail: { map: this.map } }));
+            } catch(e) { console.error(e); }
         },
         // Pick mode state
         _pickMode: false,
@@ -45,6 +50,10 @@
         _selectedMarker: null,
         _onMoveHandler: null,
         _onClickHandler: null,
+        // Get green icon from centralized MapIcons module
+        _getGreenIcon: function(){
+            return window.MapIcons ? window.MapIcons.getGreenIcon() : null;
+        },
         // Start interactive pick mode: marker follows cursor, click to select
         startPickLocation: function(){
             if(!this.map) return;
@@ -56,7 +65,7 @@
             this._onMoveHandler = function(e){
                 var latlng = e.latlng;
                 if(!self._tempMarker){
-                    self._tempMarker = L.circleMarker(latlng, {radius:8, color:'#2ecc71', fillColor:'#2ecc71', fillOpacity:1, interactive:false}).addTo(self.markersLayer);
+                    self._tempMarker = L.marker(latlng, { icon: self._getGreenIcon(), interactive: false }).addTo(self.markersLayer);
                 } else {
                     self._tempMarker.setLatLng(latlng);
                 }
@@ -66,7 +75,7 @@
                 var latlng = e.latlng;
                 if(self._tempMarker){ self.markersLayer.removeLayer(self._tempMarker); self._tempMarker = null; }
                 if(self._selectedMarker){ self.markersLayer.removeLayer(self._selectedMarker); self._selectedMarker = null; }
-                self._selectedMarker = L.circleMarker(latlng, {radius:8, color:'#2ecc71', fillColor:'#2ecc71', fillOpacity:1, interactive:false}).addTo(self.markersLayer);
+                self._selectedMarker = L.marker(latlng, { icon: self._getGreenIcon(), interactive: false }).addTo(self.markersLayer);
 
                 try{ window.dispatchEvent(new CustomEvent('panel:addEvent:locationSelected', { detail: { lat: latlng.lat, lng: latlng.lng } })); } catch(err){ console.log(err); }
 
@@ -88,27 +97,13 @@
             if(this._tempMarker){ this.markersLayer.removeLayer(this._tempMarker); this._tempMarker = null; }
         },
             // Place or move the selected marker programmatically
-            placeMarkerAt: function(lat, lng){
-                if(!this.map) return;
-                var latlng = L.latLng(lat, lng);
-                if(this._selectedMarker){ this.markersLayer.removeLayer(this._selectedMarker); this._selectedMarker = null; }
-                this._selectedMarker = L.circleMarker(latlng, {radius:8, color:'#2ecc71', fillColor:'#2ecc71', fillOpacity:1, interactive:false}).addTo(this.markersLayer);
-                this.map.setView(latlng, this.map.getZoom());
-            },
-        setMode: function(mode){
-            // placeholder: change behavior based on mode
-            console.log('Set map mode:', mode);
-            // e.g. clear markers or load friend markers
+        placeMarkerAt: function(lat, lng){
             if(!this.map) return;
-            // simple demo: set map view when switching modes
-            if(mode === 'friends'){
-                this.map.setZoom(13);
-            } else if(mode === 'now'){
-                this.map.setZoom(14);
-            } else {
-                this.map.setZoom(13);
-            }
-        }
+            var latlng = L.latLng(lat, lng);
+            if(this._selectedMarker){ this.markersLayer.removeLayer(this._selectedMarker); this._selectedMarker = null; }
+            this._selectedMarker = L.marker(latlng, { icon: this._getGreenIcon(), interactive: false }).addTo(this.markersLayer);
+            this.map.setView(latlng, this.map.getZoom());
+        },
     };
 
     // Ensure init runs even if this script is loaded after DOMContentLoaded

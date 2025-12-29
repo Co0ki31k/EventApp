@@ -2,15 +2,54 @@
     <header><h3>Dodaj wydarzenie</h3></header>
     <div class="panel-body panel-add-event">
         <?php
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $errors = [];
+            $successMessage = null;
+            
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
                 require_once SRC_PATH . '/Controllers/EventsController.php';
                 load_class('Security');
                 $result = (new EventsController())->create();
                 $errors = $result['errors'] ?? [];
-                $successMessage = $result['message'] ?? null;
+                
+                // PRG Pattern: redirect after successful POST to prevent duplicate submissions
+                if ($result['success']) {
+                    // Store success message in session for display after redirect
+                    if (session_status() !== PHP_SESSION_ACTIVE) {
+                        @session_start();
+                    }
+                    $_SESSION['event_created'] = true;
+                    $_SESSION['event_message'] = $result['message'] ?? 'Wydarzenie zostało utworzone.';
+                    
+                    // Redirect to same page (without POST data)
+                    header('Location: ' . $_SERVER['REQUEST_URI']);
+                    exit;
+                }
+            }
+            
+            // Check for success message from redirect
+            if (session_status() !== PHP_SESSION_ACTIVE) {
+                @session_start();
+            }
+            if (!empty($_SESSION['event_created'])) {
+                $successMessage = $_SESSION['event_message'] ?? 'Wydarzenie zostało utworzone.';
+                unset($_SESSION['event_created'], $_SESSION['event_message']);
             }
         ?>
-        <form class="form-add-event" action="#" method="post" novalidate>
+        <form class="form-add-event" action="" method="post" novalidate>
+            <?php if (!empty($successMessage)): ?>
+                <script>
+                    (function(){
+                        // Reload markers on map after event created
+                        try{ window.dispatchEvent(new CustomEvent('event:created')); } catch(e){}
+                        // Remove green marker from map-controller
+                        if(window.UserMapController && window.UserMapController._selectedMarker){
+                            try{ window.UserMapController.markersLayer.removeLayer(window.UserMapController._selectedMarker); }catch(e){}
+                            window.UserMapController._selectedMarker = null;
+                        }
+                    })();
+                </script>
+                <div class="alert alert-success"><?php echo Security::escape($successMessage); ?></div>
+            <?php endif; ?>
             <?php if (!empty($errors) && is_array($errors)): ?>
                 <script>
                     (function(){
