@@ -36,16 +36,28 @@
             var lng = parseFloat(ev.longitude);
             if(Number.isNaN(lat) || Number.isNaN(lng)) return null;
 
-            // Get red icon from centralized MapIcons module
-            var redIcon = window.MapIcons ? window.MapIcons.getRedIcon() : null;
+            // Determine marker icon based on creator role:
+            // - Blue icon for events created by regular users
+            // - Red icon for events created by companies
+            var markerIcon = null;
+            if(window.MapIcons){
+                var creatorRole = ev.creator_role || 'user';
+                if(creatorRole === 'company'){
+                    markerIcon = window.MapIcons.getRedIcon();
+                } else {
+                    markerIcon = window.MapIcons.getBlueIcon();
+                }
+            }
 
-            var marker = L.marker([lat, lng], { icon: redIcon });
+            var marker = L.marker([lat, lng], { icon: markerIcon });
 
             var title = ev.title || '';
             var start = ev.start_datetime || '';
             var descr = ev.description || '';
+            var creatorInfo = ev.creator_username ? (' • ' + escapeHtml(ev.creator_username)) : '';
+            var roleLabel = (ev.creator_role === 'company') ? ' (Firma)' : '';
             var popup = '<div class="map-popup"><strong>' + escapeHtml(title) + '</strong>' +
-                        (start ? ('<div class="muted">' + escapeHtml(start) + '</div>') : '') +
+                        (start ? ('<div class="muted">' + escapeHtml(start) + creatorInfo + roleLabel + '</div>') : '') +
                         (descr ? ('<div>' + escapeHtml(descr) + '</div>') : '') +
                         '</div>';
 

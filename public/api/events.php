@@ -11,12 +11,16 @@ require_once __DIR__ . '/../../src/classes/Database.php';
 try {
     // Only events that are currently ongoing or upcoming (not ended yet)
     // end_datetime >= NOW() OR end_datetime IS NULL (no end time set)
-    $query = "SELECT event_id, title, description, latitude, longitude, start_datetime, end_datetime, created_by, created_at 
-              FROM Events 
-              WHERE latitude IS NOT NULL 
-                AND longitude IS NOT NULL 
-                AND (end_datetime >= NOW() OR end_datetime IS NULL)
-              ORDER BY start_datetime ASC";
+    // JOIN with Users table to get creator's role (user/company)
+    $query = "SELECT e.event_id, e.title, e.description, e.latitude, e.longitude, 
+                     e.start_datetime, e.end_datetime, e.created_by, e.created_at,
+                     u.role AS creator_role, u.username AS creator_username
+              FROM Events e
+              LEFT JOIN Users u ON e.created_by = u.user_id
+              WHERE e.latitude IS NOT NULL 
+                AND e.longitude IS NOT NULL 
+                AND (e.end_datetime >= NOW() OR e.end_datetime IS NULL)
+              ORDER BY e.start_datetime ASC";
     $rows = Database::query($query, []);
 
     if ($rows === false || !is_array($rows)) {
@@ -34,6 +38,8 @@ try {
             'start_datetime' => $r['start_datetime'] ?? null,
             'end_datetime' => $r['end_datetime'] ?? null,
             'created_by' => isset($r['created_by']) ? (int)$r['created_by'] : null,
+            'creator_role' => $r['creator_role'] ?? 'user',
+            'creator_username' => $r['creator_username'] ?? null,
         ];
     }
 
