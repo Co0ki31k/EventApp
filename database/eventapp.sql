@@ -59,7 +59,6 @@ CREATE TABLE Categories (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
     description TEXT,
-    icon VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -95,12 +94,14 @@ CREATE TABLE Events (
     event_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(150) NOT NULL,
     description TEXT,
+    category_id INT,
     latitude DECIMAL(10,7),
     longitude DECIMAL(10,7),
     start_datetime DATETIME,
     end_datetime DATETIME,
     created_by INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id) ON DELETE SET NULL,
     FOREIGN KEY (created_by) REFERENCES Users(user_id) ON DELETE SET NULL
 );
 
@@ -117,11 +118,11 @@ CREATE TABLE EventSubcategories (
 
 -- ---------------------
 -- Tabela uczestnictwa użytkowników w wydarzeniach
+-- (zapis = dodanie wpisu, wypis = usunięcie wpisu)
 -- ---------------------
 CREATE TABLE EventParticipants (
     event_id INT NOT NULL,
     user_id INT NOT NULL,
-    status ENUM('going','interested','not_going') DEFAULT 'interested',
     joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(event_id, user_id),
     FOREIGN KEY (event_id) REFERENCES Events(event_id) ON DELETE CASCADE,
@@ -179,13 +180,13 @@ CREATE INDEX idx_user_interests ON UserInterests(user_id);
 -- ---------------------
 -- Przykładowe dane - Kategorie główne
 -- ---------------------
-INSERT INTO Categories (name, description, icon) VALUES
-('Sport', 'Aktywności sportowe i fitness', 'sport-icon.svg'),
-('Filmy i Seriale', 'Kino, streaming i produkcje filmowe', 'movie-icon.svg'),
-('Muzyka', 'Koncerty, festiwale i gatunki muzyczne', 'music-icon.svg'),
-('Technologia', 'IT, gadżety i innowacje', 'tech-icon.svg'),
-('Sztuka', 'Malarstwo, rzeźba i sztuki wizualne', 'art-icon.svg'),
-('Podróże', 'Turystyka i odkrywanie świata', 'travel-icon.svg');
+INSERT INTO Categories (name, description) VALUES
+('Sport', 'Aktywności sportowe i fitness'),
+('Filmy i Seriale', 'Kino, streaming i produkcje filmowe'),
+('Muzyka', 'Koncerty, festiwale i gatunki muzyczne'),
+('Technologia', 'IT, gadżety i innowacje'),
+('Sztuka', 'Malarstwo, rzeźba i sztuki wizualne'),
+('Podróże', 'Turystyka i odkrywanie świata');
 
 -- ---------------------
 -- Przykładowe dane - Podkategorie dla Sportu

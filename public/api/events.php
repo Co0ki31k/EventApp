@@ -9,14 +9,13 @@ require_once __DIR__ . '/../../src/Helpers/url.php';
 require_once __DIR__ . '/../../src/classes/Database.php';
 
 try {
-    // Only events that are currently ongoing or upcoming (not ended yet)
-    // end_datetime >= NOW() OR end_datetime IS NULL (no end time set)
-    // JOIN with Users table to get creator's role (user/company)
-    $query = "SELECT e.event_id, e.title, e.description, e.latitude, e.longitude, 
+    $query = "SELECT e.event_id, e.title, e.description, e.category_id, e.latitude, e.longitude, 
                      e.start_datetime, e.end_datetime, e.created_by, e.created_at,
-                     u.role AS creator_role, u.username AS creator_username
+                     u.role AS creator_role, u.username AS creator_username,
+                     c.name AS category_name
               FROM Events e
               LEFT JOIN Users u ON e.created_by = u.user_id
+              LEFT JOIN Categories c ON e.category_id = c.category_id
               WHERE e.latitude IS NOT NULL 
                 AND e.longitude IS NOT NULL 
                 AND (e.end_datetime >= NOW() OR e.end_datetime IS NULL)
@@ -33,6 +32,8 @@ try {
             'id' => isset($r['event_id']) ? (int)$r['event_id'] : null,
             'title' => $r['title'] ?? '',
             'description' => $r['description'] ?? '',
+            'category_id' => isset($r['category_id']) ? (int)$r['category_id'] : null,
+            'category_name' => $r['category_name'] ?? null,
             'latitude' => $r['latitude'] ?? null,
             'longitude' => $r['longitude'] ?? null,
             'start_datetime' => $r['start_datetime'] ?? null,

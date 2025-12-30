@@ -76,6 +76,7 @@ class EventsController
         $createdBy = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : null;
         $latVal = is_numeric($lat) ? (float)$lat : null;
         $lngVal = is_numeric($lng) ? (float)$lng : null;
+        $categoryId = is_numeric($category) ? (int)$category : null;
 
         // compute end_datetime = start + 30 minutes
         try {
@@ -87,8 +88,8 @@ class EventsController
             $endDatetime = null;
         }
 
-        $query = "INSERT INTO Events (title, description, latitude, longitude, start_datetime, end_datetime, created_by) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $params = [$title, $description, $latVal, $lngVal, $startDatetime, $endDatetime, $createdBy];
+        $query = "INSERT INTO Events (title, description, category_id, latitude, longitude, start_datetime, end_datetime, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $params = [$title, $description, $categoryId, $latVal, $lngVal, $startDatetime, $endDatetime, $createdBy];
 
         $insertId = Database::insert($query, $params);
         if ($insertId === false) {

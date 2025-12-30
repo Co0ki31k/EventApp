@@ -8,6 +8,8 @@
         markers: [],
         _initialized: false,
         autoLoadOnInit: true,
+        currentUserId: null, 
+        participationCache: {},
 
         init: function(){
             if(this._initialized) return;
@@ -19,6 +21,11 @@
             this.markersLayer = window.UserMapController.markersLayer || L.layerGroup().addTo(map);
             window.UserMapController.markersLayer = this.markersLayer;
 
+            // Try to get current user ID from global variable (set in PHP)
+            if(typeof window.currentUserId !== 'undefined'){
+                this.currentUserId = window.currentUserId;
+            }
+
             this._initialized = true;
 
             if(this.autoLoadOnInit){
@@ -26,8 +33,145 @@
             }
         },
 
+        // Check if current user is participant of an event
+        checkParticipation: function(eventId){
+            var self = this;
+            if(!this.currentUserId) return Promise.resolve(false);
+            
+            return fetch('/Projekt/public/api/participants.php?event_id=' + eventId + '&user_id=' + this.currentUserId, {
+                credentials: 'same-origin',
+                cache: 'no-cache'
+            })
+            .then(function(res){ return res.json(); })
+            .then(function(data){
+                var isJoined = data.success && data.is_joined;
+                self.participationCache[eventId] = isJoined;
+                return isJoined;
+            })
+            .catch(function(){ return false; });
+        },
+
+        // Join event via API
+        joinEvent: function(eventId){
+            var self = this;
+            return fetch('/Projekt/public/api/participants.php', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ event_id: parseInt(eventId) })
+            })
+            .then(function(res){ return res.json(); })
+            .then(function(data){
+                if(data.success){
+                    self.participationCache[eventId] = true;
+                }
+                return data;
+            });
+        },
+
+        // Leave event via API
+        leaveEvent: function(eventId){
+            var self = this;
+            return fetch('/Projekt/public/api/participants.php', {
+                method: 'DELETE',
+                credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ event_id: parseInt(eventId) })
+            })
+            .then(function(res){ return res.json(); })
+            .then(function(data){
+                if(data.success){
+                    self.participationCache[eventId] = false;
+                }
+                return data;
+            });
+        },
+
+        // Format datetime for display
+        formatDateTime: function(dateStr){
+            if(!dateStr) return 'Nie podano';
+            try {
+                var date = new Date(dateStr);
+                if(isNaN(date.getTime())) return dateStr;
+                return date.toLocaleDateString('pl-PL', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } catch(e){
+                return dateStr;
+            }
+        },
+
+        // Build popup HTML content for event
+        buildPopupContent: function(ev, isJoined){
+            var isCompany = ev.creator_role === 'company';
+            var badgeClass = isCompany ? 'badge-company' : 'badge-user';
+            var badgeText = isCompany ? 'Firma' : 'Użytkownik';
+            var creatorText = ev.creator_username || 'Nieznany';
+            
+            // Determine button state
+            var btnClass = isJoined ? 'btn-popup-leave' : 'btn-popup-join';
+            var btnText = isJoined ? 'Rezygnuj' : 'Dołącz';
+            var btnDataJoined = isJoined ? 'true' : 'false';
+            
+            // Check if user is the creator (can't join own event)
+            var isOwner = this.currentUserId && ev.created_by === this.currentUserId;
+            
+            var html = 
+                '<div class="event-popup">' +
+                    '<div class="event-popup-header">' +
+                        '<h3 class="event-popup-title">' + escapeHtml(ev.title || 'Bez tytułu') + '</h3>' +
+                    '</div>' +
+                    '<div class="event-popup-body">' +
+                        (ev.category_name ? 
+                            '<div class="event-popup-row">' +
+                                '<span class="event-popup-icon">🏷️</span>' +
+                                '<span class="event-popup-text">' + escapeHtml(ev.category_name) + '</span>' +
+                            '</div>' 
+                            : '') +
+                        '<div class="event-popup-row">' +
+                            '<span class="event-popup-icon">📅</span>' +
+                            '<span class="event-popup-text">' + this.formatDateTime(ev.start_datetime) + '</span>' +
+                        '</div>' +
+                        '<div class="event-popup-row">' +
+                            '<span class="event-popup-icon">🏁</span>' +
+                            '<span class="event-popup-text">' + this.formatDateTime(ev.end_datetime) + '</span>' +
+                        '</div>' +
+                        '<div class="event-popup-row">' +
+                            '<span class="event-popup-icon">👤</span>' +
+                            '<span class="event-popup-text">' + escapeHtml(creatorText) + '</span>' +
+                        '</div>' +
+                        (ev.description ? 
+                            '<div class="event-popup-description">' + escapeHtml(ev.description) + '</div>' 
+                            : '') +
+                    '</div>' +
+                    '<div class="event-popup-footer">' +
+                        (isOwner ? 
+                            '<span class="event-popup-owner-badge">Twoje wydarzenie</span>' :
+                            '<button class="btn-popup-action ' + btnClass + '" data-event-id="' + (ev.id || '') + '" data-joined="' + btnDataJoined + '">' + btnText + '</button>'
+                        ) +
+                    '</div>' +
+                '</div>';
+            
+            return html;
+        },
+
+        // Update button state in popup
+        updatePopupButton: function(eventId, isJoined){
+            var btn = document.querySelector('.btn-popup-action[data-event-id="' + eventId + '"]');
+            if(!btn) return;
+            
+            btn.setAttribute('data-joined', isJoined ? 'true' : 'false');
+            btn.classList.remove('btn-popup-join', 'btn-popup-leave');
+            btn.classList.add(isJoined ? 'btn-popup-leave' : 'btn-popup-join');
+            btn.textContent = isJoined ? 'Rezygnuj' : 'Dołącz';
+        },
+
         // Add a single marker for an event object
-        addMarkerForEvent: function(ev){
+        addMarkerForEvent: function(ev, isJoined){
             if(!ev || ev.latitude == null || ev.longitude == null) return null;
             this.init();
             if(!this.markersLayer) return null;
@@ -36,9 +180,6 @@
             var lng = parseFloat(ev.longitude);
             if(Number.isNaN(lat) || Number.isNaN(lng)) return null;
 
-            // Determine marker icon based on creator role:
-            // - Blue icon for events created by regular users
-            // - Red icon for events created by companies
             var markerIcon = null;
             if(window.MapIcons){
                 var creatorRole = ev.creator_role || 'user';
@@ -51,19 +192,77 @@
 
             var marker = L.marker([lat, lng], { icon: markerIcon });
 
-            var title = ev.title || '';
-            var start = ev.start_datetime || '';
-            var descr = ev.description || '';
-            var creatorInfo = ev.creator_username ? (' • ' + escapeHtml(ev.creator_username)) : '';
-            var roleLabel = (ev.creator_role === 'company') ? ' (Firma)' : '';
-            var popup = '<div class="map-popup"><strong>' + escapeHtml(title) + '</strong>' +
-                        (start ? ('<div class="muted">' + escapeHtml(start) + creatorInfo + roleLabel + '</div>') : '') +
-                        (descr ? ('<div>' + escapeHtml(descr) + '</div>') : '') +
-                        '</div>';
+            // Store event data on marker for later use
+            marker._eventData = ev;
+            marker._eventId = ev.id || null;
+            marker._isJoined = isJoined || false;
+
+            // Create Leaflet popup with custom content
+            var popupContent = this.buildPopupContent(ev, isJoined);
+            var popup = L.popup({
+                className: 'event-leaflet-popup'
+            }).setContent(popupContent);
 
             marker.bindPopup(popup);
+
+            // Bind action button event after popup opens
+            var self = this;
+            var eventId = ev.id; // Store event ID for closure
+            marker.on('popupopen', function(){
+                
+                // Bind action button
+                var btn = document.querySelector('.btn-popup-action[data-event-id="' + eventId + '"]');
+                if(btn){
+                    btn.addEventListener('click', function(){
+                        var isCurrentlyJoined = this.getAttribute('data-joined') === 'true';
+                        var btnEl = this;
+                        
+                        // Disable button during request
+                        btnEl.disabled = true;
+                        btnEl.textContent = 'Ładowanie...';
+                        
+                        if(isCurrentlyJoined){
+                            // Leave event
+                            self.leaveEvent(eventId)
+                                .then(function(data){
+                                    if(data.success){
+                                        self.updatePopupButton(eventId, false);
+                                    } else {
+                                        alert(data.message || 'Błąd podczas rezygnacji');
+                                        self.updatePopupButton(eventId, true);
+                                    }
+                                })
+                                .catch(function(){
+                                    alert('Błąd połączenia');
+                                    self.updatePopupButton(eventId, true);
+                                })
+                                .finally(function(){
+                                    btnEl.disabled = false;
+                                });
+                        } else {
+                            // Join event
+                            self.joinEvent(eventId)
+                                .then(function(data){
+                                    if(data.success){
+                                        self.updatePopupButton(eventId, true);
+                                    } else {
+                                        alert(data.message || 'Błąd podczas dołączania');
+                                        self.updatePopupButton(eventId, false);
+                                    }
+                                })
+                                .catch(function(){
+                                    alert('Błąd połączenia');
+                                    self.updatePopupButton(eventId, false);
+                                })
+                                .finally(function(){
+                                    btnEl.disabled = false;
+                                });
+                        }
+                    });
+                }
+            });
+
             marker.addTo(this.markersLayer);
-            marker._eventId = ev.id || null;
             this.markers.push(marker);
             return marker;
         },
@@ -73,6 +272,7 @@
             url = url || '/Projekt/public/api/events.php';
             this.init();
             var self = this;
+            
             return fetch(url, { credentials: 'same-origin', cache: 'no-cache' })
                 .then(function(res){
                     if(!res.ok) throw new Error('Network response not ok');
@@ -81,9 +281,20 @@
                 .then(function(data){
                     if(!data || !data.success || !Array.isArray(data.events)) return [];
                     self.clear();
-                    data.events.forEach(function(ev){ self.addMarkerForEvent(ev); });
-                    console.log('UserMapMarkers: loaded', self.markers.length, 'markers');
-                    return self.markers;
+                    
+                    // Check participation for all events (session-based on server)
+                    var participationPromises = data.events.map(function(ev){
+                        return self.checkParticipation(ev.id);
+                    });
+                    
+                    return Promise.all(participationPromises).then(function(participationResults){
+                        data.events.forEach(function(ev, index){
+                            var isJoined = participationResults[index];
+                            self.addMarkerForEvent(ev, isJoined);
+                        });
+                        console.log('UserMapMarkers: loaded', self.markers.length, 'markers');
+                        return self.markers;
+                    });
                 })
                 .catch(function(err){
                     console.error('UserMapMarkers.loadFromApi error', err);

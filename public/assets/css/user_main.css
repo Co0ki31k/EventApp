@@ -48,8 +48,7 @@
   align-items: center;
   justify-content: flex-start;
   background: rgba(12, 18, 28, 0.72); /* dark translucent pill */
-  -webkit-backdrop-filter: blur(0.12rem);
-          backdrop-filter: blur(0.12rem);
+  backdrop-filter: blur(0.12rem);
   border-radius: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   box-sizing: border-box;
@@ -275,8 +274,7 @@
 .mode-group {
   display: inline-flex;
   background: rgba(20, 30, 40, 0.45);
-  -webkit-backdrop-filter: blur(0.1rem);
-          backdrop-filter: blur(0.1rem);
+  backdrop-filter: blur(0.1rem);
   border-radius: 2rem;
   padding: 0.4rem;
   box-shadow: 0 0.3rem 0.7rem rgba(0, 0, 0, 0.12);
@@ -311,8 +309,7 @@
   display: inline-flex;
   align-items: center;
   background: rgba(20, 30, 40, 0.45);
-  -webkit-backdrop-filter: blur(0.1rem);
-          backdrop-filter: blur(0.1rem);
+  backdrop-filter: blur(0.1rem);
   border-radius: 2rem;
   padding: 0.4rem;
   box-shadow: 0 0.3rem 0.7rem rgba(0, 0, 0, 0.12);

@@ -13,7 +13,7 @@ class Category
     public static function getAllCategories(): array
     {
         $result = Database::query(
-            "SELECT category_id, name, description, icon FROM Categories ORDER BY name ASC"
+            "SELECT category_id, name, description FROM Categories ORDER BY name ASC"
         );
         
         return $result ?: [];
