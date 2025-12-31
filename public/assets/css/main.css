@@ -1872,138 +1872,6 @@ html, body {
   width: 320px;
 }
 
-.panel-add-event {
-  min-width: 30rem;
-  margin: 0 auto;
-  border-radius: inherit;
-  /* map button */
-  /* category select styles */
-}
-.panel-add-event .form-add-event {
-  display: flex;
-  flex-direction: column;
-  gap: 2.75rem;
-}
-.panel-add-event .form-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-.panel-add-event .form-row textarea {
-  resize: vertical;
-  border-radius: 0.8rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  color: #d7e6ef;
-  font-family: inherit;
-}
-.panel-add-event .row-inline {
-  display: flex;
-  gap: 1rem;
-}
-.panel-add-event .input-with-icon {
-  position: relative;
-  width: 100%;
-}
-.panel-add-event .input-with-icon input,
-.panel-add-event .input-with-icon select,
-.panel-add-event .input-with-icon textarea {
-  width: 100%;
-  border-radius: 0.75rem; /* 12px */
-  background: rgba(255, 255, 255, 0.02);
-  border: 0.0625rem solid rgba(255, 255, 255, 0.04); /* 1px */
-  color: #d7e6ef;
-  font-family: inherit;
-  height: 4rem;
-  font-size: 1.2rem;
-}
-.panel-add-event .input-with-icon .input-icon {
-  position: absolute;
-  left: 0.625rem; /* 10px */
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1.25rem; /* 20px */
-  height: 1.25rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(215, 230, 239, 0.9);
-  pointer-events: none;
-  opacity: 0.95;
-}
-.panel-add-event .btn-map {
-  width: 100%;
-  height: 4rem;
-  border-radius: 1rem;
-  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
-  color: #fff;
-  font-size: 1.4rem;
-  font-weight: 700;
-  box-shadow: 0 8px 26px rgba(99, 102, 241, 0.18);
-  border: none;
-  padding: 0;
-  transition: all 0.25s ease;
-  /* keep the same purple color on hover, only lift the button like .btn-primary does */
-  /* when user already selected a location, use green state (handled by JS via .location-selected) */
-}
-.panel-add-event .btn-map:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.22);
-  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
-}
-.panel-add-event .btn-map.location-selected {
-  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-  box-shadow: 0 8px 26px rgba(16, 185, 129, 0.3);
-}
-.panel-add-event .btn-map.location-selected:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(16, 185, 129, 0.34);
-}
-.panel-add-event .input-with-icon select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px);
-  background-size: 0.5rem;
-  background-repeat: no-repeat;
-}
-.panel-add-event .input-with-icon select option {
-  background-color: rgba(12, 18, 28, 0.72);
-  color: #d7e6ef;
-}
-.panel-add-event .form-actions {
-  margin-top: 6px;
-}
-.panel-add-event .form-actions .btn-create {
-  width: 100%;
-  height: 5rem;
-  border-radius: 1rem;
-  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 700;
-  box-shadow: 0 8px 26px rgba(99, 102, 241, 0.18);
-  border: none;
-  padding: 0;
-}
-
-#map {
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-/* Desaturate and soften light tiles to a neutral gray appearance */
-.leaflet-tile-pane img {
-  /* Make tiles neutral/gray while preserving contrast for labels */
-  filter: grayscale(120%) brightness(85%) hue-rotate(230deg) saturate(95%);
-}
-
-.leaflet-marker-pane,
-.leaflet-popup-pane {
-  filter: none;
-}
-
 /* ================================
    Event Popup Styles (Leaflet Popup)
    ================================ */
@@ -2182,4 +2050,239 @@ html, body {
 
 .event-popup-participants .participants-count {
   font-weight: 500;
+}
+
+.panel-add-event {
+  min-width: 30rem;
+  margin: 0 auto;
+  border-radius: inherit;
+  /* map button */
+  /* category select styles */
+}
+.panel-add-event .form-add-event {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+}
+.panel-add-event .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.panel-add-event .form-row textarea {
+  resize: vertical;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: #d7e6ef;
+  font-family: inherit;
+}
+.panel-add-event .row-inline {
+  display: flex;
+  gap: 1rem;
+}
+.panel-add-event .input-with-icon {
+  position: relative;
+  width: 100%;
+}
+.panel-add-event .input-with-icon input,
+.panel-add-event .input-with-icon select,
+.panel-add-event .input-with-icon textarea {
+  width: 100%;
+  border-radius: 0.75rem; /* 12px */
+  background: rgba(255, 255, 255, 0.02);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.04); /* 1px */
+  color: #d7e6ef;
+  font-family: inherit;
+  height: 4rem;
+  font-size: 1.2rem;
+}
+.panel-add-event .input-with-icon .input-icon {
+  position: absolute;
+  left: 0.625rem; /* 10px */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem; /* 20px */
+  height: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(215, 230, 239, 0.9);
+  pointer-events: none;
+  opacity: 0.95;
+}
+.panel-add-event .btn-map {
+  width: 100%;
+  height: 4rem;
+  border-radius: 1rem;
+  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-shadow: 0 8px 26px rgba(99, 102, 241, 0.18);
+  border: none;
+  padding: 0;
+  transition: all 0.25s ease;
+  /* keep the same purple color on hover, only lift the button like .btn-primary does */
+  /* when user already selected a location, use green state (handled by JS via .location-selected) */
+}
+.panel-add-event .btn-map:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.22);
+  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
+}
+.panel-add-event .btn-map.location-selected {
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 8px 26px rgba(16, 185, 129, 0.3);
+}
+.panel-add-event .btn-map.location-selected:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(16, 185, 129, 0.34);
+}
+.panel-add-event .input-with-icon select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px);
+  background-size: 0.5rem;
+  background-repeat: no-repeat;
+}
+.panel-add-event .input-with-icon select option {
+  background-color: rgba(12, 18, 28, 0.72);
+  color: #d7e6ef;
+}
+.panel-add-event .form-actions {
+  margin-top: 6px;
+}
+.panel-add-event .form-actions .btn-create {
+  width: 100%;
+  height: 5rem;
+  border-radius: 1rem;
+  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: 0 8px 26px rgba(99, 102, 241, 0.18);
+  border: none;
+  padding: 0;
+}
+
+.panel-filters {
+  min-width: 28rem;
+  margin: 0;
+  border-radius: inherit;
+  /* select dropdown styles */
+}
+.panel-filters .form-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.panel-filters .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.panel-filters .form-row label {
+  padding-bottom: 0.8rem;
+}
+.panel-filters .input-with-icon {
+  position: relative;
+  width: 100%;
+}
+.panel-filters .input-with-icon input,
+.panel-filters .input-with-icon select {
+  width: 100%;
+  border-radius: 0.75rem; /* 12px */
+  background: rgba(255, 255, 255, 0.02);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.04); /* 1px */
+  color: #d7e6ef;
+  font-family: inherit;
+  height: 4rem;
+  font-size: 1.2rem;
+  padding-left: 3rem;
+}
+.panel-filters .input-with-icon .input-icon {
+  position: absolute;
+  left: 0.625rem; /* 10px */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem; /* 20px */
+  height: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(215, 230, 239, 0.9);
+  pointer-events: none;
+  opacity: 0.95;
+}
+.panel-filters .input-with-icon select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 3.5rem;
+}
+.panel-filters .input-with-icon select option {
+  background-color: rgba(12, 18, 28, 0.72);
+  color: #d7e6ef;
+}
+.panel-filters .form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.panel-filters .form-actions .btn {
+  flex: 1;
+  height: 5rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.panel-filters .form-actions .btn-primary {
+  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
+  color: #fff;
+  box-shadow: 0 8px 26px rgba(99, 102, 241, 0.18);
+  padding: 0.85rem;
+}
+.panel-filters .form-actions .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.22);
+}
+.panel-filters .form-actions .btn-primary:active {
+  transform: translateY(0);
+}
+.panel-filters .form-actions .btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #d7e6ef;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.7rem;
+}
+.panel-filters .form-actions .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.panel-filters .form-actions .btn-secondary:active {
+  transform: translateY(0);
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Desaturate and soften light tiles to a neutral gray appearance */
+.leaflet-tile-pane img {
+  /* Make tiles neutral/gray while preserving contrast for labels */
+  filter: grayscale(120%) brightness(85%) hue-rotate(230deg) saturate(95%);
+}
+
+.leaflet-marker-pane,
+.leaflet-popup-pane {
+  filter: none;
 }/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,118 @@
+.panel-filters {
+  min-width: 28rem;
+  margin: 0;
+  border-radius: inherit;
+
+  .form-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .form-row label {
+    padding-bottom: 0.8rem;
+  }
+
+  .input-with-icon {
+    position: relative;
+    width: 100%;
+
+    input,
+    select {
+      width: 100%;
+      border-radius: 0.75rem; /* 12px */
+      background: rgba(255,255,255,0.02);
+      border: 0.0625rem solid rgba(255,255,255,0.04); /* 1px */
+      color: #d7e6ef;
+      font-family: inherit;
+      height: 4rem;
+      font-size: 1.2rem;
+      padding-left: 3rem;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 0.625rem; /* 10px */
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.25rem; /* 20px */
+      height: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(215,230,239,0.9);
+      pointer-events: none;
+      opacity: 0.95;
+    }
+  }
+
+  /* select dropdown styles */
+  .input-with-icon select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 3.5rem;
+    
+    option {
+      background-color: rgba(12,18,28,0.72);
+      color: #d7e6ef;
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .btn {
+      flex: 1;
+      height: 5rem;
+      border-radius: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border: none;
+      padding: 0;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
+      color: #fff;
+      box-shadow: 0 8px 26px rgba(99,102,241,0.18);
+      padding: 0.85rem;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(99,102,241,0.22);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: #d7e6ef;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.7rem;
+
+      &:hover {
+        background: rgba(255,255,255,0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}
