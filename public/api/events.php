@@ -18,9 +18,30 @@ try {
               LEFT JOIN Categories c ON e.category_id = c.category_id
               WHERE e.latitude IS NOT NULL 
                 AND e.longitude IS NOT NULL 
-                AND (e.end_datetime >= NOW() OR e.end_datetime IS NULL)
-              ORDER BY e.start_datetime ASC";
-    $rows = Database::query($query, []);
+                AND (e.end_datetime >= NOW() OR e.end_datetime IS NULL)";
+    
+    $params = [];
+    
+    // Filter by category if provided
+    if (!empty($_GET['category'])) {
+        $categoryId = (int)$_GET['category'];
+        $query .= " AND e.category_id = ?";
+        $params[] = $categoryId;
+    }
+    
+    // Filter by start date if provided (show events on this specific date)
+    if (!empty($_GET['start_date'])) {
+        $startDate = $_GET['start_date'];
+        // Validate date format
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $startDate)) {
+            $query .= " AND DATE(e.start_datetime) = ?";
+            $params[] = $startDate;
+        }
+    }
+    
+    $query .= " ORDER BY e.start_datetime ASC";
+    
+    $rows = Database::query($query, $params);
 
     if ($rows === false || !is_array($rows)) {
         $rows = [];

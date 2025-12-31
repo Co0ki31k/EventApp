@@ -269,7 +269,15 @@
 
         // Load events from API and place markers
         loadFromApi: function(url){
-            url = url || '/Projekt/public/api/events.php';
+            if (!url) {
+                url = '/Projekt/public/api/events.php';
+                // Append current URL parameters to API call
+                var params = new URLSearchParams(window.location.search);
+                var queryString = params.toString();
+                if (queryString) {
+                    url += '?' + queryString;
+                }
+            }
             this.init();
             var self = this;
             
