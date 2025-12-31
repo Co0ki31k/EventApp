@@ -351,13 +351,22 @@
 
     // Listen for event creation to reload markers
     window.addEventListener('event:created', function(){
-        try{ window.UserMapMarkers.reload(); } catch(e){ console.error(e); }
+        // Skip reload if popup is open
+        var hasOpenPopup = document.querySelector('.leaflet-popup-pane .leaflet-popup') !== null;
+        if(!hasOpenPopup){
+            try{ window.UserMapMarkers.reload(); } catch(e){ console.error(e); }
+        }
     });
 
     // Auto-reload markers every 10 seconds to see events from other users
+    // Skip reload if any popup is open
     setInterval(function(){
         if(window.UserMapMarkers && window.UserMapMarkers._initialized){
-            try{ window.UserMapMarkers.reload(); } catch(e){ console.error(e); }
+            // Check if any popup is open
+            var hasOpenPopup = document.querySelector('.leaflet-popup-pane .leaflet-popup') !== null;
+            if(!hasOpenPopup){
+                try{ window.UserMapMarkers.reload(); } catch(e){ console.error(e); }
+            }
         }
     }, 10000);
 
