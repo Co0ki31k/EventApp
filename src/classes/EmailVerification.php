@@ -210,7 +210,7 @@ class EmailVerification
             $mail->Host = defined('SMTP_HOST') ? SMTP_HOST : 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = defined('SMTP_USER') ? SMTP_USER : 'eventapp4@gmail.com';
-            $mail->Password = defined('SMTP_PASS') ? SMTP_PASS : 'sois dnxe dlko yhks';
+            $mail->Password = defined('SMTP_PASS') ? SMTP_PASS : 'sutu ifao dvht gich';
             $mail->SMTPSecure = defined('SMTP_SECURE') ? SMTP_SECURE : \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = defined('SMTP_PORT') ? SMTP_PORT : 465;
             $mail->CharSet = 'UTF-8';

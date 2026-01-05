@@ -12,8 +12,8 @@
         </div>
 
         <ul class="sidebar-group sidebar-main" role="tablist">
-            <li><button class="sidebar-icon" data-panel="calendar" title="Kalendarz" role="tab">📅</button></li>
-            <li><button class="sidebar-icon" data-panel="messages" title="Wiadomości" role="tab">💬</button></li>
+            <li><button class="sidebar-icon" data-panel="discover" title="Odkryj" role="tab">📡</button></li>
+            <li><button class="sidebar-icon" data-panel="my-events" title="Moje wydarzenia" role="tab">📅</button></li>
             <li><button class="sidebar-icon" data-panel="notifications" title="Powiadomienia" role="tab">🔔</button></li>
         </ul>
 
@@ -30,8 +30,8 @@
             <?php
             // Panels moved into the sidebar so the left side becomes one big expandable panel
             include view('user/partials/panels/add_event_panel.php');
-            include view('user/partials/panels/calendar_panel.php');
-            include view('user/partials/panels/messages_panel.php');
+            include view('user/partials/panels/my_events_panel.php');
+            include view('user/partials/panels/discover_panel.php');
             include view('user/partials/panels/notifications_panel.php');
             include view('user/partials/panels/friends_panel.php');
             include view('user/partials/panels/filters_panel.php');

@@ -9,6 +9,7 @@ define('SMTP_USER', 'eventapp4@gmail.com');
 define('SMTP_FROM_EMAIL', 'eventapp4@gmail.com');
 define('SMTP_FROM_NAME', 'EventApp:noreply');
 date_default_timezone_set(DEFAULT_TIMEZONE);
+define('SMTP_PASS', 'sutu ifao dvht gich');
 
 // Środowisko aplikacji (development, production)
 define("APP_ENV", "development");
