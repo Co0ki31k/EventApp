@@ -3,8 +3,10 @@
 	left: calc(100% + 0.8rem);
 	top: 0; /* align with top of .sidebar-inner */
 	height: auto; /* match .sidebar-inner height */
-	width: auto; /* panel width */
+	width: 0; /* don't force width on children */
 	z-index: 21;
+	display: grid; /* use grid to prevent width inheritance */
+	grid-template-columns: 1fr;
 }
 
 .panel{
@@ -16,6 +18,7 @@
 	border-radius: 1.5rem; /* same as .sidebar-inner */
 	overflow: hidden;
 	padding: 2.5rem;
+	width: max-content; /* each panel determines its own width */
 	
 	> header, header {
 		font-size: 3rem;
@@ -51,4 +54,25 @@
   font-size: 1.4rem;
   font-weight: 550;
   color: #d7e6ef;
+}
+
+/* Individual panel widths */
+#panel-my-events {
+  min-width: 30rem;
+  max-width: 36rem;
+}
+
+#panel-notifications {
+  min-width: 28rem;
+  max-width: 34rem;
+}
+
+#panel-friends {
+  min-width: 26rem;
+  max-width: 32rem;
+}
+
+#panel-settings {
+  min-width: 28rem;
+  max-width: 34rem;
 }

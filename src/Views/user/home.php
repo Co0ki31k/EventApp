@@ -23,5 +23,6 @@
 <script src="<?= asset('js/user/map-controller.js') ?>"></script>
 <script src="<?= asset('js/user/map-markers.js') ?>"></script>
 <script src="<?= asset('js/user/add-event-panel.js') ?>"></script>
+<script src="<?= asset('js/user/discover-panel.js') ?>"></script>
 <script src="<?= asset('js/user/topbar.js') ?>"></script>
 <script src="<?= asset('js/user/sidebar.js') ?>"></script>

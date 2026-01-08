@@ -170,6 +170,61 @@
             btn.textContent = isJoined ? 'Rezygnuj' : 'Dołącz';
         },
 
+        // Setup button handler for popup action button
+        setupPopupButtonHandler: function(btn){
+            if(!btn) return;
+            
+            var self = this;
+            var eventId = parseInt(btn.getAttribute('data-event-id'));
+            
+            btn.addEventListener('click', function(){
+                var isCurrentlyJoined = this.getAttribute('data-joined') === 'true';
+                var btnEl = this;
+                
+                // Disable button during request
+                btnEl.disabled = true;
+                btnEl.textContent = 'Ładowanie...';
+                
+                if(isCurrentlyJoined){
+                    // Leave event
+                    self.leaveEvent(eventId)
+                        .then(function(data){
+                            if(data.success){
+                                self.updatePopupButton(eventId, false);
+                            } else {
+                                alert(data.message || 'Błąd podczas rezygnacji');
+                                self.updatePopupButton(eventId, true);
+                            }
+                        })
+                        .catch(function(){
+                            alert('Błąd połączenia');
+                            self.updatePopupButton(eventId, true);
+                        })
+                        .finally(function(){
+                            btnEl.disabled = false;
+                        });
+                } else {
+                    // Join event
+                    self.joinEvent(eventId)
+                        .then(function(data){
+                            if(data.success){
+                                self.updatePopupButton(eventId, true);
+                            } else {
+                                alert(data.message || 'Błąd podczas dołączania');
+                                self.updatePopupButton(eventId, false);
+                            }
+                        })
+                        .catch(function(){
+                            alert('Błąd połączenia');
+                            self.updatePopupButton(eventId, false);
+                        })
+                        .finally(function(){
+                            btnEl.disabled = false;
+                        });
+                }
+            });
+        },
+
         // Add a single marker for an event object
         addMarkerForEvent: function(ev, isJoined){
             if(!ev || ev.latitude == null || ev.longitude == null) return null;
@@ -213,52 +268,7 @@
                 // Bind action button
                 var btn = document.querySelector('.btn-popup-action[data-event-id="' + eventId + '"]');
                 if(btn){
-                    btn.addEventListener('click', function(){
-                        var isCurrentlyJoined = this.getAttribute('data-joined') === 'true';
-                        var btnEl = this;
-                        
-                        // Disable button during request
-                        btnEl.disabled = true;
-                        btnEl.textContent = 'Ładowanie...';
-                        
-                        if(isCurrentlyJoined){
-                            // Leave event
-                            self.leaveEvent(eventId)
-                                .then(function(data){
-                                    if(data.success){
-                                        self.updatePopupButton(eventId, false);
-                                    } else {
-                                        alert(data.message || 'Błąd podczas rezygnacji');
-                                        self.updatePopupButton(eventId, true);
-                                    }
-                                })
-                                .catch(function(){
-                                    alert('Błąd połączenia');
-                                    self.updatePopupButton(eventId, true);
-                                })
-                                .finally(function(){
-                                    btnEl.disabled = false;
-                                });
-                        } else {
-                            // Join event
-                            self.joinEvent(eventId)
-                                .then(function(data){
-                                    if(data.success){
-                                        self.updatePopupButton(eventId, true);
-                                    } else {
-                                        alert(data.message || 'Błąd podczas dołączania');
-                                        self.updatePopupButton(eventId, false);
-                                    }
-                                })
-                                .catch(function(){
-                                    alert('Błąd połączenia');
-                                    self.updatePopupButton(eventId, false);
-                                })
-                                .finally(function(){
-                                    btnEl.disabled = false;
-                                });
-                        }
-                    });
+                    self.setupPopupButtonHandler(btn);
                 }
             });
 
