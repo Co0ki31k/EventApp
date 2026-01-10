@@ -14,17 +14,6 @@ if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
     exit;
 }
 
-// Update last_login timestamp
-try {
-    Database::query(
-        "UPDATE Users SET last_login = NOW() WHERE user_id = ?",
-        [(int)$_SESSION['user_id']]
-    );
-} catch (Exception $e) {
-    // Log error but don't block page load
-    error_log('Failed to update last_login: ' . $e->getMessage());
-}
-
 require_once VIEWS_USER_PATH . '/home.php';
 
 ?>
