@@ -26,5 +26,6 @@
 <script src="<?= asset('js/user/discover-panel.js') ?>"></script>
 <script src="<?= asset('js/user/my-events-panel.js') ?>"></script>
 <script src="<?= asset('js/user/notifications.js') ?>"></script>
+<script src="<?= asset('js/user/friends.js') ?>"></script>
 <script src="<?= asset('js/user/topbar.js') ?>"></script>
 <script src="<?= asset('js/user/sidebar.js') ?>"></script>

@@ -1,0 +1,204 @@
+// Friends Panel Styles
+.panel-body-friends {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.friends-count {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border-radius: 1.5rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+    vertical-align: middle;
+    transform: translateY(-2px);
+}
+
+.friends-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 0;
+    
+    // Scroll tylko gdy jest więcej niż 5 elementów
+    &.scrollable {
+        overflow-y: auto;
+        max-height: 32rem;
+        padding-right: 0.5rem;
+    }
+    
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        
+        &:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    }
+}
+
+.friend-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateX(2px);
+    }
+    
+    // Status colors
+    &.sent {
+        border-left-color: #3498db; // Blue
+    }
+    
+    &.received {
+        border-left-color: #e67e22; // Orange
+    }
+    
+    &.accepted {
+        border-left-color: #2ecc71; // Green
+    }
+}
+
+.friend-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.friend-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.friend-name {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.friend-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.btn-action {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    &.btn-accept {
+        background: #2ecc71;
+        color: white;
+        
+        &:hover:not(:disabled) {
+            background: #27ae60;
+            transform: translateY(-1px) scale(1.05);
+        }
+    }
+    
+    &.btn-reject {
+        background: #e74c3c;
+        color: white;
+        
+        &:hover:not(:disabled) {
+            background: #c0392b;
+            transform: translateY(-1px) scale(1.05);
+        }
+    }
+    
+    &.btn-cancel {
+        background: #95a5a6;
+        color: white;
+        
+        &:hover:not(:disabled) {
+            background: #7f8c8d;
+            transform: translateY(-1px) scale(1.05);
+        }
+    }
+    
+    &.btn-remove {
+        background: rgba(231, 76, 60, 0.2);
+        font-size: 0.9rem;
+        
+        &:hover:not(:disabled) {
+            background: #e74c3c;
+            transform: translateY(-1px) scale(1.05);
+        }
+    }
+}
+
+// Empty state
+.no-friends {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #95a5a6;
+}
+
+.no-friends-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.no-friends p {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+// Error state
+.friends-error {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #e74c3c;
+    
+    p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+}
