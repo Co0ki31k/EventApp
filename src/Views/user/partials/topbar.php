@@ -11,11 +11,13 @@
     </div>
     <div class="profile-area">
         <?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
-        <button id="profile-edit-btn" class="profile-btn" aria-haspopup="dialog" aria-controls="profile-menu">
+        <button id="profile-edit-btn" class="profile-btn" aria-haspopup="true" aria-expanded="false">
             <span class="profile-emoji" aria-hidden="true">👤</span>
             <span class="profile-name"><?php echo Security::escape($_SESSION['username'] ?? 'Profile'); ?></span>
             <span class="profile-arrow js-profile-toggle" aria-hidden="true">▾</span>
         </button>
+        
+        <?php include view('user/partials/profile_edit.php'); ?>
     </div>
 </div>
 

@@ -1,21 +1,31 @@
 <?php
-// Profile edit modal (hidden by default)
+// Profile dropdown panel (hidden by default)
 ?>
-<div id="profile-edit-modal" class="modal" aria-hidden="true">
-    <div class="modal-content">
-        <button class="modal-close" aria-label="Zamknij">×</button>
-        <h2>Edytuj profil</h2>
-        <form id="profile-edit-form">
-            <label>Imię
-                <input type="text" name="first_name">
-            </label>
-            <label>Nazwisko
-                <input type="text" name="last_name">
-            </label>
-            <label>Email
-                <input type="email" name="email" disabled>
-            </label>
-            <button type="submit">Zapisz</button>
-        </form>
+<div id="profile-dropdown" class="profile-dropdown profile-hidden">
+    <div class="profile-dropdown-inner">
+        <div class="profile-user-info">
+            <div class="profile-name" id="profile-username">Ładowanie...</div>
+            <div class="profile-email" id="profile-email"></div>
+        </div>
+        
+        <div class="profile-stats">
+            <div class="profile-stat">
+                <div class="profile-stat-icon">🎉</div>
+                <div class="profile-stat-content">
+                    <div class="profile-stat-value" id="profile-events-count">-</div>
+                    <div class="profile-stat-label">Wydarzenia</div>
+                </div>
+            </div>
+            
+            <div class="profile-stat">
+                <div class="profile-stat-icon">👥</div>
+                <div class="profile-stat-content">
+                    <div class="profile-stat-value" id="profile-friends-count">-</div>
+                    <div class="profile-stat-label">Znajomi</div>
+                </div>
+            </div>
+        </div>
+        
+        <button id="logout-btn" class="btn-logout">Wyloguj się</button>
     </div>
 </div>

@@ -1,4 +1,114 @@
-/* Profile modal styles placeholder */
-.modal{ display:none; position:fixed; inset:0; align-items:center; justify-content:center; }
-.modal.open{ display:flex; }
-.modal .modal-content{ background:#fff; padding:16px; border-radius:6px; width:320px; }
+/* Profile dropdown styles - jak sidebar */
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 1.5rem);
+    right: 1rem;
+    width: 25rem;
+    z-index: 1000;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: auto;
+    
+    &.profile-hidden {
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+    }
+}
+
+.profile-dropdown-inner {
+    background: rgba(12, 18, 28, 0.72);
+    backdrop-filter: blur(0.12rem);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.profile-user-info {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.profile-name {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.profile-email {
+    color: #95a5a6;
+    font-size: 0.9rem;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.profile-stat {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.2s;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+    }
+}
+
+.profile-stat-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.profile-stat-content {
+    flex: 1;
+}
+
+.profile-stat-value {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.profile-stat-label {
+    color: #95a5a6;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.btn-logout {
+    width: 100%;
+    padding: 0.875rem;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(231, 76, 60, 0.4);
+    }
+    
+    &:active {
+        transform: translateY(0);
+    }
+}
+
