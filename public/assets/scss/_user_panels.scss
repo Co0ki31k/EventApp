@@ -74,5 +74,11 @@
 
 #panel-settings {
   min-width: 28rem;
-  max-width: 34rem;
+  max-width: 39rem;
+  position: relative;
+  top: -15rem;
+  
+  header {
+    padding-bottom: 0;
+  }
 }

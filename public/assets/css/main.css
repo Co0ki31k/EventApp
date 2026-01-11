@@ -1768,7 +1768,12 @@ html, body {
 
 #panel-settings {
   min-width: 28rem;
-  max-width: 34rem;
+  max-width: 39rem;
+  position: relative;
+  top: -15rem;
+}
+#panel-settings header {
+  padding-bottom: 0;
 }
 
 /* Topbar styles placeholder */
@@ -3251,6 +3256,183 @@ html, body {
   font-size: 0.95rem;
 }
 
+.settings-section {
+  padding: 0;
+}
+.settings-section h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  padding: 1.5rem 1.5rem 0 0;
+}
+.settings-section .settings-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  padding: 0 1.5rem 0 0;
+}
+
+.notification-settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0 1.5rem 1.5rem 0;
+}
+.notification-settings-form .settings-group {
+  margin-bottom: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+}
+.notification-settings-form .settings-group h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  padding: 1rem 1.5rem 0.5rem 0;
+  border-bottom: none;
+}
+.notification-settings-form .setting-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+  margin-bottom: 0;
+}
+.notification-settings-form .setting-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(2px);
+}
+.notification-settings-form .setting-item:has(#pref-friend-request-sent), .notification-settings-form .setting-item:has(#pref-friend-request-received) {
+  border-left-color: #3498db;
+}
+.notification-settings-form .setting-item:has(#pref-event-joined), .notification-settings-form .setting-item:has(#pref-event-created), .notification-settings-form .setting-item:has(#pref-event-starting-soon), .notification-settings-form .setting-item:has(#pref-event-ongoing) {
+  border-left-color: #9b59b6;
+}
+.notification-settings-form .setting-item label {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 0.5rem;
+}
+.notification-settings-form .setting-item label input[type=checkbox] {
+  margin-right: 0.75rem;
+  margin-top: 0.15rem;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #7c3aed;
+  flex-shrink: 0;
+}
+.notification-settings-form .setting-item label .setting-label {
+  font-weight: 500;
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.notification-settings-form .setting-item .setting-description {
+  margin-left: 2.75rem;
+  margin-top: 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.4;
+}
+
+.settings-actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  margin: 0.5rem;
+  border-top: none;
+}
+.settings-actions .btn {
+  flex: 1;
+  height: 5rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.settings-actions .btn.btn-primary {
+  background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%);
+  color: #fff;
+  box-shadow: 0 8px 26px rgba(99, 102, 241, 0.18);
+  padding: 0.85rem;
+}
+.settings-actions .btn.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.22);
+}
+.settings-actions .btn.btn-primary:active {
+  transform: translateY(0);
+}
+.settings-actions .btn.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #d7e6ef;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.7rem;
+}
+.settings-actions .btn.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.settings-actions .btn.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.settings-message {
+  padding: 0.7rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+.settings-message.success {
+  background-color: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+.settings-message.error {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+.settings-message.info {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+.notification-settings-form .settings-group:last-of-type {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .settings-section h4, .settings-section .settings-description {
+    padding-right: 1rem;
+  }
+  .notification-settings-form {
+    padding: 0 1rem 1rem 0;
+  }
+  .notification-settings-form .settings-group h5 {
+    padding-right: 1rem;
+  }
+  .settings-actions {
+    flex-direction: column;
+    padding: 0 1rem 1rem 0;
+  }
+  .settings-actions .btn {
+    width: 100%;
+  }
+}
 #map {
   width: 100%;
   height: 100%;

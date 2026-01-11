@@ -57,13 +57,34 @@ class NotificationsManager {
             }
             
             if (data.success) {
-                this.renderNotifications(data.notifications);
-                this.updateCount(data.count);
+                // Filtruj powiadomienia na podstawie preferencji z localStorage
+                const filteredNotifications = this.filterNotificationsByPreferences(data.notifications);
+                this.renderNotifications(filteredNotifications);
+                this.updateCount(filteredNotifications.length);
             }
         } catch (error) {
             console.error('Error loading notifications:', error);
             this.showError('Nie udało się załadować powiadomień');
         }
+    }
+    
+    /**
+     * Filtruj powiadomienia na podstawie preferencji użytkownika
+     */
+    filterNotificationsByPreferences(notifications) {
+        // Pobierz preferencje z localStorage (funkcja z settings.js)
+        const prefs = typeof getNotificationPreferences === 'function' 
+            ? getNotificationPreferences() 
+            : {
+                friend_request_sent: true,
+                friend_request_received: true,
+                event_joined: true,
+                event_created: true,
+                event_starting_soon: true,
+                event_ongoing: true
+            };
+        
+        return notifications.filter(notif => prefs[notif.type] !== false);
     }
     
     /**
@@ -201,6 +222,9 @@ class NotificationsManager {
 
 // Inicjalizacja po załadowaniu strony
 document.addEventListener('DOMContentLoaded', () => {
-    window.notificationsManager = new NotificationsManager();
+    // Sprawdź czy kontener powiadomień istnieje przed inicjalizacją
+    if(document.getElementById('notifications-container')){
+        window.notificationsManager = new NotificationsManager();
+    }
 });
 
