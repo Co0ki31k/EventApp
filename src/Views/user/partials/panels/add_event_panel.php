@@ -1,40 +1,6 @@
 <section id="panel-add-event" class="panel panel-hidden" aria-hidden="true">
     <header><h3>Dodaj wydarzenie</h3></header>
     <div class="panel-body panel-add-event">
-        <?php
-            $errors = [];
-            $successMessage = null;
-            
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
-                require_once SRC_PATH . '/Controllers/EventsController.php';
-                load_class('Security');
-                $result = (new EventsController())->create();
-                $errors = $result['errors'] ?? [];
-                
-                // PRG Pattern: redirect after successful POST to prevent duplicate submissions
-                if ($result['success']) {
-                    // Store success message in session for display after redirect
-                    if (session_status() !== PHP_SESSION_ACTIVE) {
-                        @session_start();
-                    }
-                    $_SESSION['event_created'] = true;
-                    $_SESSION['event_message'] = $result['message'] ?? 'Wydarzenie zostało utworzone.';
-                    
-                    // Redirect to same page (without POST data)
-                    header('Location: ' . $_SERVER['REQUEST_URI']);
-                    exit;
-                }
-            }
-            
-            // Check for success message from redirect
-            if (session_status() !== PHP_SESSION_ACTIVE) {
-                @session_start();
-            }
-            if (!empty($_SESSION['event_created'])) {
-                $successMessage = $_SESSION['event_message'] ?? 'Wydarzenie zostało utworzone.';
-                unset($_SESSION['event_created'], $_SESSION['event_message']);
-            }
-        ?>
         <form class="form-add-event" action="" method="post" novalidate>
             <?php if (!empty($successMessage)): ?>
                 <script>
