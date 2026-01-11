@@ -10,6 +10,9 @@
         autoLoadOnInit: true,
         currentUserId: null, 
         participationCache: {},
+        allEvents: [], // wszystkie pobrane wydarzenia
+        friendsList: [], // lista ID znajomych
+        currentMode: 'all', // aktualny tryb: 'all', 'friends', 'now'
 
         init: function(){
             if(this._initialized) return;
@@ -28,9 +31,86 @@
 
             this._initialized = true;
 
+            // Nasłuchuj na zmianę trybu mapy
+            this.setupModeListener();
+
             if(this.autoLoadOnInit){
                 try{ this.loadFromApi(); } catch(e){ console.error(e); }
             }
+        },
+
+        // Nasłuchuj na zmianę trybu wyświetlania
+        setupModeListener: function(){
+            var self = this;
+            document.addEventListener('map:modeChange', function(e){
+                var mode = e.detail.mode;
+                console.log('UserMapMarkers: mode changed to', mode);
+                self.currentMode = mode;
+                self.applyFilter();
+            });
+        },
+
+        // Pobierz listę znajomych
+        loadFriendsList: function(){
+            var self = this;
+            return fetch('/Projekt/public/api/friends.php', {
+                credentials: 'same-origin',
+                cache: 'no-cache'
+            })
+            .then(function(res){ return res.json(); })
+            .then(function(data){
+                if(data.success && Array.isArray(data.friends)){
+                    self.friendsList = data.friends
+                        .filter(function(f){ return f.status === 'accepted'; })
+                        .map(function(f){ return f.user_id; });
+                    console.log('Załadowano znajomych:', self.friendsList.length);
+                }
+                return self.friendsList;
+            })
+            .catch(function(err){
+                console.error('Błąd pobierania znajomych:', err);
+                return [];
+            });
+        },
+
+        // Sprawdź czy wydarzenie spełnia warunki aktualnego trybu
+        matchesCurrentMode: function(ev){
+            if(this.currentMode === 'all') return true;
+            
+            if(this.currentMode === 'friends'){
+                // Pokaż tylko wydarzenia utworzone przez znajomych
+                return this.friendsList.indexOf(ev.created_by) !== -1;
+            }
+            
+            if(this.currentMode === 'now'){
+                // Pokaż tylko wydarzenia odbywające się teraz
+                var now = new Date();
+                var start = new Date(ev.start_datetime);
+                var end = new Date(ev.end_datetime);
+                return start <= now && now <= end;
+            }
+            
+            return true;
+        },
+
+        // Zastosuj filtr do wszystkich wydarzeń
+        applyFilter: function(){
+            var self = this;
+            
+            // Wyczyść aktualne markery
+            this.clear();
+            
+            // Przefiltruj i dodaj markery
+            this.allEvents.forEach(function(eventData){
+                var ev = eventData.event;
+                var isJoined = eventData.isJoined;
+                
+                if(self.matchesCurrentMode(ev)){
+                    self.addMarkerForEvent(ev, isJoined);
+                }
+            });
+            
+            console.log('Zastosowano filtr:', this.currentMode, '- widoczne markery:', this.markers.length);
         },
 
         // Check if current user is participant of an event
@@ -305,13 +385,23 @@
                         return self.checkParticipation(ev.id);
                     });
                     
-                    return Promise.all(participationPromises).then(function(participationResults){
-                        data.events.forEach(function(ev, index){
-                            var isJoined = participationResults[index];
-                            self.addMarkerForEvent(ev, isJoined);
+                    // Najpierw załaduj listę znajomych
+                    return self.loadFriendsList().then(function(){
+                        return Promise.all(participationPromises).then(function(participationResults){
+                            // Zapisz wszystkie wydarzenia z informacją o uczestnictwie
+                            self.allEvents = data.events.map(function(ev, index){
+                                return {
+                                    event: ev,
+                                    isJoined: participationResults[index]
+                                };
+                            });
+                            
+                            // Zastosuj filtr zgodny z aktualnym trybem
+                            self.applyFilter();
+                            
+                            console.log('UserMapMarkers: loaded', self.allEvents.length, 'events, visible:', self.markers.length, 'markers');
+                            return self.markers;
                         });
-                        console.log('UserMapMarkers: loaded', self.markers.length, 'markers');
-                        return self.markers;
                     });
                 })
                 .catch(function(err){
