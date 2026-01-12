@@ -9,6 +9,23 @@
 	<?php include view('user/partials/sidebar.php'); ?>
 
 	<main class="user-map-area">
+		<?php if (isset($joinedEventsMessage) && $joinedEventsMessage): ?>
+			<div class="notification-banner success" style="position: fixed; top: 7rem; right: 2rem; z-index: 10000; padding: 1.5rem 2rem; border-radius: 0.5rem; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.15); background: linear-gradient(135deg, #16d10596 0%, #4ba259 100%); color: white; opacity: 0;">
+				<?= Security::escape($joinedEventsMessage) ?>
+			</div>
+			<script>
+				(function(){
+					var banner = document.querySelector('.notification-banner');
+					if(banner) {
+						setTimeout(function(){ banner.style.opacity = '1'; banner.style.transition = 'opacity 0.3s'; }, 10);
+						setTimeout(function(){
+							banner.style.opacity = '0';
+							setTimeout(function(){ banner.remove(); }, 300);
+						}, 4000);
+					}
+				})();
+			</script>
+		<?php endif; ?>
 		<?php include view('user/partials/map_container.php'); ?>
 	</main>
 

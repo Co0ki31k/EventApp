@@ -209,7 +209,7 @@ class InterestsController
             // Ustaw komunikat sukcesu
             $_SESSION['registration_complete'] = true;
             
-            // Przekieruj do logowania
+            // Przekieruj do logowania - wydarzenia z trybu gościa zostaną dołączone po zalogowaniu
             header('Location: login.php?registered=1');
             exit;
         } else {

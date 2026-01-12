@@ -39,6 +39,11 @@ if(session_status() === PHP_SESSION_ACTIVE && !empty($_SESSION['event_created'])
     unset($_SESSION['event_created'],$_SESSION['event_message']);
 }
 
+$joinedEventsMessage = null;
+if(session_status() === PHP_SESSION_ACTIVE && !empty($_SESSION['joined_events_message'])){
+    $joinedEventsMessage = $_SESSION['joined_events_message'];
+    unset($_SESSION['joined_events_message']);
+}
 
 require_once VIEWS_USER_PATH . '/home.php';
 

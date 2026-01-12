@@ -8,6 +8,7 @@ load_class('Database');
 load_class('Security');
 require_once SRC_PATH . '/Models/User.php';
 require_once SRC_PATH . '/Controllers/Auth/LoginController.php';
+require_once SRC_PATH . '/Helpers/pending_events.php';
 
 session_name(defined('SESSION_NAME') ? SESSION_NAME : 'eventapp_session');
 if (session_status() === PHP_SESSION_NONE) session_start();
@@ -39,6 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "UPDATE Users SET last_login = NOW() WHERE user_id = ?",
             [$user['user_id']]
         );
+        
+        // Sprawdź czy są zapisane wydarzenia z trybu gościa i dołącz do nich
+        if (hasPendingEvents()) {
+            $joinResult = joinPendingEvents($user['user_id']);
+            if ($joinResult['joined'] > 0) {
+                $_SESSION['joined_events_message'] = "Dołączono do {$joinResult['joined']} wydarzeń!";
+            }
+        }
         
         // Przekieruj do odpowiedniej strony w zależności od roli
         if ($user['role'] === 'company') {

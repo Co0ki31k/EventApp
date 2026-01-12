@@ -15,9 +15,8 @@ class EventsController
             return ['success' => false, 'message' => 'Nieprawidłowa metoda żądania', 'errors' => []];
         }
 
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            @session_start();
-        }
+        session_name(defined('SESSION_NAME') ? SESSION_NAME : 'eventapp_session');
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         $title = isset($_POST['title']) ? Security::cleanInput((string)$_POST['title']) : '';
         $description = isset($_POST['description']) ? Security::cleanInput((string)$_POST['description']) : '';
