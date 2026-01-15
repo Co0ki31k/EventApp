@@ -62,7 +62,7 @@
 						<div class="role-title"><span class="role-title-orange">Twórz.</span> Zorganizuj coś własnego</div>
 						<div class="role-desc">Masz pomysł na spacer z psami, planszówki czy poranną jogę? Dodaj wydarzenie w 30 sekund i znajdź chętnych.</div>
 						<div class="role-cta">
-							<a class="role-btn" href="/register">Rozpocznij</a>
+							<a class="role-btn" href="<?= url('register.php') ?>">Rozpocznij</a>
 						</div>
 					</div>
 				</div>
@@ -77,7 +77,7 @@
 						<div class="role-title"><span class="role-title-blue">Odkrywaj.</span> Dołącz do ekipy</div>
 						<div class="role-desc">Nudzisz się? Sprawdź mapę, zobacz, kto właśnie gra w kosza lub idzie na kawę i dołącz jednym kliknięciem.</div>
 						<div class="role-cta">
-							<a class="role-btn" href="/register">Rozpocznij</a>
+							<a class="role-btn" href="<?= url('register.php') ?>">Rozpocznij</a>
 						</div>
 					</div>
 				</div>
