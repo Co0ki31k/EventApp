@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         // Przekieruj do odpowiedniej strony w zależności od roli
-        if ($user['role'] === 'company') {
-            header('Location: company-home.php');
+        if ($user['role'] === 'admin') {
+            header('Location: admin-home.php');
         } else {
             header('Location: user-home.php');
         }
