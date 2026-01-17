@@ -2,8 +2,64 @@
 <main class="admin-content">
 	<!-- Panel: Dashboard -->
 	<div class="admin-panel active" id="panel-dashboard">
-		<h2>Dashboard</h2>
-		<p>Placeholder - statystyki i przegląd systemu</p>
+
+		<!-- Simplified dashboard tiles (placeholders) - preserve classes for JS -->
+		<div class="dashboard-grid">
+			<div class="dashboard-tile">
+				<div class="dashboard-tile__header">
+					<h3 class="dashboard-tile__title">Wydarzenia Ogółem</h3>
+					<i class="fas fa-calendar-check dashboard-tile__icon"></i>
+				</div>
+				<div class="dashboard-tile__value">—</div>
+				<div class="dashboard-tile__chart"></div>
+			</div>
+
+			<div class="dashboard-tile">
+				<div class="dashboard-tile__header">
+					<h3 class="dashboard-tile__title">Wydarzenia Ten Miesiąc</h3>
+					<i class="fas fa-calendar-plus dashboard-tile__icon"></i>
+				</div>
+				<div class="dashboard-tile__value">—</div>
+				<div class="dashboard-tile__chart"></div>
+			</div>
+
+			<div class="dashboard-tile">
+				<div class="dashboard-tile__header">
+					<h3 class="dashboard-tile__title">Wydarzenia Dziś</h3>
+					<i class="fas fa-calendar-day dashboard-tile__icon"></i>
+				</div>
+				<div class="dashboard-tile__value">—</div>
+				<div class="dashboard-tile__chart-center"></div>
+			</div>
+
+			<div class="dashboard-tile">
+				<div class="dashboard-tile__header">
+					<h3 class="dashboard-tile__title">Uczestnicy Ogółem</h3>
+					<i class="fas fa-users dashboard-tile__icon"></i>
+				</div>
+				<div class="dashboard-tile__value">—</div>
+				<div class="dashboard-tile__chart"></div>
+			</div>
+
+			<div class="dashboard-tile">
+				<div class="dashboard-tile__header">
+					<h3 class="dashboard-tile__title">Uczestnicy Ten Miesiąc</h3>
+					<i class="fas fa-user-plus dashboard-tile__icon"></i>
+				</div>
+				<div class="dashboard-tile__value">—</div>
+				<div class="dashboard-tile__chart"></div>
+			</div>
+
+			<div class="dashboard-tile">
+				<div class="dashboard-tile__header">
+					<h3 class="dashboard-tile__title">Uczestnicy Dziś</h3>
+					<i class="fas fa-user-clock dashboard-tile__icon"></i>
+				</div>
+				<div class="dashboard-tile__value">—</div>
+				<div class="dashboard-tile__chart-center"></div>
+			</div>
+
+		</div>
 	</div>
 	
 	<!-- Panel: Users -->

@@ -47,5 +47,13 @@ function switchPanel(panelName) {
     const selectedPanel = document.getElementById(`panel-${panelName}`);
     if (selectedPanel) {
         selectedPanel.style.display = 'block';
+        // If switched to dashboard, trigger stats reload
+        if (panelName === 'dashboard' && typeof window.loadDashboardStats === 'function') {
+            try {
+                window.loadDashboardStats();
+            } catch (e) {
+                console.error('Failed to load dashboard stats:', e);
+            }
+        }
     }
 }

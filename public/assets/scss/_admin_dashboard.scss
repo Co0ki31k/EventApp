@@ -1,0 +1,271 @@
+// Admin Dashboard Panel Styles
+
+#panel-dashboard {
+	// Dashboard grid layout
+	.dashboard-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		/* larger vertical gap (rows) but keep columns tighter */
+		gap: 4rem 2rem; /* row-gap column-gap */
+		padding-bottom: 3rem;
+		padding-top: 2rem;
+	}
+
+	// Dashboard tile (kafelek)
+	.dashboard-tile {
+		background: #ffffff;
+		border-radius: 0.5rem;
+		padding: 1rem;
+		box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+		display: flex;
+		flex-direction: column;
+		aspect-ratio: 1.3;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+		&:hover {
+			transform: translateY(-0.25rem);
+			box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.12);
+		}
+
+		// Tile header (title + icon)
+		&__header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 0.5rem;
+		}
+
+		&__title {
+			font-size: 0.75rem;
+			color: #7f8c8d;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 0.05rem;
+		}
+
+		&__icon {
+			font-size: 1.25rem;
+
+			// Color variations
+			&--green { color: #2ecc71; }
+			&--light-green { color: #27ae60; }
+			&--teal { color: #16a085; }
+			&--blue { color: #3498db; }
+			&--dark-blue { color: #2980b9; }
+			&--turquoise { color: #1abc9c; }
+		}
+
+		// Tile value (main number)
+		&__value {
+			font-size: 1.875rem;
+			font-weight: 700;
+			color: #2c3e50;
+			margin-bottom: 0.5rem;
+			line-height: 1;
+		}
+
+		// Chart container
+		&__chart {
+			flex: 1;
+			display: flex;
+			align-items: flex-end;
+		}
+
+		&__chart-center {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	// Bar chart placeholder
+	.bar-chart {
+		width: 100%;
+		height: 3rem;
+		border-radius: 0.5rem;
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-around;
+		padding: 0.5rem;
+
+		&__bar {
+			width: 10%;
+			border-radius: 0.25rem 0.25rem 0 0;
+			transition: height 0.3s ease;
+		}
+
+		// Color variations
+		&--green {
+			background: linear-gradient(to top, rgba(46, 204, 113, 0.2) 0%, rgba(46, 204, 113, 0.05) 100%);
+			
+			.bar-chart__bar {
+				background: #2ecc71;
+			}
+		}
+
+		&--blue {
+			background: linear-gradient(to top, rgba(52, 152, 219, 0.2) 0%, rgba(52, 152, 219, 0.05) 100%);
+			
+			.bar-chart__bar {
+				background: #3498db;
+			}
+		}
+	}
+
+	// Simple bar chart (no background)
+	.simple-bars {
+		display: flex;
+		gap: 0.5rem;
+		align-items: flex-end;
+		height: 3rem;
+
+		&__bar {
+			width: 0.75rem;
+			border-radius: 0.25rem 0.25rem 0 0;
+
+			&--green {
+				background: #27ae60;
+			}
+
+			&--blue {
+				background: #2980b9;
+			}
+
+			&--turquoise {
+				background: #1abc9c;
+			}
+		}
+	}
+
+	// Gradient bar chart
+	.gradient-bars {
+		width: 100%;
+		height: 3rem;
+		display: flex;
+		align-items: flex-end;
+		gap: 0.25rem;
+
+		&__bar {
+			flex: 1;
+			border-radius: 0.25rem 0.25rem 0 0;
+			transition: height 0.3s ease;
+
+			&--blue {
+				background: linear-gradient(to top, #2980b9, rgba(41, 128, 185, 0.3));
+			}
+		}
+	}
+
+	// Progress circle
+	.progress-circle {
+		position: relative;
+		width: 4rem;
+		height: 4rem;
+
+		&__svg {
+			width: 100%;
+			height: 100%;
+			transform: rotate(-90deg);
+
+			circle {
+				fill: none;
+				stroke-width: 6;
+
+				&.progress-circle__bg {
+					stroke: #ecf0f1;
+				}
+
+				&.progress-circle__fill {
+					stroke-linecap: round;
+					transition: stroke-dashoffset 0.5s ease;
+
+					&--green {
+						stroke: #27ae60;
+					}
+
+					&--teal {
+						stroke: #16a085;
+					}
+
+					&--blue {
+						stroke: #2980b9;
+					}
+				}
+			}
+		}
+
+		&__label {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 0.875rem;
+			font-weight: 700;
+
+			&--green {
+				color: #27ae60;
+			}
+
+			&--teal {
+				color: #16a085;
+			}
+
+			&--blue {
+				color: #2980b9;
+			}
+		}
+	}
+
+	// User icons visualization
+	.user-icons {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+
+		&__icon {
+			width: 2.5rem;
+			height: 2.5rem;
+			background: #1abc9c;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: opacity 0.3s ease;
+
+			i {
+				font-size: 1rem;
+				color: white;
+			}
+
+			&--fade-3 { opacity: 0.3; }
+			&--fade-6 { opacity: 0.6; }
+			&--fade-10 { opacity: 1; }
+		}
+	}
+
+	// Responsive breakpoints
+	@media (max-width: 1200px) {
+		.dashboard-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.dashboard-grid {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.dashboard-tile {
+			&__value {
+				font-size: 1.5rem;
+			}
+
+			&__chart {
+				min-height: 2.5rem;
+			}
+		}
+	}
+}

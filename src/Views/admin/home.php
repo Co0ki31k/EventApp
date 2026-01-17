@@ -15,3 +15,4 @@
 <script src="<?= asset('js/admin/admin-sidebar.js') ?>"></script>
 <script src="<?= asset('js/admin/admin-topbar.js') ?>"></script>
 <script src="<?= asset('js/admin/admin-panel.js') ?>"></script>
+<script src="<?= asset('js/admin/dashboard.js') ?>"></script>

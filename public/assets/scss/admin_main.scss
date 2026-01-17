@@ -9,6 +9,13 @@
 @use 'admin_topbar';
 @use 'admin_content';
 
+// Import admin panel content styles
+@use 'admin_dashboard';
+@use 'admin_users';
+@use 'admin_events';
+@use 'admin_categories';
+@use 'admin_reports';
+
 // Global admin styles
 .admin-layout {
     min-height: 100vh;
