@@ -1,0 +1,347 @@
+// Admin Sidebar Styles
+.admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 19rem;
+    height: 100vh;
+    background: #ffffff;
+    color: #2c3e50;
+    border-right: 0.0625rem solid #e0e0e0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0.125rem 0 0.5rem rgba(0, 0, 0, 0.05);
+
+    &::-webkit-scrollbar {
+        width: 0.3125rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f5f6fa;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #cbd5e0;
+        border-radius: 0.625rem;
+
+        &:hover {
+            background: #a0aec0;
+        }
+    }
+
+    &.collapsed {
+        width: 4.375rem;
+
+        .admin-sidebar__logo span {
+            display: none;
+        }
+
+        .admin-sidebar__menu-item span {
+            display: none;
+        }
+
+        .admin-sidebar__menu-item {
+            justify-content: center;
+        }
+
+        .admin-sidebar__submenu {
+            display: none !important;
+        }
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 0.0625rem solid #e0e0e0;
+        text-decoration: none;
+        color: #2c3e50;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: #f8f9fa;
+        }
+
+        img {
+            width: 3rem;
+            height: 3rem;
+            object-fit: contain;
+        }
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+            
+            .brand {
+                font-size: 1.375rem;
+                font-weight: 700;
+                color: #2c3e50;
+                line-height: 1.2;
+            }
+            
+            .role {
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: #7f8c8d;
+                text-transform: uppercase;
+                letter-spacing: 0.03125rem;
+            }
+        }
+    }
+
+    &__menu {
+        padding: 1.25rem 0;
+
+        &-section {
+            margin-bottom: 2rem;
+
+            &-title {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.8125rem;
+                text-transform: uppercase;
+                letter-spacing: 0.0625rem;
+                color: #95a5a6;
+                font-weight: 600;
+            }
+        }
+
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0.4rem 1.25rem;
+            padding: 1rem 1.25rem;
+            color: #2c3e50;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border-radius: 0.625rem;
+            background-color: transparent;
+
+            i {
+                font-size: 1.375rem;
+                min-width: 1.5rem;
+                text-align: center;
+                color: #7f8c8d;
+                transition: color 0.3s ease;
+            }
+
+            span {
+                font-size: 1rem;
+                font-weight: 500;
+                flex: 1;
+            }
+
+            &:hover {
+                background: #f8f9fa;
+                transform: translateX(0.125rem);
+                
+                i {
+                    color: #3498db;
+                }
+            }
+
+            &.active {
+                background: #F97316;
+                color: white;
+                box-shadow: 0 0.125rem 0.5rem rgba(249, 115, 22, 0.3);
+
+                i {
+                    color: white;
+                }
+            }
+
+            &--parent {
+                justify-content: space-between;
+
+                .arrow {
+                    font-size: 0.75rem;
+                    transition: transform 0.3s ease;
+                }
+
+                &.open .arrow {
+                    transform: rotate(180deg);
+                }
+            }
+
+            .badge {
+                margin-left: auto;
+                background: #e0e0e0;
+                color: #2c3e50;
+                padding: 0.25rem 0.625rem;
+                border-radius: 0.875rem;
+                font-size: 0.8125rem;
+                font-weight: 600;
+
+                &--danger {
+                    background: #fee;
+                    color: #e74c3c;
+                }
+
+                &--success {
+                    background: #d4edda;
+                    color: #155724;
+                }
+
+                &--warning {
+                    background: #fff3cd;
+                    color: #856404;
+                }
+            }
+        }
+    }
+
+    &__submenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: #f8f9fa;
+        margin: 0 0.9375rem;
+        border-radius: 0.5rem;
+
+        &.open {
+            max-height: 31.25rem;
+            padding: 0.3125rem 0;
+        }
+
+        .admin-sidebar__menu-item {
+            margin: 0.125rem 0.3125rem;
+            padding-left: 2.8125rem;
+            font-size: 0.8125rem;
+
+            &:hover {
+                transform: translateX(0.125rem);
+            }
+
+            &.active {
+                padding-left: 2.8125rem;
+            }
+        }
+    }
+
+    &__footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1.25rem;
+        border-top: 0.0625rem solid #e0e0e0;
+        background: #f8f9fa;
+
+        &-user {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            margin-bottom: 0.9375rem;
+
+            img {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 0.125rem solid #e0e0e0;
+            }
+
+            &-info {
+                flex: 1;
+
+                strong {
+                    display: block;
+                    font-size: 0.875rem;
+                    margin-bottom: 0.125rem;
+                }
+
+                small {
+                    font-size: 0.6875rem;
+                    color: #7f8c8d;
+                }
+            }
+        }
+
+        &-toggle {
+            width: 100%;
+            padding: 0.625rem;
+            background: #e0e0e0;
+            border: none;
+            color: #2c3e50;
+            border-radius: 0.3125rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: #cbd5e0;
+            }
+
+            i {
+                margin-right: 0.5rem;
+            }
+        }
+    }
+}
+
+// Toggle button for mobile
+.sidebar-toggle {
+    position: fixed;
+    top: 0.9375rem;
+    left: 0.9375rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: white;
+    border: 0.0625rem solid #e0e0e0;
+    border-radius: 0.5rem;
+    color: #2c3e50;
+    font-size: 1.125rem;
+    cursor: pointer;
+    z-index: 1001;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+// Overlay for mobile
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.active {
+        opacity: 1;
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+
+        &.active {
+            transform: translateX(0);
+        }
+    }
+
+    .sidebar-toggle {
+        display: flex;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+}

@@ -1,27 +1,43 @@
 <!-- Admin Sidebar Navigation -->
 <aside class="admin-sidebar">
-    <div class="admin-sidebar-header">
-        <h2>Admin Panel</h2>
+    <!-- Logo Section -->
+    <div class="admin-sidebar__logo">
+        <img src="<?= asset('img/logo.png') ?>" alt="Logo">
+        <div class="admin-sidebar__logo-text">
+            <span class="brand">EventApp</span>
+            <span class="role">Administrator</span>
+        </div>
     </div>
     
-    <nav class="admin-nav">
-        <ul class="admin-nav-list">
-            <li class="admin-nav-item active" data-panel="dashboard">
-                <i class="icon-dashboard"></i>
+    <!-- Navigation Menu -->
+    <nav class="admin-sidebar__menu">
+        <div class="admin-sidebar__menu-section">
+            <div class="admin-sidebar__menu-section-title">Menu główne</div>
+            
+            <a href="#" class="admin-sidebar__menu-item active" data-panel="dashboard">
+                <i class="fas fa-chart-line"></i>
                 <span>Dashboard</span>
-            </li>
-            <li class="admin-nav-item" data-panel="users">
-                <i class="icon-users"></i>
+            </a>
+            
+            <a href="#" class="admin-sidebar__menu-item" data-panel="users">
+                <i class="fas fa-users"></i>
                 <span>Użytkownicy</span>
-            </li>
-            <li class="admin-nav-item" data-panel="events">
-                <i class="icon-events"></i>
+            </a>
+            
+            <a href="#" class="admin-sidebar__menu-item" data-panel="events">
+                <i class="fas fa-calendar-alt"></i>
                 <span>Wydarzenia</span>
-            </li>
-            <li class="admin-nav-item" data-panel="categories">
-                <i class="icon-categories"></i>
+            </a>
+            
+            <a href="#" class="admin-sidebar__menu-item" data-panel="categories">
+                <i class="fas fa-tags"></i>
                 <span>Kategorie</span>
-            </li>
-        </ul>
+            </a>
+            
+            <a href="#" class="admin-sidebar__menu-item" data-panel="reports">
+                <i class="fas fa-chart-bar"></i>
+                <span>Raporty</span>
+            </a>
+        </div>
     </nav>
 </aside>

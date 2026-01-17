@@ -23,4 +23,10 @@
 		<h2>Zarządzanie kategoriami</h2>
 		<p>Placeholder - lista kategorii</p>
 	</div>
+
+	<!-- Panel: reports -->
+	<div class="admin-panel" id="panel-reports">
+		<h2>Zarządzanie raportami</h2>
+		<p>Placeholder - lista raportow</p>
+	</div>
 </main>

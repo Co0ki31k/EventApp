@@ -16,6 +16,9 @@
   echo '<link rel="stylesheet" href="' . htmlspecialchars(asset('css/reset.css')) . '">';
   echo '<link rel="stylesheet" href="' . htmlspecialchars(asset('css/main.css')) . '">';
 
+  // Font Awesome for icons
+  echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">';
+
   // Leaflet CSS for user map
   echo '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>';
   echo '<link rel="apple-touch-icon" sizes="180x180" href="' . htmlspecialchars(asset('img/favicon_io/apple-touch-icon.png')) . '">';
