@@ -17,3 +17,4 @@
 <script src="<?= asset('js/admin/dashboard.js') ?>"></script>
 <script src="<?= asset('js/admin/users.js') ?>"></script>
 <script src="<?= asset('js/admin/events.js') ?>"></script>
+<script src="<?= asset('js/admin/categories.js') ?>"></script>

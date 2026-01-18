@@ -5391,186 +5391,279 @@ html, body {
   }
 }
 
-#panel-categories .categories-header {
+#panel-categories .categories-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-#panel-categories .categories-header__title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #2c3e50;
-}
-#panel-categories .categories-header__actions {
-  display: flex;
-  gap: 1rem;
-}
-#panel-categories .categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  flex-direction: column;
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+}
+#panel-categories .empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #7f8c8d;
+  font-size: 1.1rem;
 }
 #panel-categories .category-card {
   background: white;
   border-radius: 0.75rem;
-  padding: 1.5rem;
   box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  text-align: center;
-}
-#panel-categories .category-card:hover {
-  transform: translateY(-0.25rem);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.12);
-}
-#panel-categories .category-card__icon {
-  width: 4rem;
-  height: 4rem;
-  margin: 0 auto 1rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: white;
-}
-#panel-categories .category-card__icon--sport {
-  background: #3498db;
-}
-#panel-categories .category-card__icon--music {
-  background: #e74c3c;
-}
-#panel-categories .category-card__icon--film {
-  background: #9b59b6;
-}
-#panel-categories .category-card__icon--tech {
-  background: #1abc9c;
-}
-#panel-categories .category-card__icon--art {
-  background: #f39c12;
-}
-#panel-categories .category-card__icon--travel {
-  background: #27ae60;
-}
-#panel-categories .category-card__name {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-}
-#panel-categories .category-card__count {
-  font-size: 0.875rem;
-  color: #7f8c8d;
-  margin-bottom: 1rem;
-}
-#panel-categories .category-card__count strong {
-  color: #2c3e50;
-}
-#panel-categories .category-card__actions {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  padding-top: 1rem;
-  border-top: 0.0625rem solid #ecf0f1;
-}
-#panel-categories .category-card__actions button {
-  padding: 0.5rem 0.75rem;
-  border: none;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  font-size: 0.875rem;
+  overflow: hidden;
   transition: all 0.2s ease;
 }
-#panel-categories .category-card__actions button.btn-edit {
+#panel-categories .category-card:hover {
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.12);
+}
+#panel-categories .category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e8ed;
+}
+#panel-categories .category-info {
+  flex: 1;
+}
+#panel-categories .category-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+}
+#panel-categories .category-description {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem 0;
+}
+#panel-categories .category-meta {
+  display: inline-block;
   background: #3498db;
   color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
 }
-#panel-categories .category-card__actions button.btn-edit:hover {
-  background: #2980b9;
+#panel-categories .category-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
-#panel-categories .category-card__actions button.btn-delete {
-  background: #e74c3c;
-  color: white;
+#panel-categories .subcategories-list {
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
-#panel-categories .category-card__actions button.btn-delete:hover {
-  background: #c0392b;
-}
-#panel-categories .subcategories {
-  margin-top: 3rem;
-}
-#panel-categories .subcategories__title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-}
-#panel-categories .subcategories__list {
-  background: white;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
-}
-#panel-categories .subcategories__item {
+#panel-categories .subcategory-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
-  border-bottom: 0.0625rem solid #ecf0f1;
-  transition: background-color 0.2s ease;
+  padding: 0.75rem 1rem;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease;
 }
-#panel-categories .subcategories__item:last-child {
-  border-bottom: none;
+#panel-categories .subcategory-item:hover {
+  background: #e9ecef;
 }
-#panel-categories .subcategories__item:hover {
-  background-color: #f8f9fa;
+#panel-categories .subcategory-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
-#panel-categories .subcategories__name {
-  font-weight: 600;
+#panel-categories .subcategory-name {
+  font-weight: 500;
   color: #2c3e50;
 }
-#panel-categories .subcategories__parent {
-  font-size: 0.875rem;
+#panel-categories .subcategory-description {
+  font-size: 0.85rem;
   color: #7f8c8d;
-  margin-left: 1rem;
 }
-#panel-categories .subcategories__actions {
+#panel-categories .subcategory-actions {
   display: flex;
   gap: 0.5rem;
 }
-#panel-categories .subcategories__actions button {
-  padding: 0.5rem 0.75rem;
-  border: none;
+#panel-categories .action-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e1e8ed;
+  background: white;
+  color: #2c3e50;
   border-radius: 0.375rem;
   cursor: pointer;
-  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+#panel-categories .action-btn:hover {
+  background-color: #f8f9fa;
+  border-color: #3498db;
+}
+#panel-categories .action-btn.delete-category-btn, #panel-categories .action-btn.delete-subcategory-btn {
+  color: #e74c3c;
+}
+#panel-categories .action-btn.delete-category-btn:hover, #panel-categories .action-btn.delete-subcategory-btn:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+  border-color: #e74c3c;
+}
+#panel-categories .action-btn.add-subcategory-btn {
+  background: #3498db;
+  color: white;
+  border-color: #3498db;
+}
+#panel-categories .action-btn.add-subcategory-btn:hover {
+  background: #2980b9;
+}
+#panel-categories .action-btn i {
+  font-size: 0.9rem;
+}
+#panel-categories .action-btn-small {
+  padding: 0.375rem 0.5rem;
+  border: 1px solid #e1e8ed;
+  background: white;
+  color: #2c3e50;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+}
+#panel-categories .action-btn-small:hover {
+  background-color: #f8f9fa;
+  border-color: #3498db;
+}
+#panel-categories .action-btn-small.delete-subcategory-btn {
+  color: #e74c3c;
+}
+#panel-categories .action-btn-small.delete-subcategory-btn:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+  border-color: #e74c3c;
+}
+#panel-categories .modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+#panel-categories .modal-overlay.active {
+  display: flex;
+}
+#panel-categories .modal-content {
+  background: white;
+  border-radius: 0.75rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+  animation: modalSlideIn 0.3s ease;
+}
+#panel-categories .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e1e8ed;
+}
+#panel-categories .modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #2c3e50;
+}
+#panel-categories .modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #7f8c8d;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+#panel-categories .modal-close:hover {
+  color: #2c3e50;
+}
+#panel-categories .modal-body {
+  padding: 1.5rem;
+}
+#panel-categories .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e1e8ed;
+}
+#panel-categories .form-group {
+  margin-bottom: 1.5rem;
+}
+#panel-categories .form-group:last-child {
+  margin-bottom: 0;
+}
+#panel-categories .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #2c3e50;
+  font-size: 0.9rem;
+}
+#panel-categories .form-group .form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e1e8ed;
+  border-radius: 0.375rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+#panel-categories .form-group .form-input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+#panel-categories .form-group textarea.form-input {
+  resize: vertical;
+  font-family: inherit;
+}
+#panel-categories .btn-primary,
+#panel-categories .btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
-#panel-categories .subcategories__actions button.btn-edit {
+#panel-categories .btn-primary {
   background: #3498db;
   color: white;
 }
-#panel-categories .subcategories__actions button.btn-edit:hover {
+#panel-categories .btn-primary:hover {
   background: #2980b9;
 }
-#panel-categories .subcategories__actions button.btn-delete {
-  background: #e74c3c;
-  color: white;
+#panel-categories .btn-primary i {
+  margin-right: 0.5rem;
 }
-#panel-categories .subcategories__actions button.btn-delete:hover {
-  background: #c0392b;
+#panel-categories .btn-secondary {
+  background: #e1e8ed;
+  color: #2c3e50;
 }
-@media (max-width: 768px) {
-  #panel-categories .categories-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 480px) {
-  #panel-categories .categories-grid {
-    grid-template-columns: 1fr;
-  }
+#panel-categories .btn-secondary:hover {
+  background: #d1d8dd;
 }
 
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 #panel-reports .reports-header {
   display: flex;
   justify-content: space-between;

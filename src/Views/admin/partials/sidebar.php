@@ -33,11 +33,6 @@
                 <i class="fas fa-tags"></i>
                 <span>Kategorie</span>
             </a>
-            
-            <a href="#" class="admin-sidebar__menu-item" data-panel="reports">
-                <i class="fas fa-chart-bar"></i>
-                <span>Raporty</span>
-            </a>
         </div>
     </nav>
 </aside>

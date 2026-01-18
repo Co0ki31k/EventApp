@@ -71,5 +71,13 @@ function switchPanel(panelName) {
                 console.error('Failed to load events:', e);
             }
         }
+        // If switched to categories, trigger categories reload
+        if (panelName === 'categories' && window.categoriesManager) {
+            try {
+                window.categoriesManager.loadCategories();
+            } catch (e) {
+                console.error('Failed to load categories:', e);
+            }
+        }
     }
 }

@@ -135,13 +135,67 @@
 	
 	<!-- Panel: Categories -->
 	<div class="admin-panel" id="panel-categories">
-		<h2>Zarządzanie kategoriami</h2>
-		<p>Placeholder - lista kategorii</p>
-	</div>
+		<div class="panel-header">
+			<h2 class="panel-title">Zarządzanie kategoriami</h2>
+			<button id="add-category-btn" class="btn-primary">
+				<i class="fas fa-plus"></i> Dodaj kategorię
+			</button>
+		</div>
 
-	<!-- Panel: reports -->
-	<div class="admin-panel" id="panel-reports">
-		<h2>Zarządzanie raportami</h2>
-		<p>Placeholder - lista raportow</p>
+		<div id="categories-list" class="categories-container">
+			<!-- Kategorie będą załadowane przez JavaScript -->
+		</div>
+
+		<!-- Modal dodawania/edycji kategorii -->
+		<div id="category-modal" class="modal-overlay">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 id="category-modal-title">Dodaj kategorię</h3>
+					<button class="modal-close" onclick="window.categoriesManager.closeModal('category-modal')">
+						<i class="fas fa-times"></i>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="category-name">Nazwa kategorii *</label>
+						<input type="text" id="category-name" class="form-input" placeholder="np. Sport, Muzyka">
+					</div>
+					<div class="form-group">
+						<label for="category-description">Opis (opcjonalnie)</label>
+						<textarea id="category-description" class="form-input" rows="3" placeholder="Krótki opis kategorii"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn-secondary" onclick="window.categoriesManager.closeModal('category-modal')">Anuluj</button>
+					<button id="save-category-btn" class="btn-primary">Zapisz</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal dodawania/edycji podkategorii -->
+		<div id="subcategory-modal" class="modal-overlay">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 id="subcategory-modal-title">Dodaj podkategorię</h3>
+					<button class="modal-close" onclick="window.categoriesManager.closeModal('subcategory-modal')">
+						<i class="fas fa-times"></i>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="subcategory-name">Nazwa podkategorii *</label>
+						<input type="text" id="subcategory-name" class="form-input" placeholder="np. Piłka nożna, Jazz">
+					</div>
+					<div class="form-group">
+						<label for="subcategory-description">Opis (opcjonalnie)</label>
+						<textarea id="subcategory-description" class="form-input" rows="3" placeholder="Krótki opis podkategorii"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn-secondary" onclick="window.categoriesManager.closeModal('subcategory-modal')">Anuluj</button>
+					<button id="save-subcategory-btn" class="btn-primary">Zapisz</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </main>
