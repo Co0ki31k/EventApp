@@ -99,8 +99,38 @@
 	
 	<!-- Panel: Events -->
 	<div class="admin-panel" id="panel-events">
-		<h2>Zarządzanie wydarzeniami</h2>
-		<p>Placeholder - lista wydarzeń</p>
+		<div class="panel-header">
+			<h2>Zarządzanie wydarzeniami</h2>
+			<div class="search-box">
+				<input type="text" id="event-search" placeholder="Wyszukaj wydarzenie...">
+				<i class="fas fa-search"></i>
+			</div>
+		</div>
+
+		<div class="events-table-container">
+			<table class="events-table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Tytuł</th>
+						<th>Kategoria</th>
+						<th>Start</th>
+						<th>Koniec</th>
+						<th>Utworzony przez</th>
+						<th>Akcje</th>
+					</tr>
+				</thead>
+				<tbody id="events-table-body">
+					<tr>
+						<td colspan="7" class="loading-cell">Ładowanie danych...</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="pagination" id="events-pagination">
+			<!-- Paginacja będzie generowana przez JS -->
+		</div>
 	</div>
 	
 	<!-- Panel: Categories -->

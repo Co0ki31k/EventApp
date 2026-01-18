@@ -63,5 +63,13 @@ function switchPanel(panelName) {
                 console.error('Failed to load users:', e);
             }
         }
+        // If switched to events, trigger events reload
+        if (panelName === 'events' && window.eventsManager) {
+            try {
+                window.eventsManager.loadEvents();
+            } catch (e) {
+                console.error('Failed to load events:', e);
+            }
+        }
     }
 }

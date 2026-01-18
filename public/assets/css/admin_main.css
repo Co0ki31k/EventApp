@@ -1321,6 +1321,123 @@ html, body {
     opacity: 0;
   }
 }
+#panel-events .panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+#panel-events .panel-header h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+#panel-events .panel-header .search-box {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+#panel-events .panel-header .search-box input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  border: 2px solid #e1e8ed;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+#panel-events .panel-header .search-box input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+#panel-events .panel-header .search-box i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7f8c8d;
+  pointer-events: none;
+}
+#panel-events .events-table-container {
+  background: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+}
+#panel-events .events-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#panel-events .events-table thead {
+  background: #f8f9fa;
+}
+#panel-events .events-table thead th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #7f8c8d;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #ecf0f1;
+  white-space: nowrap;
+}
+#panel-events .events-table tbody tr {
+  border-bottom: 1px solid #ecf0f1;
+  transition: background-color 0.2s ease;
+}
+#panel-events .events-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+#panel-events .events-table tbody tr:last-child {
+  border-bottom: none;
+}
+#panel-events .events-table tbody tr td {
+  padding: 1rem;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+#panel-events .events-table tbody .loading-cell,
+#panel-events .events-table tbody .empty-cell,
+#panel-events .events-table tbody .error-cell {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: #7f8c8d;
+  font-style: italic;
+}
+#panel-events .events-table tbody .error-cell {
+  color: #e74c3c;
+}
+#panel-events .actions-cell {
+  text-align: left;
+  white-space: nowrap;
+}
+#panel-events .action-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  margin: 0 0.25rem;
+  cursor: pointer;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+#panel-events .action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+#panel-events .action-btn.delete-btn {
+  color: #e74c3c;
+}
+#panel-events .action-btn.delete-btn:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #c0392b;
+}
+#panel-events .action-btn i {
+  margin-right: 0.25rem;
+}
 #panel-events .events-header {
   display: flex;
   justify-content: space-between;
@@ -2108,5 +2225,64 @@ html, body {
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+.admin-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 10000;
+  animation: slideInRight 0.3s ease;
+  min-width: 300px;
+}
+.admin-notification.success {
+  border-left: 4px solid #2ecc71;
+}
+.admin-notification.success i {
+  color: #2ecc71;
+}
+.admin-notification.error {
+  border-left: 4px solid #e74c3c;
+}
+.admin-notification.error i {
+  color: #e74c3c;
+}
+.admin-notification.warning {
+  border-left: 4px solid #f39c12;
+}
+.admin-notification.warning i {
+  color: #f39c12;
+}
+.admin-notification.info {
+  border-left: 4px solid #3498db;
+}
+.admin-notification.info i {
+  color: #3498db;
+}
+.admin-notification i {
+  font-size: 1.25rem;
+}
+.admin-notification span {
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+.admin-notification.fade-out {
+  animation: fadeOut 0.3s ease;
+  opacity: 0;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }/*# sourceMappingURL=admin_main.css.map */
