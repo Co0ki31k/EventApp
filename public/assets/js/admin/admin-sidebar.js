@@ -55,5 +55,13 @@ function switchPanel(panelName) {
                 console.error('Failed to load dashboard stats:', e);
             }
         }
+        // If switched to users, trigger users reload
+        if (panelName === 'users' && window.usersManager) {
+            try {
+                window.usersManager.loadUsers();
+            } catch (e) {
+                console.error('Failed to load users:', e);
+            }
+        }
     }
 }

@@ -16,3 +16,4 @@
 <script src="<?= asset('js/admin/admin-topbar.js') ?>"></script>
 <script src="<?= asset('js/admin/admin-panel.js') ?>"></script>
 <script src="<?= asset('js/admin/dashboard.js') ?>"></script>
+<script src="<?= asset('js/admin/users.js') ?>"></script>

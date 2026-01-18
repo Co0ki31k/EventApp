@@ -64,8 +64,37 @@
 	
 	<!-- Panel: Users -->
 	<div class="admin-panel" id="panel-users">
-		<h2>Zarządzanie użytkownikami</h2>
-		<p>Placeholder - lista użytkowników</p>
+		<div class="panel-header">
+			<h2>Zarządzanie użytkownikami</h2>
+			<div class="search-box">
+				<input type="text" id="user-search" placeholder="Wyszukaj użytkownika po nazwie...">
+				<i class="fas fa-search"></i>
+			</div>
+		</div>
+
+		<div class="users-table-container">
+			<table class="users-table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Username</th>
+						<th>Email</th>
+						<th>Rola</th>
+						<th>Ostatnie logowanie</th>
+						<th>Akcje</th>
+					</tr>
+				</thead>
+				<tbody id="users-table-body">
+					<tr>
+						<td colspan="6" class="loading-cell">Ładowanie danych...</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="pagination" id="users-pagination">
+			<!-- Paginacja będzie generowana przez JS -->
+		</div>
 	</div>
 	
 	<!-- Panel: Events -->
